@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:flex-col md:justify-center">
           <div className="mb-6 md:mb-0 flex justify-center align-center m-5">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <a href="/" className="flex items-center">
               <Image
                 src="/logo-white.png"
                 className=" me-3 pb-5 h-[70px]"

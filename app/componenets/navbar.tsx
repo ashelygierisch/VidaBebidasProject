@@ -49,25 +49,29 @@ const Navigation = () => {
 
       <NavbarContent className="sm:hidden " justify="center">
         <NavbarBrand>
-          <Image
-            src="/logo-white.png"
-            alt="Logo"
-            width={150}
-            height="55"
-            priority
-          />
+          <Link href="/">
+            <Image
+              src="/logo-white.png"
+              alt="Logo"
+              width={150}
+              height="55"
+              priority
+            />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start">
         <NavbarBrand className="hidden lg:flex">
-          <Image
-            src="/logo-white.png"
-            alt="Logo"
-            width={300}
-            height="55"
-            priority
-          />
+          <Link href="/">
+            <Image
+              src="/logo-white.png"
+              alt="Logo"
+              width={300}
+              height="55"
+              priority
+            />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 

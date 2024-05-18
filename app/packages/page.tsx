@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Services = () => {
+const Packages = () => {
   return <div></div>;
 };
 
-export default Services;
+export default Packages;

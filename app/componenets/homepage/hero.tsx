@@ -29,7 +29,7 @@ const MainHero = () => {
                 Book Now
               </Button>
             </Link>
-            <Link href={'/services'}>
+            <Link href={'/packages'}>
               <Button
                 className="bg-[#DC143C] hover:bg-[#FFFFF0] hover:text-black"
                 variant="shadow"

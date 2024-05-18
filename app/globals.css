@@ -25,6 +25,16 @@ main {
   border-bottom: 1px solid #fffff0;
 }
 
+.carousel {
+  display: inline-flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-snap-type: y none;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .min-h-screen-main {
   min-height: 10vh;
 }

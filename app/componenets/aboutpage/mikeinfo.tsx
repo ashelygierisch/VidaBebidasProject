@@ -1,14 +1,11 @@
 import React from 'react';
-import { Button } from '@nextui-org/react';
 
-import Link from 'next/link';
-import { Image } from '@nextui-org/react';
 const MikeInfo = () => {
   return (
-    <div className="flex flex-row justify-evenly flex-wrap  m-10 ">
+    <div className="flex flex-row justify-evenly flex-wrap  m-10 border-b-1 border-[#FFFFF0]">
       <div className="flex flex-col gap-5">
         <h2 className="text-4xl text-center text-[#FFD700]">Michael Estrada</h2>
-        <p className="text-wrap text-center lg:text-2xl leading-7">
+        <p className="text-wrap text-center lg:text-2xl leading-7 m-3">
           Michael is a dedicated and professional bartender who brings
           exceptional service to every event through his business,
           VidaBebidasProject. With three customizable packages, he caters to a
@@ -20,21 +17,6 @@ const MikeInfo = () => {
           occasion.
         </p>
       </div>
-      <Image
-        isBlurred
-        width={500}
-        src="https://mikessite.s3.us-east-2.amazonaws.com/MikePic.JPEG"
-        alt="Mike Bartending"
-        className="pt-3 lg:m-10 pt-10"
-      />
-      <Link href={'/contact'}>
-        <Button
-          className="bg-[#FFFFF0] text-black hover:bg-[#DC143C] m-10"
-          variant="shadow"
-        >
-          Book Now
-        </Button>
-      </Link>
     </div>
   );
 };

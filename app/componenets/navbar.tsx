@@ -82,7 +82,7 @@ const Navigation = () => {
           </Link>
         </NavbarItem>
         <NavbarItem className="hover:text-[#DC143C]">
-          <Link href="/services" aria-current="page">
+          <Link href="/packages" aria-current="page">
             Packages
           </Link>
         </NavbarItem>

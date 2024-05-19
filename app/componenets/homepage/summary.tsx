@@ -4,7 +4,7 @@ import Link from 'next/link';
 const Summary = () => {
   return (
     <div className=" border-b-1 border-[#FFFFF0]  ">
-      <p className="leading-8 text-center lg:text-4xl m-10 text-2xl text-white ">
+      <p className="leading-8 text-center lg:text-4xl m-10 text-xl text-white ">
         Introducing <a className="text-[#DC143C]">Michael Estrada</a>, the
         master <a className="text-[#FFD700]">mixologist</a> and proud owner of{' '}
         <a className="text-[#FFD700]">VidaBebidasProject</a>, a mobile

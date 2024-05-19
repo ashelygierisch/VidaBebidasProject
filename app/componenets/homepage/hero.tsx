@@ -23,7 +23,7 @@ const MainHero = () => {
           <div className="flex flex-row gap-3">
             <Link href={'/contact'}>
               <Button
-                className="bg-[#FFFFF0] text-black hover:bg-[#DC143C] "
+                className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C] "
                 variant="shadow"
               >
                 Book Now
@@ -31,7 +31,7 @@ const MainHero = () => {
             </Link>
             <Link href={'/packages'}>
               <Button
-                className="bg-[#DC143C] hover:bg-[#FFFFF0] hover:text-black"
+                className="bg-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
                 variant="shadow"
               >
                 Packages
@@ -41,7 +41,7 @@ const MainHero = () => {
           <div className="flex justify-center">
             <Link href={'/contact'}>
               <Button
-                className="bg-transparent border border-[#DC143C] hover:bg-[#FFFFF0] hover:text-black"
+                className="bg-[#FFD700] text-black border border-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
                 variant="shadow"
               >
                 Leave a Review

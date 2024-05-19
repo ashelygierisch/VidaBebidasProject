@@ -7,7 +7,7 @@ const VideoCatch = () => {
       <div className="content">
         <Link href={'/packages'}>
           <Button
-            className="bg-transparent border border-white hover:border-[#DC143C]"
+            className="bg-transparent border border-[#DC143C] hover:border-white"
             variant="shadow"
           >
             Explore the Packages

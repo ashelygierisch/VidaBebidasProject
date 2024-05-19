@@ -6,11 +6,11 @@ const ServicesSection = () => {
   return (
     <div>
       <h2 className="text-5xl text-[#FFFFF0] text-center m-5">Packages</h2>
-      <div>
+      <div className="space-y-6">
         {PackageData.map((pck) => (
           <Card
             isBlurred
-            className="border-none bg-background/60 dark:bg-default-100/50 w-65"
+            className="border-none bg-background/60 dark:bg-default-100/50 w-65 "
             shadow="sm"
             key={pck.id}
           >
@@ -26,7 +26,7 @@ const ServicesSection = () => {
                     width="100%"
                   />
                 </div>
-                <div className="flex flex-col col-span-1 ">
+                <div className="flex flex-col col-span-1 gap-4">
                   <h1 className="text-4xl text-center">{pck.name}</h1>
                   <p className="text-start">Price of Package</p>
                   <ul className="text-start">

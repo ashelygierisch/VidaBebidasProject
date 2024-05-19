@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Silver Package",
-    "image": "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "image": "https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 150,
     "descriptions": [
       "Serve Beer.",
@@ -27,8 +27,8 @@
   },
   {
     "id": 3,
-    "name": "Anejo Package",
-    "image": "https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Añejo Package",
+    "image": "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     "price": 250,
     "descriptions": [
       "Serve Beer choice of michelada setup or can get beer dressed with salt.",

@@ -17,10 +17,6 @@ const MikeInfo = () => {
           occasion.
         </p>
       </div>
-      <div className="flex flex-row mt-10 mb-0 gap-5">
-        <span className="icon-[lucide--gallery-horizontal] text-3xl"></span>
-        <span className="icon-[material-symbols--swipe-outline] text-3xl "></span>
-      </div>
     </div>
   );
 };

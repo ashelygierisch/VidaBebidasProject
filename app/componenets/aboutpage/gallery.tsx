@@ -1,37 +1,89 @@
 import React from 'react';
 import { Image } from '@nextui-org/react';
-const Gallery = () => {
+
+const Carousel = () => {
   return (
-    <div className=" w-full  carousel ">
-      <div className="carousel-item w-full flex justify-center rounded-none">
+    <div className="w-full carousel">
+      <div
+        id="slide1"
+        className="carousel-item relative w-full flex justify-center rounded-none"
+      >
         <Image
           isBlurred
           width={800}
           src="https://mikessite.s3.us-east-2.amazonaws.com/MikePic.JPEG"
           alt="Mike Bartending"
-          className=" imagegallery  rounded-none"
+          className="imagegallery rounded-none"
         />
+        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
+          <a
+            href="#slide3"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❮
+          </a>
+          <a
+            href="#slide2"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❯
+          </a>
+        </div>
       </div>
-      <div className="carousel-item w-full rounded-none flex justify-center">
+      <div
+        id="slide2"
+        className="carousel-item relative w-full flex justify-center rounded-none"
+      >
         <Image
           isBlurred
           width={800}
           src="https://mikessite.s3.us-east-2.amazonaws.com/Mikethree.jpg"
           alt="Mike Bartending"
-          className="   rounded-none"
+          className="rounded-none"
         />
+        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
+          <a
+            href="#slide1"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❮
+          </a>
+          <a
+            href="#slide3"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❯
+          </a>
+        </div>
       </div>
-      <div className="carousel-item w-full rounded-none flex justify-center">
+      <div
+        id="slide3"
+        className="carousel-item relative w-full flex justify-center rounded-none"
+      >
         <Image
           isBlurred
           width={800}
           src="https://mikessite.s3.us-east-2.amazonaws.com/IMG_0989.JPEG"
           alt="Mike Bartending"
-          className=" imagegallery  rounded-none"
+          className="imagegallery rounded-none"
         />
+        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
+          <a
+            href="#slide2"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❮
+          </a>
+          <a
+            href="#slide1"
+            className="btn btn-circle bg-transparent border-[#FFFFF0]"
+          >
+            ❯
+          </a>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Gallery;
+export default Carousel;

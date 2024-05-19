@@ -22,7 +22,7 @@ const ServicesSection = () => {
                     className="object-cover"
                     height={200}
                     shadow="md"
-                    src="https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    src={pck.image}
                     width="100%"
                   />
                 </div>

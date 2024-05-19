@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "Silver Package",
+    "price": 150,
+    "descriptions": [
+      "Serve Beer.",
+      "Serve Beverages such as: Coke, Sprite, Waters, etc.",
+      "Serve Straight shots/chilled shots dressed with salt/tajin.",
+      "Serve Mixed Drinks such as: Crown and Sprite, Buchanan and Pineapple, Tequila and soda, etc."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Reposado Package",
+    "price": 200,
+    "descriptions": [
+      "Serve Beer choice of dressed with salt/tajin or choice of michelada setup.",
+      "Serve Beverages such as: Coke, Sprite, Waters, etc.",
+      "Serve Straight shots/chilled shots dressed with salt/tajin.",
+      "Serve Mixed Drinks such as: Crown and Sprite, Buchanan and Pineapple, Tequila and soda, etc.",
+      "Serve Three Mixed shots of your choice such as: Green teas, White teas, Vegas Bombs, Mexican candy’s, lemon drops, etc.",
+      "Serve One cocktail made with fresh lime juice of your choice: Palomas, Pineapple Margaritas, Strawberry/Mango Margaritas, etc."
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Anejo Package",
+    "price": 250,
+    "descriptions": [
+      "Serve Beer choice of michelada setup or can get beer dressed with salt.",
+      "Serve Beverages such as: Coke, Sprite, Waters, etc.",
+      "Serve Straight shots/chilled shots dressed with salt/tajin.",
+      "Serve Mixed Drinks such as: Crown and Sprite, Buchanan and Pineapple, Tequila and soda, etc.",
+      "Serve Four Mixed shots your choice of preference such as: Green teas, White teas, Vegas Bombs, Mexican candy’s, lemon drops, etc.",
+      "Serve Three Cocktails made with fresh lime juice your choice of preference: Ranch Waters, Grapefruit or Watermelon Palomas, Pineapple margaritas, strawberry or mango margaritas, classic lime margaritas, flavored lemon drop drinks, old fashion, whiskey sour, etc."
+    ]
+  }
+]

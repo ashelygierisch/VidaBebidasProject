@@ -39,7 +39,7 @@ const ImportantInfo = () => {
               exceptional service.
             </li>
           </ul>
-          <p className="m-2 leading-7 text-center">
+          <p className="m-2 leading-7 text-start">
             For the <a className="font-bold text-[#FFD700]">Reposado Package</a>{' '}
             and <a className="font-bold text-[#FFD700]">Añejo Package</a>, it is
             highly recommended that the bartender procure the liquor to ensure

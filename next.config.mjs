@@ -1,6 +1,8 @@
 /**  @type {import('next').NextConfig} */
 const nextConfig = {
-  // your custom Next.js configuration options here
+  images: {
+    domains: ['images.pexels.com'],
+  },
 };
 
 import withVideos from 'next-videos';

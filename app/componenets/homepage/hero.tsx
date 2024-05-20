@@ -1,35 +1,41 @@
 'use client';
 import React from 'react';
 import { Button } from '@nextui-org/react';
-
 import Link from 'next/link';
+import Image from 'next/image';
+import HeroBG from '../../../public/HeroBG.jpeg';
+
 const MainHero = () => {
   return (
-    <div
-      className=" hero min-h-screen-main  border border-bottom border-black  "
-      style={{
-        backgroundImage:
-          'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg)',
-      }}
-    >
-      <div className="lg:flex lg:flex-col lg:flex-nowrap flex-wrap flex-col justify-around">
+    <div className="relative hero min-h-screen lg:min-h-screen md:h-[80vh] h-[30vh]  border border-bottom border-black">
+      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+      <Image
+        src={HeroBG}
+        alt="Bar Bottles"
+        objectFit="cover"
+        layout="fill"
+        className="absolute inset-0 z-0 "
+        placeholder="blur"
+      />
+
+      <div className="relative z-10 flex flex-col justify-around lg:flex-nowrap flex-wrap">
         <div className="flex flex-col justify-center items-center gap-4 text-[#FFFFF0]">
-          <h1 className="text-[#FFD700] lg:text-7xl FONT-BOLD text-4xl ">
+          <h1 className="text-[#FFD700] lg:text-7xl font-bold text-3xl z-10">
             VIDABEBIDASPROJECT
           </h1>
-          <p className="text-2xl text-center">
+          <p className="text-2xl text-center z-10">
             El toque perfecto para tu evento especial.
           </p>
-          <div className="flex flex-row gap-3">
-            <Link href={'/contact'}>
+          <div className="flex flex-row gap-3 z-10">
+            <Link href="/contact">
               <Button
-                className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C] "
+                className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C]"
                 variant="shadow"
               >
                 Book Now
               </Button>
             </Link>
-            <Link href={'/packages'}>
+            <Link href="/packages">
               <Button
                 className="bg-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
                 variant="shadow"
@@ -38,8 +44,8 @@ const MainHero = () => {
               </Button>
             </Link>
           </div>
-          <div className="flex justify-center">
-            <Link href={'/contact'}>
+          <div className="flex justify-center z-10">
+            <Link href="/contact">
               <Button
                 className="bg-[#FFD700] text-black border border-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
                 variant="shadow"

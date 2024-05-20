@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import MainHero from './componenets/homepage/hero';
 
 import VideoCatch from './componenets/homepage/videocatch';
-import ServicesSection from './componenets/homepage/servicessection';
+import ServicesSection from './componenets/packagespage/servicessection';
 import Reviews from './componenets/homepage/reviews';
 
 import Summary from './componenets/homepage/summary';

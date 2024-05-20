@@ -4,8 +4,7 @@ import PackageData from '../../packagesData.json';
 
 const ServicesSection = () => {
   return (
-    <div>
-      <h2 className="text-5xl text-[#FFFFF0] text-center m-5">Packages</h2>
+    <div className="mt-5">
       <div className="space-y-6">
         {PackageData.map((pck) => (
           <Card

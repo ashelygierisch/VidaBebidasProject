@@ -13,7 +13,7 @@ const ImportantInfo = () => {
     <div>
       <h2 className="text-5xl text-[#FFFFF0] text-center m-5">Packages</h2>
       <Card className="w-50 h-50">
-        <CardHeader className="flex gap-3">
+        <CardHeader className="flex gap-3 justify-center">
           <Image
             alt="nextui logo"
             height={40}

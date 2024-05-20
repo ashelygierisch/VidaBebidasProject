@@ -38,7 +38,7 @@ const Navigation = () => {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className="navbar font-open  text-white"
+      className="navbar font-open bg-black text-white fixed z-20"
       isBordered
     >
       <NavbarContent className="sm:hidden" justify="center">

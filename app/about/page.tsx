@@ -7,7 +7,6 @@ export default async function About() {
     <div>
       <MikeInfo />
       <Gallery />
-      <AboutButton />
     </div>
   );
 }

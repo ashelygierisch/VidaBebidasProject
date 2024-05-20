@@ -26,11 +26,18 @@ const ServicesSection = () => {
                     width="100%"
                   />
                 </div>
-                <div className="flex flex-col col-span-1 gap-4">
+                <div className="flex flex-col col-span-1 gap-4 ">
                   <h1 className="text-4xl text-center">{pck.name}</h1>
-                  <p className="text-start">Price of Package</p>
-                  <ul className="text-start">
-                    <li>Description One</li>
+                  <p className="text-start font-sans">
+                    Price of Package:{' '}
+                    <a className="font-bold text-[#FFD700]">${pck.price}</a>
+                  </p>
+                  <ul className=" font-sans list-disc list-inside">
+                    {pck.descriptions.map((description, index) => (
+                      <li key={index} className="p-1 marker:text-[#FFD700]">
+                        {description}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

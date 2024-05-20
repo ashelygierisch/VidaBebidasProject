@@ -4,7 +4,7 @@ import ImportantInfo from '../componenets/packagespage/importantinfo';
 import AboutButton from '../componenets/aboutpage/aboutbutton';
 const Packages = () => {
   return (
-    <div>
+    <div className="mt-[100px]">
       <ImportantInfo />
       <ServicesSection />
       <AboutButton />

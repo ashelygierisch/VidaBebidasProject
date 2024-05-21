@@ -1,8 +1,13 @@
 import React from 'react';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+
+import {motion} from 'framer-motion'
+
 const Summary = () => {
   return (
+    <motion.div className="flex flex-row gap-3 z-10" initial={{ opacity: 0}}   animate={{ opacity: 1 }}
+            transition={{ duration: 1 }} >
     <div className=" border-b-1 border-[#FFFFF0]  ">
       <p className="leading-8 text-center lg:text-4xl m-10 text-xl text-white ">
         Introducing <a className="text-[#DC143C]">Michael Estrada</a>, the
@@ -25,6 +30,7 @@ const Summary = () => {
         </Link>
       </div>
     </div>
+    </motion.div>
   );
 };
 

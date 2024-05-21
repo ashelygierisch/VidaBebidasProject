@@ -23,9 +23,9 @@ const MainHero = () => {
 
       <div className="relative z-10 flex flex-col justify-around lg:flex-nowrap flex-wrap">
         <div className="flex flex-col justify-center items-center gap-4 text-[#FFFFF0]">
-          <motion.div     initial={{ opacity: 0, y: -100 }}
+          {/* <motion.div     initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}> 
+            transition={{ duration: 0.6 }}>  */}
 
           <h1 className="text-[#FFD700] lg:text-7xl font-bold text-3xl z-10">
             VIDABEBIDASPROJECT
@@ -33,7 +33,7 @@ const MainHero = () => {
           <p className="text-2xl text-center z-10">
             El toque perfecto para tu evento especial.
           </p>
-          </motion.div>
+       
       
         
           <motion.div className="flex flex-row gap-3 z-10" initial={{ opacity: 0, y: 100 }}   animate={{ opacity: 1, y: 10 }}

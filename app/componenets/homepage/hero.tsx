@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 const MainHero = () => {
   return (
     <div className="relative hero min-h-screen lg:min-h-screen md:h-[80vh] h-[30vh]  border border-bottom border-black">
-      <div className="absolute inset-0 bg-black opacity-15 z-10"></div>
+      <div className="absolute inset-0 bg-black opacity-25 z-10"></div>
       <Image
         src={HeroBG}
         alt="Bar Bottles"

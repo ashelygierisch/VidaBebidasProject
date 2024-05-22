@@ -42,7 +42,13 @@ const Navigation = () => {
       isBordered
     >
       <div className="absolute top-0 left-0">
-        <span className="clickmeicon icon-[game-icons--click] text-xl text-white animate-pulse"></span>
+        <span
+          className={
+            isMenuOpen
+              ? 'clickmeicon icon-[game-icons--click] text-xl text-white animate-pulse hidden'
+              : 'clickmeicon icon-[game-icons--click] text-xl text-white animate-pulse '
+          }
+        ></span>
       </div>
       <NavbarContent className="sm:hidden" justify="center">
         <NavbarMenuToggle

@@ -90,11 +90,12 @@ Navbar {
   z-index: 20;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  main {
-    /* padding-top: 7rem; */
-    /* margin-left: 2.5rem;
-    margin-right: 2.5rem; */
+@media (max-width: 1366px) {
+  .clickmeicon {
+    position: fixed;
+    top: 3.5rem;
+    left: 65rem;
+    z-index: 20;
   }
 }
 
@@ -106,6 +107,7 @@ Navbar {
     z-index: 20;
   }
 }
+
 @media (max-width: 810px) {
   main {
     /* padding-top: 0.5rem; */

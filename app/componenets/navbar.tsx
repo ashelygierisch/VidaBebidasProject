@@ -41,13 +41,16 @@ const Navigation = () => {
       className="navbar font-open bg-black text-white fixed z-20"
       isBordered
     >
+      <div className="absolute top-0 left-0">
+        <span className="clickmeicon icon-[game-icons--click] text-xl text-white animate-pulse"></span>
+      </div>
       <NavbarContent className="sm:hidden" justify="center">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden " justify="center">
+      <NavbarContent className="sm:hidden" justify="center">
         <NavbarBrand>
           <Link href="/">
             <Image
@@ -75,7 +78,7 @@ const Navigation = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className=" hidden sm:flex gap-4 " justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem className="hover:text-[#DC143C]">
           <Link color="foreground" href="/">
             Home
@@ -99,8 +102,8 @@ const Navigation = () => {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className=" lg:flex sm:flex gap-4">
-          <div className="flex items-center gap-4">
+        <NavbarItem className="lg:flex sm:flex gap-4">
+          <div className="flex items-center gap-4 relative">
             <Dropdown placement="bottom-start">
               <DropdownTrigger>
                 <User
@@ -130,7 +133,7 @@ const Navigation = () => {
                     </a>
                   </p>
                 </DropdownItem>
-                <DropdownItem key="phone number" className="flex ">
+                <DropdownItem key="phone number" className="flex">
                   <p>
                     <span className="icon-[material-symbols--phone-forwarded] inline-block"></span>
                     {'   '}

@@ -9,14 +9,13 @@ import MainHero from './componenets/homepage/hero';
 import VideoCatch from './componenets/homepage/videocatch';
 import ServicesSection from './componenets/packagespage/servicessection';
 import Reviews from './componenets/homepage/reviews';
-import ClickMe from './componenets/homepage/clickme';
+
 import Summary from './componenets/homepage/summary';
 export default function Home() {
   const [welcome, setWelcome] = useState('Welcome');
 
   return (
     <div>
-      <ClickMe />
       <MainHero />
       <Summary />
       <VideoCatch />

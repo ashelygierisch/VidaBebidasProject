@@ -83,6 +83,13 @@ Navbar {
   padding-top: 30rem;
 }
 
+.clickmeicon {
+  position: fixed;
+  top: 3.5rem;
+  left: 82rem;
+  z-index: 20;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   main {
     /* padding-top: 7rem; */
@@ -94,5 +101,11 @@ Navbar {
 @media (max-width: 767px) {
   main {
     /* padding-top: 0.5rem; */
+  }
+  .clickmeicon {
+    position: fixed;
+    top: 3.5rem;
+    left: 16rem;
+    z-index: 20;
   }
 }

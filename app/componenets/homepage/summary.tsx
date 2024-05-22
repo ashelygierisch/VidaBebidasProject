@@ -26,7 +26,7 @@ const Summary = () => {
         <div className="flex justify-center m-5">
           <Link href={'/about'}>
             <Button
-              className="bg-transparent border border-white text-white hover:border-[#DC143C]"
+              className="bg-transparent border rounded-sm border-white text-white hover:border-[#DC143C]"
               variant="shadow"
             >
               Learn More

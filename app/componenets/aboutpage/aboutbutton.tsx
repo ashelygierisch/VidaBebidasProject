@@ -8,7 +8,7 @@ const AboutButton = () => {
     <div className="flex justify-center">
       <Link href={'/contact'}>
         <Button
-          className="bg-[#FFFFF0] text-black hover:bg-[#DC143C] m-10"
+          className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C] m-10"
           variant="shadow"
         >
           Book Now

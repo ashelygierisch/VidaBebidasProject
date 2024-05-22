@@ -25,7 +25,7 @@ const MikeInfo = () => {
           <div className="flex justify-center m-3">
             <Link href={'/contact'}>
               <Button
-                className="bg-[#FFFFF0] text-black hover:bg-[#DC143C] "
+                className="bg-[#FFFFF0] text-black rounded-sm hover:bg-[#DC143C] "
                 variant="shadow"
               >
                 Book Now

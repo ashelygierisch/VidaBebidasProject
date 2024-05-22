@@ -8,6 +8,7 @@ import {
   Link,
   Image,
 } from '@nextui-org/react';
+
 const ImportantInfo = () => {
   return (
     <div>

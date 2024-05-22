@@ -12,7 +12,7 @@ import {
 const ImportantInfo = () => {
   return (
     <div>
-      <h2 className="text-5xl text-[#FFFFF0] text-center m-5">Packages</h2>
+      <h2 className="text-5xl text-[#FFD700] text-center m-5">Packages</h2>
       <Card className="w-50 h-50">
         <CardHeader className="flex gap-3 justify-center">
           <Image

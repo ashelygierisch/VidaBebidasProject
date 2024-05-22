@@ -1,18 +1,25 @@
 import React from 'react';
 import { Button } from '@nextui-org/react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 const VideoCatch = () => {
   return (
     <div className="video-container border-b-1 border-[#FFFFF0] ">
       <div className="content">
-        <Link href={'/packages'}>
-          <Button
-            className="bg-transparent border border-[#DC143C] hover:border-white"
-            variant="shadow"
-          >
-            Explore the Packages
-          </Button>
-        </Link>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <Link href={'/packages'}>
+            <Button
+              className="bg-transparent border border-[#DC143C] hover:border-white"
+              variant="shadow"
+            >
+              Explore the Packages
+            </Button>
+          </Link>
+        </motion.div>
       </div>
       <div className="video-overlay">
         <video
@@ -20,7 +27,7 @@ const VideoCatch = () => {
           autoPlay
           playsInline
           loop
-         muted
+          muted
           className="video"
         />
       </div>

@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import { Button } from '@nextui-org/react';
 import { Image } from '@nextui-org/react';
+import { motion } from 'framer-motion';
 const Reviews = () => {
   return (
     <div className="flex justify-center border-b-1 border-[#FFFFF0]  ">
@@ -27,15 +28,22 @@ const Reviews = () => {
                 fill="currentColor"
               />
             </svg>
-            <blockquote>
-              <p className="text-xl font-medium text-gray-900 dark:text-white leading-10">
-                &quot;Absolutely amazing! Our event was a huge success thanks to
-                the incredible cocktails and service provided by Michael. His
-                professionalism, creativity, and attention to detail truly
-                impressed us and our guests. Highly recommend for any
-                event!&quot;
-              </p>
-            </blockquote>
+            <motion.div
+              className="flex flex-row gap-3 z-10"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <blockquote>
+                <p className="text-xl font-medium text-gray-900 dark:text-white leading-10">
+                  &quot;Absolutely amazing! Our event was a huge success thanks
+                  to the incredible cocktails and service provided by Michael.
+                  His professionalism, creativity, and attention to detail truly
+                  impressed us and our guests. Highly recommend for any
+                  event!&quot;
+                </p>
+              </blockquote>
+            </motion.div>
             <figcaption className="flex items-center justify-center mt-6 space-x-3">
               {/* <Image
                 className="w-6 h-6 rounded-full"

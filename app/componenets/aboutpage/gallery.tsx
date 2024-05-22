@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from '@nextui-org/react';
-
+import { GalleryMotion } from './galleryMotion';
 const Carousel = () => {
   return (
     <div className="w-full carousel">
@@ -8,13 +8,15 @@ const Carousel = () => {
         id="slide1"
         className="carousel-item relative w-full flex justify-center rounded-none"
       >
-        <Image
-          isBlurred
-          width={800}
-          src="https://mikessite.s3.us-east-2.amazonaws.com/MikePic.JPEG"
-          alt="Mike Bartending"
-          className="imagegallery rounded-none"
-        />
+        <GalleryMotion>
+          <Image
+            isBlurred
+            width={800}
+            src="https://mikessite.s3.us-east-2.amazonaws.com/MikePic.JPEG"
+            alt="Mike Bartending"
+            className="imagegallery rounded-none"
+          />
+        </GalleryMotion>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
           <a
             href="#slide3"
@@ -34,13 +36,15 @@ const Carousel = () => {
         id="slide2"
         className="carousel-item relative w-full flex justify-center rounded-none"
       >
-        <Image
-          isBlurred
-          width={800}
-          src="https://mikessite.s3.us-east-2.amazonaws.com/Mikethree.jpg"
-          alt="Mike Bartending"
-          className="rounded-none"
-        />
+        <GalleryMotion>
+          <Image
+            isBlurred
+            width={800}
+            src="https://mikessite.s3.us-east-2.amazonaws.com/Mikethree.jpg"
+            alt="Mike Bartending"
+            className="rounded-none"
+          />
+        </GalleryMotion>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
           <a
             href="#slide1"
@@ -60,13 +64,15 @@ const Carousel = () => {
         id="slide3"
         className="carousel-item relative w-full flex justify-center rounded-none"
       >
-        <Image
-          isBlurred
-          width={800}
-          src="https://mikessite.s3.us-east-2.amazonaws.com/IMG_0989.JPEG"
-          alt="Mike Bartending"
-          className="imagegallery rounded-none"
-        />
+        <GalleryMotion>
+          <Image
+            isBlurred
+            width={800}
+            src="https://mikessite.s3.us-east-2.amazonaws.com/IMG_0989.JPEG"
+            alt="Mike Bartending"
+            className="imagegallery rounded-none"
+          />
+        </GalleryMotion>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
           <a
             href="#slide2"

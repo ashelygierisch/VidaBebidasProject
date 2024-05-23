@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { saveAs } from 'file-saver';
 import { motion } from 'framer-motion';
-
+import { useActivePath } from './helper';
 import {
   DropdownMenu,
   Dropdown,
@@ -25,14 +25,18 @@ import {
 } from '@nextui-org/react';
 
 const Navigation = () => {
-  const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 0, x: '-100%' },
-  };
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = ['Home', 'Packages', 'About', 'Contact'];
+
+  const homeMenuItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Packages', path: '/packages' },
+    { name: 'About', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  const checkActivePath = useActivePath();
 
   return (
     <Navbar
@@ -85,26 +89,18 @@ const Navigation = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem className="hover:text-[#DC143C]">
-          <Link color="foreground" href="/">
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:text-[#DC143C]">
-          <Link href="/packages" aria-current="page">
-            Packages
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:text-[#DC143C]">
-          <Link color="foreground" href="/about">
-            About
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hover:text-[#DC143C]">
-          <Link color="foreground" href="/contact">
-            Contact
-          </Link>
-        </NavbarItem>
+        {homeMenuItems.map((item) => (
+          <NavbarItem
+            key={item.path}
+            className={
+              checkActivePath(item.path)
+                ? 'text-[#DC143C] border-b-1 border-yellow font-bold'
+                : 'hover:text-[#FFD700] hover:animate-pulse'
+            }
+          >
+            <Link href={item.path}>{item.name}</Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -125,15 +121,15 @@ const Navigation = () => {
               </DropdownTrigger>
               <DropdownMenu aria-label="User Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2 text-center">
-                  <p className="font-bold">Bartender Servicing DFW</p>
+                  <p className="font-bold">Servicing DFW</p>
                 </DropdownItem>
                 <DropdownItem key="settings">
                   <p className="">
-                    <span className="icon-[mdi--email]"></span>
+                    <span className="icon-[mdi--email] text-blue-300"></span>
                     {'   '}
                     <a
                       href="mailto:saludos@vidabebidasproject.com"
-                      className="m-2"
+                      className="m-2 text-white hover:text-blue-300"
                     >
                       saludos@vidabebidasproject.com
                     </a>
@@ -145,6 +141,34 @@ const Navigation = () => {
                     {'   '}
                     <a href="tel:214-809-7270" className="text-white m-2">
                       +1 (214-893-2926)
+                    </a>
+                  </p>
+                </DropdownItem>
+                <DropdownItem className="flex">
+                  <p>
+                    <span className="icon-[simple-icons--cashapp] inline-block text-green-500"></span>
+                    {'   '}
+                    <a
+                      href="https://cash.app/$Mikeee214"
+                      className="text-white hover:text-green-500 m-2"
+                      target="_blank"
+                    >
+                      $ Cash App $
+                    </a>
+                  </p>
+                </DropdownItem>
+                <DropdownItem className="flex">
+                  <p>
+                    <span className="icon-[simple-icons--zelle] inline-block text-purple-500">
+                      {' '}
+                    </span>
+                    {'   '}
+                    <a
+                      href="https://www.zellepay.com/go/zelle"
+                      className=" m-2 text-white hover:text-purple-500"
+                      target="_blank"
+                    >
+                      Zelle : +1 (214-893-2926)
                     </a>
                   </p>
                 </DropdownItem>

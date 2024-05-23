@@ -35,7 +35,7 @@ const Reviews = () => {
               transition={{ duration: 1 }}
             >
               <blockquote>
-                <p className="text-xl font-medium text-gray-900 dark:text-white leading-10">
+                <p className="text-md font-medium text-gray-900 dark:text-white leading-10">
                   &quot;Absolutely amazing! Our event was a huge success thanks
                   to the incredible cocktails and service provided by Michael.
                   His professionalism, creativity, and attention to detail truly

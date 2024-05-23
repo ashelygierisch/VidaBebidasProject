@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 
 const MainHero = () => {
   return (
-    <div className="relative hero min-h-screen lg:min-h-screen md:h-[80vh] h-[30vh]  border border-bottom border-black">
+    <div className="relative hero min-h-[30vh] lg:min-h-[50vh] md:h-[80vh] h-[30vh]  border border-bottom border-black">
       <div className="absolute inset-0 bg-black opacity-25 z-10"></div>
       <Image
         src={HeroBG}
@@ -42,7 +42,7 @@ const MainHero = () => {
           >
             <Link href="/contact">
               <Button
-                className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C]"
+                className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C] hover:animate-pulse"
                 variant="shadow"
               >
                 Book Now
@@ -50,7 +50,7 @@ const MainHero = () => {
             </Link>
             <Link href="/packages">
               <Button
-                className="bg-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
+                className="bg-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
                 variant="shadow"
               >
                 Packages
@@ -66,7 +66,7 @@ const MainHero = () => {
           >
             <Link href="/contact">
               <Button
-                className="bg-[#FFD700] text-black border border-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black"
+                className="bg-[#FFD700] text-black border border-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
                 variant="shadow"
               >
                 Leave a Review

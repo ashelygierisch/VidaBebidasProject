@@ -60,7 +60,7 @@ const Reviews = () => {
           <div className="flex justify-center pt-10">
             <Link href={'/contact'}>
               <Button
-                className="bg-transparent border rounded-sm border-[#DC143C] hover:bg-[#FFFFF0] hover:text-black"
+                className="bg-transparent border rounded-sm border-[#DC143C] hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
                 variant="shadow"
               >
                 Book Now

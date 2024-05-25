@@ -13,7 +13,6 @@ const Packages = () => {
 
       <ServicesSection />
 
-      <AboutButton />
     </div>
   );
 };

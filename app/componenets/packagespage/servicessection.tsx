@@ -2,6 +2,9 @@ import React from 'react';
 import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 import PackageData from '../../packagesData.json';
 import { PackageMotion } from './packagemotion';
+import Link from 'next/link';
+
+
 const ServicesSection = () => {
   return (
     <div className="mt-5">
@@ -38,6 +41,16 @@ const ServicesSection = () => {
                         </li>
                       ))}
                     </ul>
+                    <div className='flex justify-center mt-3 animate-pulse'>
+                    <Link href="/contact">
+              <Button
+                className="bg-transparent border  rounded-sm border-[#DC143C] rounded-sm text-[#FFD700] hover:bg-[#DC143C] hover:animate-pulse"
+                variant="shadow"
+              >
+                Book Now
+              </Button>
+            </Link>
+                    </div>
                   </div>
                 </div>
               </CardBody>

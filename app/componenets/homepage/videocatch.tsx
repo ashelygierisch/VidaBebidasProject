@@ -27,6 +27,7 @@ const VideoCatch = () => {
           autoPlay
           playsInline
           loop
+          muted
           className="video"
         />
       </div>

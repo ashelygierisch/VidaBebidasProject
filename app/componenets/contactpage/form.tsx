@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Modal,
   ModalContent,
@@ -17,10 +17,19 @@ const GoogleForm = () => {
   const [scrollBehavior, setScrollBehavior] = React.useState<
     'normal' | 'inside' | 'outside'
   >('inside');
+
+  useEffect(() => {
+    onOpen();
+  }, [onOpen]);
   return (
     <div className="flex justify-center items-center ">
       <div className="flex flex-col gap-2">
-        <Button onPress={onOpen}>Open Form</Button>
+        <Button
+          onPress={onOpen}
+          className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white animate-pulse"
+        >
+          Open Form
+        </Button>
         <RadioGroup
           label="Select scroll behavior"
           orientation="horizontal"
@@ -56,7 +65,11 @@ const GoogleForm = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onPress={onClose}>
+                  <Button
+                    color="primary"
+                    onPress={onClose}
+                    className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700] "
+                  >
                     Back Home
                   </Button>
                 </ModalFooter>

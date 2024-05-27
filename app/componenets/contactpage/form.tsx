@@ -11,9 +11,12 @@ import {
   RadioGroup,
   Radio,
 } from '@nextui-org/react';
+
 const GoogleForm = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [scrollBehavior, setScrollBehavior] = React.useState('inside');
+  const [scrollBehavior, setScrollBehavior] = React.useState<
+    'normal' | 'inside' | 'outside'
+  >('inside');
   return (
     <div className="flex justify-center items-center ">
       <div className="flex flex-col gap-2">

@@ -25,7 +25,9 @@ const GoogleForm = () => {
           label="Select scroll behavior"
           orientation="horizontal"
           value={scrollBehavior}
-          onValueChange={setScrollBehavior}
+          onValueChange={(value) =>
+            setScrollBehavior(value as 'normal' | 'inside' | 'outside')
+          }
           className="hidden"
         >
           <Radio value="inside">inside</Radio>

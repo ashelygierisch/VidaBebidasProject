@@ -30,7 +30,7 @@ const GoogleForm = () => {
           }
           className="hidden"
         >
-          <Radio value="inside">inside</Radio>
+          <Radio value="outside">outside</Radio>
         </RadioGroup>
         <Modal
           isOpen={isOpen}

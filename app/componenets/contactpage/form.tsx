@@ -46,7 +46,7 @@ const GoogleForm = () => {
                 <ModalBody>
                   <iframe
                     src="https://docs.google.com/forms/d/e/1FAIpQLSfhtDyMZ3aX_9JlM6v3N4aT8_LsdMdySORoGPSCtMsTib9m8g/viewform?embedded=true"
-                    width="350"
+                    width="400"
                     height="2437"
                   >
                     Loading…

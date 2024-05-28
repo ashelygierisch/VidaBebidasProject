@@ -1,7 +1,14 @@
 import GoogleForm from '@/app/componenets/contactpage/form';
 import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 
-async function getPackagebyId(pckId: string) {
+type Package = {
+  image: string;
+  name: string;
+  price: number;
+  descriptions: string[];
+};
+
+async function getPackagebyId(pckId: string): Promise<Package> {
   const response = await fetch(`http://localhost:3000/api/packages/${pckId}`, {
     method: 'GET',
   });
@@ -9,8 +16,12 @@ async function getPackagebyId(pckId: string) {
   return response.json();
 }
 
-export default async function PackageID({ params }: any) {
-  const { pck } = await getPackagebyId(params.id);
+export default async function PackageID({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const pck: Package = await getPackagebyId(params.id);
 
   console.log(pck);
 

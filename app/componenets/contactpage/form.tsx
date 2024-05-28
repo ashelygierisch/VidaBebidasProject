@@ -24,14 +24,6 @@ const GoogleForm = () => {
     onOpen();
   }, [onOpen]);
 
-
-  const thankYou=()=>{
-    return (
-      <div>
-        Thank you for submitting the Form!
-      </div>
-    )
-  }
   return (
     <div className="flex justify-center items-center ">
       <div className="flex flex-col gap-2">
@@ -56,6 +48,7 @@ const GoogleForm = () => {
           isOpen={isOpen}
           onOpenChange={onOpenChange}
           scrollBehavior={scrollBehavior}
+          className="h-[1000px]"
         >
           <ModalContent className="flex justify-center items-center">
             {(onClose) => (
@@ -67,7 +60,7 @@ const GoogleForm = () => {
                   <iframe
                     src="https://docs.google.com/forms/d/e/1FAIpQLSfhtDyMZ3aX_9JlM6v3N4aT8_LsdMdySORoGPSCtMsTib9m8g/viewform?embedded=true"
                     width="400"
-                    height="2437"
+                    height="2700"
                   >
                     Loading…
                   </iframe>
@@ -76,11 +69,9 @@ const GoogleForm = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-          
-                
+
                   <Button
                     color="primary"
-                  
                     onPress={onClose}
                     className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700] "
                   >
@@ -97,5 +88,3 @@ const GoogleForm = () => {
 };
 
 export default GoogleForm;
-
-

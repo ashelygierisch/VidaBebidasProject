@@ -27,13 +27,13 @@ import {
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Packages', 'About', 'Contact'];
+  const menuItems = ['Home', 'Packages', 'About', 'Booking'];
 
   const homeMenuItems = [
     { name: 'Home', path: '/' },
     { name: 'Packages', path: '/packages' },
     { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Booking', path: '/booking' },
   ];
 
   const checkActivePath = useActivePath();

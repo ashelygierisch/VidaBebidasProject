@@ -1,6 +1,6 @@
 import React from 'react';
 import GoogleForm from '../componenets/contactpage/form';
-const Contact = () => {
+const Booking = () => {
   return (
     <div className="mt-[100px]">
       {' '}
@@ -9,4 +9,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Booking;

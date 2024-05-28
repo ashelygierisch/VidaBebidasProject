@@ -12,6 +12,8 @@ import {
   Radio,
 } from '@nextui-org/react';
 
+import Link from 'next/link';
+
 const GoogleForm = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [scrollBehavior, setScrollBehavior] = React.useState<
@@ -21,6 +23,15 @@ const GoogleForm = () => {
   useEffect(() => {
     onOpen();
   }, [onOpen]);
+
+
+  const thankYou=()=>{
+    return (
+      <div>
+        Thank you for submitting the Form!
+      </div>
+    )
+  }
   return (
     <div className="flex justify-center items-center ">
       <div className="flex flex-col gap-2">
@@ -65,12 +76,15 @@ const GoogleForm = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
+          
+                
                   <Button
                     color="primary"
+                  
                     onPress={onClose}
                     className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700] "
                   >
-                    Back Home
+                    Close Form
                   </Button>
                 </ModalFooter>
               </>
@@ -84,13 +98,4 @@ const GoogleForm = () => {
 
 export default GoogleForm;
 
-// <div className="bg-black">
-//   <iframe
-//     src="https://docs.google.com/forms/d/e/1FAIpQLSfhtDyMZ3aX_9JlM6v3N4aT8_LsdMdySORoGPSCtMsTib9m8g/viewform?embedded=true"
-//     width="100%"
-//     height="1200"
-//   >
-//     Loading…
-//   </iframe>
-// </div>
-<></>;
+

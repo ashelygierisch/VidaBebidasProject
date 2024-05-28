@@ -9,9 +9,12 @@ type Package = {
 };
 
 async function getPackagebyId(pckId: string): Promise<Package> {
-  const response = await fetch(`http://localhost:3000/api/packages/${pckId}`, {
-    method: 'GET',
-  });
+  const response = await fetch(
+    `https://vida-bebidas-project.vercel.app/api/packages/${pckId}`,
+    {
+      method: 'GET',
+    }
+  );
 
   return response.json();
 }

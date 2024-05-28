@@ -41,7 +41,7 @@ const ServicesSection = () => {
                       ))}
                     </ul>
                     <div className="flex justify-center mt-3 animate-pulse">
-                      <Link href="/booking">
+                      <Link href={`/pckbuy/${pck.id}`}>
                         <Button
                           className="bg-transparent border  rounded-sm border-[#DC143C] rounded-sm text-[#FFD700] hover:bg-[#DC143C] hover:animate-pulse"
                           variant="shadow"

@@ -10,7 +10,7 @@ type Package = {
 
 async function getPackagebyId(pckId: string): Promise<Package> {
   const response = await fetch(
-    `https://vida-bebidas-project-erickio8s-oscar-leals-projects.vercel.app//api/packages/${pckId}`,
+    `https://vida-bebidas-project-erickio8s-oscar-leals-projects.vercel.app/api/packages/${pckId}`,
     {
       method: 'GET',
     }

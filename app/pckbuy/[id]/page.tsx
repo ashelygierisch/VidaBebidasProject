@@ -11,6 +11,7 @@ import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 async function getPackagebyId(pckId: string) {
   const response = await fetch(`http://localhost:3000/api/packages/${pckId}`, {
     method: 'GET',
+    cache: 'no-cache',
   });
 
   return response.json();
@@ -52,11 +53,9 @@ export default async function PackageID({ params }: any) {
                 </p>
 
                 <ul className="font-sans list-disc list-inside">
-                  {pck.descriptions.map((description, index) => (
-                    <li key={index} className="p-1 marker:text-[#FFD700]">
-                      {description}
-                    </li>
-                  ))}
+                  <li className="p-1 marker:text-[#FFD700]">
+                    {pck.description}
+                  </li>
                 </ul>
               </div>
             </div>

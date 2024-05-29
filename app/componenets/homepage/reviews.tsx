@@ -58,7 +58,7 @@ const Reviews = () => {
             </figcaption>
           </figure>
           <div className="flex justify-center pt-10">
-            <Link href={'/contact'}>
+            <Link href={'/booking'}>
               <Button
                 className="bg-transparent border rounded-sm border-[#DC143C] hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
                 variant="shadow"

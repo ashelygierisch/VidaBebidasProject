@@ -6,12 +6,12 @@ import { Image } from '@nextui-org/react';
 const AboutButton = () => {
   return (
     <div className="flex justify-center">
-      <Link href={'/contact'}>
+      <Link href={'/packages'}>
         <Button
           className="bg-[#FFFFF0] rounded-sm text-black hover:bg-[#DC143C] m-10"
           variant="shadow"
         >
-          Book Now
+          Explore the Packages
         </Button>
       </Link>
     </div>

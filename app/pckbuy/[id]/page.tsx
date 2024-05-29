@@ -9,10 +9,13 @@ import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 // };
 
 async function getPackagebyId(pckId: string) {
-  const response = await fetch(`http://localhost:3000/api/packages/${pckId}`, {
-    method: 'GET',
-    cache: 'no-cache',
-  });
+  const response = await fetch(
+    `https://vida-bebidas-project.vercel.app/api/packages/${pckId}`,
+    {
+      method: 'GET',
+      cache: 'no-cache',
+    }
+  );
 
   return response.json();
 }

@@ -46,10 +46,10 @@ const packages: any = [
   },
 ];
 
-export async function GET(request: Request, context: any) {
+export const GET = async (request: Request, context: any) => {
   const { params } = context;
 
   return NextResponse.json({
     pck: packages.find((x: any) => x.id.toString() === params.id),
   });
-}
+};

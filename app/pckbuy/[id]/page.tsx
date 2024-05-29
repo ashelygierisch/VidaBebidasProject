@@ -1,42 +1,35 @@
 import GoogleForm from '@/app/componenets/contactpage/form';
 import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 
-type Package = {
-  image: string;
-  name: string;
-  price: number;
-  descriptions: string[];
-};
+// type Package = {
+//   image: string;
+//   name: string;
+//   price: number;
+//   descriptions: string[];
+// };
 
-async function getPackagebyId(pckId: string): Promise<Package> {
-  const response = await fetch(
-    `https://vida-bebidas-project-erickio8s-oscar-leals-projects.vercel.app/api/packages/${pckId}`,
-    {
-      method: 'GET',
-    }
-  );
+async function getPackagebyId(pckId: string) {
+  const response = await fetch(`http://localhost:3000/api/packages/${pckId}`, {
+    method: 'GET',
+  });
 
   return response.json();
 }
 
-export default async function PackageID({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const pck: Package = await getPackagebyId(params.id);
+export default async function PackageID({ params }: any) {
+  const { pck } = await getPackagebyId(params.id);
 
   console.log(pck);
 
   return (
-    <div className="mt-[100px] ">
+    <div className="mt-[100px]">
       <div className="flex justify-center items-center m-10">
         <GoogleForm />
       </div>
-      <div className=" flex  lg:flex-nowrap flex-wrap text-start">
+      <div className="flex lg:flex-nowrap flex-wrap text-start">
         <Card
           isBlurred
-          className="border-none bg-background/60 dark:bg-default-100/50 w-65 "
+          className="border-none bg-background/60 dark:bg-default-100/50 w-65"
           shadow="sm"
         >
           <CardBody>
@@ -51,13 +44,14 @@ export default async function PackageID({
                   width="100%"
                 />
               </div>
-              <div className="flex flex-col col-span-1 gap-4 ">
+              <div className="flex flex-col col-span-1 gap-4">
                 <h1 className="text-4xl text-center">{pck.name}</h1>
                 <p className="text-start font-sans">
                   Price of Package:{' '}
                   <a className="font-bold text-[#FFD700]">${pck.price}</a>
                 </p>
-                <ul className=" font-sans list-disc list-inside">
+
+                <ul className="font-sans list-disc list-inside">
                   {pck.descriptions.map((description, index) => (
                     <li key={index} className="p-1 marker:text-[#FFD700]">
                       {description}

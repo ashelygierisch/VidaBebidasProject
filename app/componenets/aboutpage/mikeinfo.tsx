@@ -23,12 +23,12 @@ const MikeInfo = () => {
             choice for any occasion.
           </p>
           <div className="flex justify-center m-3">
-            <Link href={'/contact'}>
+            <Link href={'/packages'}>
               <Button
                 className="bg-[#FFFFF0] text-black rounded-sm hover:bg-[#DC143C] "
                 variant="shadow"
               >
-                Book Now
+                Packages
               </Button>
             </Link>
           </div>

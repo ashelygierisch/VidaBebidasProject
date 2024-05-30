@@ -27,7 +27,11 @@ VidaBebidas Project is a comprehensive, full-stack website designed to serve as 
 
 ## Desktop View
 
+![](https://github.com/Oscarl214/VidaBebidasProject-/blob/main/public/desktopvida.png)
+
 # Mobile View
+
+![](https://github.com/Oscarl214/VidaBebidasProject-/blob/main/public/MobileVida.png)
 
 ## Live
 

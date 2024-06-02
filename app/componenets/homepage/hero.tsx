@@ -64,7 +64,7 @@ const MainHero = () => {
             whileInView={{ opacity: 1, y: 10 }}
             transition={{ duration: 1 }}
           >
-            <Link href="/contact">
+            <Link href="/feedback">
               <Button
                 className="bg-[#FFD700] text-black border border-[#DC143C] rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
                 variant="shadow"

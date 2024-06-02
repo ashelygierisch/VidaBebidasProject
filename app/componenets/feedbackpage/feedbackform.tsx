@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Modal,
   ModalContent,
@@ -14,7 +14,7 @@ import {
 
 import Link from 'next/link';
 
-const GoogleForm = () => {
+const FeedbackForm = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [scrollBehavior, setScrollBehavior] = React.useState<
     'normal' | 'inside' | 'outside'
@@ -58,7 +58,7 @@ const GoogleForm = () => {
                 </ModalHeader>
                 <ModalBody>
                   <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSfhtDyMZ3aX_9JlM6v3N4aT8_LsdMdySORoGPSCtMsTib9m8g/viewform?embedded=true"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSczRs-7TTUYJOsab9bmhRK_p4kUsqmtJTENHMz_vyJcNSF0vg/viewform?embedded=true"
                     width="400"
                     height="2700"
                   >
@@ -69,13 +69,13 @@ const GoogleForm = () => {
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Link href="/packages">
+                  <Link href="/">
                     <Button
                       color="primary"
                       onPress={onClose}
                       className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700] "
                     >
-                      Back To Packages
+                      HomePage
                     </Button>
                   </Link>
                 </ModalFooter>
@@ -88,4 +88,4 @@ const GoogleForm = () => {
   );
 };
 
-export default GoogleForm;
+export default FeedbackForm;

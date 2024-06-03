@@ -14,11 +14,7 @@ const Summary = () => {
     >
       <div className=" border-b-1 border-[#FFFFF0]  ">
         <p className="leading-8 text-center lg:text-4xl m-10 text-md text-white ">
-          Introducing{' '}
-          <a className="text-[#FE8B8B]" href="/about">
-            Michael Estrada
-          </a>
-          , the master{' '}
+          Introducing Michael Estrada , the master{' '}
           <a className="text-[#FFD700]" href="/about">
             mixologist
           </a>{' '}

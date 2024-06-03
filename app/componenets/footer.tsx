@@ -24,7 +24,7 @@ const Footer = () => {
           </div>
           <div className="flex justify-center mt-4 sm:justify-center sm:mt-0">
             <a
-              href="#"
+              href="https://www.facebook.com/story.php?story_fbid=7194571487328980&id=100003286008993&mibextid=WC7FNe&rdid=w9ZRwtbtRdW4CB6z"
               className="text-white hover:text-[#DC143C] dark:hover:text-[#FFD700]"
             >
               <svg

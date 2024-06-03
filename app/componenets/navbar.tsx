@@ -27,7 +27,7 @@ import {
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Packages', 'About', 'Booking'];
+  const menuItems = ['Home', 'Packages', 'About', 'Booking', 'Reviews'];
 
   const homeMenuItems = [
     { name: 'Home', path: '/' },

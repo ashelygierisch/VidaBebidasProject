@@ -54,7 +54,7 @@ const FeedbackForm = () => {
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col text-center gap-1 text-[#FFD700]">
-                  Booking Form
+                  Leave a Review
                 </ModalHeader>
                 <ModalBody>
                   <iframe

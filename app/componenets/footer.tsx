@@ -26,6 +26,7 @@ const Footer = () => {
             <a
               href="https://www.facebook.com/story.php?story_fbid=7194571487328980&id=100003286008993&mibextid=WC7FNe&rdid=w9ZRwtbtRdW4CB6z"
               className="text-white hover:text-[#DC143C] dark:hover:text-[#FFD700]"
+              aria-label="FaceBook"
             >
               <svg
                 className="w-4 h-4"
@@ -46,6 +47,7 @@ const Footer = () => {
               href="https://www.instagram.com/vidabebidasproject?igsh=MXc5bHB4cGlpdHN0NQ=="
               className="text-white hover:text-[#DC143C] dark:hover:text-[#FFD700] ms-5"
               target="_blank"
+              aria-label="Instagram"
             >
               <span className="icon-[ph--instagram-logo-thin] text-lg"></span>
             </a>

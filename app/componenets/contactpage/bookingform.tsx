@@ -82,6 +82,10 @@ const BookingForm = () => {
             placeholder="Do you go and get the liquor..?  "
           />
         </label>
+        <div className="w-full bg-white text-black">
+          <DateCalendar />
+          <TimePicker />
+        </div>
       </form>
     </div>
   );

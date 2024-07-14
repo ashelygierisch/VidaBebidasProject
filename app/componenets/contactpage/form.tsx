@@ -13,9 +13,10 @@ import {
 } from '@nextui-org/react';
 
 import Link from 'next/link';
+import BookingForm from './bookingform';
 
-const GoogleForm = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+const BookingModel = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [scrollBehavior, setScrollBehavior] = React.useState<
     'normal' | 'inside' | 'outside'
   >('inside');
@@ -25,11 +26,11 @@ const GoogleForm = () => {
   }, [onOpen]);
 
   return (
-    <div className="flex justify-center items-center ">
+    <div className="flex justify-center items-center">
       <div className="flex flex-col gap-2">
         <Button
           onPress={onOpen}
-          className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white animate-pulse"
+          className="bg-transparent border rounded-sm border-[#DC143C] hover:border-white animate-pulse"
         >
           Open Form
         </Button>
@@ -46,34 +47,28 @@ const GoogleForm = () => {
         </RadioGroup>
         <Modal
           isOpen={isOpen}
-          onOpenChange={onOpenChange}
+          onClose={onClose}
           scrollBehavior={scrollBehavior}
           className="h-[1000px]"
         >
           <ModalContent className="flex justify-center items-center">
-            {(onClose) => (
+            {(closeModal) => (
               <>
                 <ModalHeader className="flex flex-col text-center gap-1 text-[#FFD700]">
                   Booking Form
                 </ModalHeader>
                 <ModalBody>
-                  <iframe
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSfhtDyMZ3aX_9JlM6v3N4aT8_LsdMdySORoGPSCtMsTib9m8g/viewform?embedded=true"
-                    width="400"
-                    height="2700"
-                  >
-                    Loading…
-                  </iframe>
+                  <BookingForm />
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
+                  <Button color="danger" variant="light" onPress={closeModal}>
                     Close
                   </Button>
                   <Link href="/packages">
                     <Button
                       color="primary"
-                      onPress={onClose}
-                      className="bg-transparent border  rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700] "
+                      onPress={closeModal}
+                      className="bg-transparent border rounded-sm border-[#DC143C] hover:border-white hover:text-[#FFD700]"
                     >
                       Back To Packages
                     </Button>
@@ -88,4 +83,4 @@ const GoogleForm = () => {
   );
 };
 
-export default GoogleForm;
+export default BookingModel;

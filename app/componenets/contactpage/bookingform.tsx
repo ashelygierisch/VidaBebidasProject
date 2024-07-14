@@ -3,14 +3,26 @@ import React from 'react';
 
 import { useState, useEffect } from 'react';
 import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+
+import dayjs, { Dayjs } from 'dayjs';
 
 const BookingForm = () => {
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
+  const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  console.log('Date & Time', selectedDate, setSelectedTime);
   return (
     <div>
       <form className=" flex flex-col lg:justify-center justify-start lg:items-center gap-5 p-4 ">
-        <div className="flex lg:flex-row flex-col gap-4">
-          <label className="input input-bordered flex items-center gap-2 text-sm">
+        <div className="flex  flex-col gap-4">
+          <label className="input input-bordered flex items-center gap-2 text-sm ">
             First Name
             <input type="text" className="grow" placeholder="Daisy" />
           </label>
@@ -82,10 +94,21 @@ const BookingForm = () => {
             placeholder="Do you go and get the liquor..?  "
           />
         </label>
-        <div className="w-full bg-white text-black">
-          <DateCalendar />
-          <TimePicker />
+        <div className="flex flex-col justify-center items-center text-black bg-white">
+          <h1 className="text-2xl text-black m-3">Calendar</h1>
+          <DateCalendar
+            disablePast
+            value={selectedDate}
+            onChange={(newDate) => setSelectedDate(newDate)}
+          />
+
+          <TimePicker
+            views={['hours', 'minutes']}
+            value={selectedTime}
+            onChange={(newTime) => setSelectedTime(newTime)}
+          />
         </div>
+        <button>Submit</button>
       </form>
     </div>
   );

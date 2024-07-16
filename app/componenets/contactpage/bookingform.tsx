@@ -19,8 +19,9 @@ const BookingForm = () => {
 
   console.log('Date & Time', selectedDate, setSelectedTime);
   return (
-    <div>
-      <form className=" flex flex-col lg:justify-center justify-start lg:items-center gap-5 p-4 ">
+    <div className="flex justify-center ">
+      <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-[#FFD700]">
+        <h1 className="font-bold text-2xl">Booking Form</h1>
         <div className="flex  flex-col gap-4">
           <label className="input input-bordered flex items-center gap-2 text-sm ">
             First Name
@@ -35,39 +36,39 @@ const BookingForm = () => {
           Email
           <input type="text" className="grow" placeholder="daisy@site.com" />
         </label>
-        <label className="input input-bordered flex items-center gap-2 lg:w-auto  text-sm h-auto ">
+        <label className="input h-auto input-bordered flex flex-col items-start gap-2 lg:w-auto text-sm pt-3">
           Choice of Service
-          <ul className="m-2 ">
-            <li className="m-2">
+          <ul className="w-full m-2">
+            <li className="flex items-center gap-2 p-2">
               <input
                 type="radio"
                 name="radio-6"
                 className="radio radio-warning"
                 id="SilverPackage"
               />
-              <label htmlFor="SilverPackage" className="text-sm p-2">
+              <label htmlFor="SilverPackage" className="text-sm">
                 SilverPackage ($150)
               </label>
             </li>
-            <li className="m-2">
+            <li className="flex items-center gap-2 p-2">
               <input
                 type="radio"
                 name="radio-6"
                 className="radio radio-warning"
                 id="ReposadoPackage"
               />
-              <label htmlFor="ReposadoPackage" className="text-sm p-2">
-                ReposadoPackage($200)
+              <label htmlFor="ReposadoPackage" className="text-sm">
+                ReposadoPackage ($200)
               </label>
             </li>
-            <li className="m-2">
+            <li className="flex items-center gap-2 p-2">
               <input
                 type="radio"
                 name="radio-6"
                 className="radio radio-warning"
                 id="AñejoPackage"
               />
-              <label htmlFor="AñejoPackage" className="text-sm p-2">
+              <label htmlFor="AñejoPackage" className="text-sm">
                 AñejoPackage ($250)
               </label>
             </li>
@@ -85,28 +86,30 @@ const BookingForm = () => {
           Phone Number
           <input type="text" className="grow" placeholder="469-768-6711" />
         </label>
-        <label className="input input-bordered flex items-center gap-2 lg:w-auto  text-sm">
+        <label className="input input-bordered flex items-center gap-2 lg:w-auto  text-sm h-auto">
           Questions|Comments
-          <input
-            type="message"
-            className="grow resize-none overflow-hidden"
+          <textarea
+            className="grow resize-none overflow-auto m-2"
             maxLength={200}
-            placeholder="Do you go and get the liquor..?  "
+            placeholder="Do you go and get the liquor..?"
+            rows={4}
           />
         </label>
-        <div className="flex flex-col justify-center items-center text-black bg-white">
-          <h1 className="text-2xl text-black m-3">Calendar</h1>
+        <div className="flex flex-col justify-center items-center text-black bg-white border-1 rounded-lg mb-2">
+          <h1 className="text-2xl text-black m-3 ">Calendar</h1>
           <DateCalendar
             disablePast
             value={selectedDate}
             onChange={(newDate) => setSelectedDate(newDate)}
           />
-
-          <TimePicker
-            views={['hours', 'minutes']}
-            value={selectedTime}
-            onChange={(newTime) => setSelectedTime(newTime)}
-          />
+          <div className="m-2">
+            <TimePicker
+              views={['hours', 'minutes']}
+              value={selectedTime}
+              format="hh:mm"
+              onChange={(newTime) => setSelectedTime(newTime)}
+            />
+          </div>
         </div>
         <button>Submit</button>
       </form>

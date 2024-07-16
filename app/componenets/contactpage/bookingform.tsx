@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-
+import { Button } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
 import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
-
+import { toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
 
 const BookingForm = () => {
@@ -25,7 +25,55 @@ const BookingForm = () => {
 
   if (!mounted) return null;
 
-  console.log('Date & Time', selectedDate, setSelectedTime);
+  const createUser = async () => {
+    if (!selectedDate) {
+      toast.error('Please select a date');
+      return;
+    }
+    if (!name) {
+      toast.error('Please enter your first name');
+      return;
+    }
+
+    if (!email) {
+      toast.error('Please enter your email');
+      return;
+    }
+    if (!address) {
+      toast.error('Please enter your address');
+      return;
+    }
+    if (!phone) {
+      toast.error('Please enter your phone number');
+      return;
+    }
+
+    if (!service) {
+      toast.error('Please choose a Service');
+    }
+
+    const response = await fetch('/api/bookings', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        date: dayjs(selectedDate).format('YYYY-MM-DD'),
+        time: dayjs(selectedTime).format('h:mm A'),
+        name,
+        email,
+        phone,
+        address,
+        message,
+        service,
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log('info needed', data);
+  };
+
   return (
     <div className="flex justify-center ">
       <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-[#FFD700]">
@@ -141,7 +189,13 @@ const BookingForm = () => {
             />
           </div>
         </div>
-        <button>Submit</button>
+        <Button
+          className="bg-transparent border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse"
+          variant="shadow"
+          onClick={createUser}
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );

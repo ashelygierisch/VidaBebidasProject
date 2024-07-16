@@ -173,24 +173,30 @@ const BookingForm = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </label>
-        <div className="flex flex-col justify-center items-center text-black bg-white border-1 rounded-lg mb-2">
-          <h1 className="text-2xl text-black m-3 ">Calendar</h1>
+        <div className="flex flex-col justify-center items-center text-black bg-white border-1 rounded-lg ">
+          <h2 className="text-2xl text-black m-3 ">Calendar</h2>
           <DateCalendar
             disablePast
             value={selectedDate}
             onChange={(newDate) => setSelectedDate(newDate)}
           />
-          <div className="m-2">
+        </div>
+        <div className="flex flex-col justify-center items-center text-black bg-white border-1 rounded-lg ">
+          <div className="m-2 ">
+            <h2 className="text-2xl text-black text-center">Time</h2>
+            <p className="pb-3">
+              Please choose the time you would like me to arrive at your event.
+            </p>
             <TimePicker
               views={['hours', 'minutes']}
               value={selectedTime}
-              format="hh:mm"
+              format="hh:mm a"
               onChange={(newTime) => setSelectedTime(newTime)}
             />
           </div>
         </div>
         <Button
-          className="bg-transparent border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse"
+          className=" border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse"
           variant="shadow"
           onClick={createUser}
         >

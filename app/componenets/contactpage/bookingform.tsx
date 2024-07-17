@@ -74,14 +74,22 @@ const BookingForm = () => {
 
     console.log('info needed', data);
 
-    router.push('/waiver');
+    router.push(`/waiver/&email=${email}`);
   };
 
   return (
     <div className="flex justify-center ">
       <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-[#FFD700]">
-        <h1 className="font-bold text-2xl">Booking Form</h1>
+        <h1 className="font-bold text-2xl">VidaBebidasProject Booking Form</h1>
+        <p className='text-sm'>Please note the following details before Booking:</p>
+        <ul className='bg-white text-black border-1 rounded-lg m-2 text-sm'>
+          <li className='p-2 '><span className='font-bold underline'>Responsibility:</span>  All liquor, beer, and beverages must be provided by the host.</li>
+          <li className='p-2 '><span className='font-bold underline'>Bartender Provisions:</span> I will supply lime juice, Tajín, salt, juice mixers, bartender materials, and exceptional service.</li>
+          <li className='p-2 '><span className='font-bold underline'>Package Recommendations:</span> For the Reposado Package and Añejo Package, it is highly recommended that the bartender procure the liquor to ensure all necessary ingredients are available for the event.</li>
+          <li className='p-2'><span className='font-bold underline'>Budget Variations:</span> Please be aware that the budget may vary based on the choice of house liquor or upscale liquor.</li>
+        </ul>
         <div className="flex  flex-col gap-4">
+         
           <label className="input input-bordered flex items-center gap-2 text-sm ">
             Name
             <input

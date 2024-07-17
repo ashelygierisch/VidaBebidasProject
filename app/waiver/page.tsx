@@ -13,26 +13,72 @@ const WaiverForm = () => {
   };
 
   return (
-    <div className="mt-[100px]">
+    <div className="mt-[100px] m-2">
+      <form className='max-w-lg mx-auto text-left border-1 rounded-lg '>
       <div className="flex justify-center">
         <div className="waiver-form">
-          <h1 className="font-bold text-2xl">Waiver Form</h1>
-          <p>
+          <h1 className="font-bold text-2xl text-center"> Waiver and Agreement for Bartending Services</h1>
+          <p className='text-center'>
             Please read and accept the waiver terms to proceed with your
             booking.
           </p>
-          <textarea className="waiver-text" readOnly>
-            {/* Waiver text here */}
-          </textarea>
-          <Button
-            className="border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse"
+          <div className="h-85 overflow-y-auto border border-gray-300 p-4 bg-white text-black">
+            <p className='m-3 font-serif '>
+This Waiver and Agreement is made between VidaBebidasProject/Michael Estrada and the client booking. By accepting this Agreement, the Client acknowledges and agrees to the terms and conditions set forth below. 
+</p>
+<ul>
+<li>1. Host Responsibility:
+
+The Client understands and agrees that all liquor, beer, and beverages must be provided by the host. The Bartender is not responsible for providing alcoholic beverages unless specified in the package.</li>
+
+<li>2. Bartender Provisions:
+
+The Bartender will supply lime juice, Tajín, salt, juice mixers, bartender materials, and exceptional service to ensure a memorable experience.</li>
+
+<li>3. Package Recommendations:
+
+For the Reposado Package and Añejo Package, it is highly recommended that the Bartender procure the liquor to ensure all necessary ingredients are available for the event. This ensures the highest quality and availability of necessary ingredients.</li>
+
+<li>4. Budget Variations:
+
+The Client acknowledges that the budget may vary based on the choice of house liquor or upscale liquor. The Client will be informed of any budget changes prior to the procurement of the liquor by the Bartender.</li>
+
+<li>5. Liability Waiver:
+
+The Client agrees to indemnify and hold harmless Vida Bebidas Project, its employees, and agents from any and all claims, damages, losses, and expenses arising out of or resulting from the services provided, except where such claims are the result of gross negligence or willful misconduct by the Bartender.</li>
+
+<li>6. Age Verification:
+
+The Client is responsible for ensuring that all guests consuming alcoholic beverages are of legal drinking age. The Bartender reserves the right to request identification and refuse service to any guest without proper identification.</li>
+
+<li>7. Event Duration and Overtime:
+
+The Bartender will provide services for the agreed-upon duration of the event. Any additional time requested by the Client beyond the initial agreement will be charged at an overtime rate to be determined by the Bartender.</li>
+
+<li>8. Cancellation Policy:
+
+The Client must provide notice of cancellation at least three days prior to the event.</li>
+
+<li>9. Acceptance of Terms:
+
+By accepting below, the Client acknowledges that they have read, understood, and agreed to the terms and conditions outlined in this Agreement.
+
+For any questions or concerns, please contact Vida Bebidas Project at +1 (214-893-2926).</li>
+</ul>
+          </div>
+         <div className='flex justify-center m-2'>
+         <Button
+            className="border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse "
             variant="shadow"
             onClick={submitWaiver}
           >
-            Accept Waiver
+            Accept Waiver & Complete Booking
           </Button>
+         </div>
+     
         </div>
       </div>
+      </form>
     </div>
   );
 };

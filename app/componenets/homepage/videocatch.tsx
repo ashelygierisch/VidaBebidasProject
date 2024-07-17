@@ -27,6 +27,7 @@ const VideoCatch = () => {
           autoPlay
           playsInline
           loop
+          preload="metadata"
           // muted
           className="video"
         />

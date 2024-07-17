@@ -1,12 +1,14 @@
 {
-  "name": "VidaBebidasProject ",
+  "name": "vidabebidasproject",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "prisma:generate": "prisma generate"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -14,6 +16,7 @@
     "@mui/material": "^5.16.1",
     "@mui/x-date-pickers": "^7.10.0",
     "@nextui-org/react": "^2.2.10",
+    "@prisma/client": "^5.17.0",
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",
     "dayjs": "^1.11.11",
@@ -45,7 +48,7 @@
     "@iconify/json": "^2.2.202",
     "@iconify/tailwind": "^0.1.4",
     "@types/file-saver": "^2.0.7",
-    "@types/node": "^20",
+    "@types/node": "^20.14.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
@@ -53,7 +56,14 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
+    "prisma": "^5.17.0",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "description": "VidaBebidas Project is a comprehensive, full-stack website designed to serve as a booking platform for a mobile bartender. The site features a professional video showcasing the client's expertise, along with written reviews from previous clients. Users can explore a detailed packages page to learn about the services offered and access a booking page to submit a booking form, which promptly notifies the client of new bookings.",
+  "main": "postcss.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

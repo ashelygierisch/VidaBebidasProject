@@ -72,6 +72,8 @@ const BookingForm = () => {
     const data = await response.json();
 
     console.log('info needed', data);
+
+    toast.success('Booking Successful!');
   };
 
   return (
@@ -109,6 +111,7 @@ const BookingForm = () => {
                 name="radio-6"
                 className="radio radio-warning"
                 id="SilverPackage"
+                value="SilverPackage"
                 checked={service === 'SilverPackage'}
                 onChange={(e) => setService(e.target.value)}
               />
@@ -121,6 +124,7 @@ const BookingForm = () => {
                 type="radio"
                 name="radio-6"
                 className="radio radio-warning"
+                value="ReposadoPackage"
                 id="ReposadoPackage"
                 checked={service === 'ReposadoPackage'}
                 onChange={(e) => setService(e.target.value)}
@@ -134,6 +138,7 @@ const BookingForm = () => {
                 type="radio"
                 name="radio-6"
                 className="radio radio-warning"
+                value="AñejoPackage"
                 id="AñejoPackage"
                 checked={service === 'AñejoPackage'}
                 onChange={(e) => setService(e.target.value)}
@@ -149,6 +154,8 @@ const BookingForm = () => {
           <input
             type="text"
             className="grow"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
             placeholder="1234 Mockingbird Lane, Dallas, TX 75209"
           />
         </label>

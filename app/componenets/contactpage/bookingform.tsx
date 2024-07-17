@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@nextui-org/react';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
 import { toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
@@ -18,7 +19,7 @@ const BookingForm = () => {
   const [message, setMessage] = useState('');
 
   const [mounted, setMounted] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -73,7 +74,7 @@ const BookingForm = () => {
 
     console.log('info needed', data);
 
-    toast.success('Booking Successful!');
+    router.push('/waiver');
   };
 
   return (
@@ -207,7 +208,7 @@ const BookingForm = () => {
           variant="shadow"
           onClick={createUser}
         >
-          Submit
+          Continue
         </Button>
       </form>
     </div>

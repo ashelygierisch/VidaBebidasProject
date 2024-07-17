@@ -13,7 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.16.1",
+    "@mui/material": "^5.16.4",
     "@mui/x-date-pickers": "^7.10.0",
     "@nextui-org/react": "^2.2.10",
     "@prisma/client": "^5.17.0",

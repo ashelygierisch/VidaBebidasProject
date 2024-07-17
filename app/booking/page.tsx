@@ -6,6 +6,7 @@ const Booking = () => {
   return (
     <div className="mt-[100px]">
       {' '}
+      Testing
       <BookingForm />
     </div>
   );

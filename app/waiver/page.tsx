@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
@@ -8,16 +8,45 @@ const WaiverForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
+  const name = searchParams.get('name');
 
-  const submitWaiver = () => {
-    // Handle waiver submission
+  useEffect(() => {
+    console.log('Email:', email);
+    console.log('Name:', name);
+  }, [email, name]);
+  const [fullName, setFullName] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const response = await fetch('api/waiver', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        fullName,
+        isChecked,
+        email,
+      }),
+    });
+
+    console.log('Form Submitted', fullName, isChecked);
+
     toast.success('Waiver Accepted and Booking Successful!');
     router.push('/thankyou'); // Redirect to a thank you page or another page
   };
 
   return (
     <div className="mt-[100px] m-2">
-      <form className="max-w-lg mx-auto text-left border-1 rounded-lg ">
+      <form
+        className="max-w-lg mx-auto text-left border-1 rounded-lg "
+        onSubmit={handleSubmit}
+      >
         <div className="flex justify-center">
           <div className="waiver-form">
             <h1 className="font-bold text-2xl text-center m-2">
@@ -32,13 +61,13 @@ const WaiverForm = () => {
               <p className="m-3 font-serif ">
                 This Waiver and Agreement is made between
                 VidaBebidasProject/Michael Estrada ("Bartender") and the client
-                booking ("Client"). By accepting this Agreement, the Client
+                booking, {name}. By accepting this Agreement, the Client
                 acknowledges and agrees to the terms and conditions set forth
                 below.
               </p>
               <ul className="text-sm">
-                <li>
-                  <span className="font-bold underline">
+                <li className="m-2">
+                  <span className="font-bold underline ">
                     1. Host Responsibility:
                   </span>{' '}
                   The Client understands and agrees that all liquor, beer, and
@@ -47,7 +76,7 @@ const WaiverForm = () => {
                   in the package.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     2. Bartender Provisions:
                   </span>{' '}
@@ -56,7 +85,7 @@ const WaiverForm = () => {
                   a memorable experience.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     3. Package Recommendations:
@@ -68,7 +97,7 @@ const WaiverForm = () => {
                   ingredients.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     4. Budget Variations:
@@ -79,7 +108,7 @@ const WaiverForm = () => {
                   liquor by the Bartender.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     5. Liability Waiver:
@@ -91,7 +120,7 @@ const WaiverForm = () => {
                   of gross negligence or willful misconduct by the Bartender.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     6. Age Verification:
@@ -102,7 +131,7 @@ const WaiverForm = () => {
                   refuse service to any guest without proper identification.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     7. Event Duration and Overtime:
@@ -113,7 +142,7 @@ const WaiverForm = () => {
                   overtime rate to be determined by the Bartender.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     8. Cancellation Policy:
@@ -122,7 +151,7 @@ const WaiverForm = () => {
                   days prior to the event.
                 </li>
 
-                <li>
+                <li className="m-2">
                   <span className="font-bold underline">
                     {' '}
                     9. Acceptance of Terms:
@@ -134,13 +163,37 @@ const WaiverForm = () => {
                 </li>
               </ul>
             </div>
+            <label className="block m-2">
+              Electronic Signature:
+              <input
+                type="text"
+                className="w-full border rounded px-2 py-1 mt-1"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </label>
+
+            <label className="block m-4">
+              <input
+                type="checkbox"
+                className="mr-2"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+              I acknowledge and agree to the terms and conditions outlined in
+              this Dumpster Damage Waiver Form.
+            </label>
             <div className="flex justify-center m-2">
               <Button
-                className="border rounded-sm border-white text-white hover:border-[#DC143C] hover:animate-pulse "
-                variant="shadow"
-                onClick={submitWaiver}
+                type="submit"
+                className={`bg-orange-500 text-white px-4 py-2 rounded ${
+                  isChecked
+                    ? 'hover:bg-orange-600'
+                    : 'opacity-50 cursor-not-allowed'
+                }`}
+                disabled={!isChecked}
               >
-                Accept Waiver & Complete Booking
+                Complete Booking
               </Button>
             </div>
           </div>

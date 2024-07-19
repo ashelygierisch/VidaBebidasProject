@@ -74,8 +74,7 @@ const BookingForm = () => {
 
     console.log('info needed', data);
 
-    router.push(`/waiver?email=${email}`);
-    router.push(`/waiver?email=${email}`);
+    router.push(`/waiver?email=${email}&name=${name}`);
   };
 
   return (

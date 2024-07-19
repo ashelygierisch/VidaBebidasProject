@@ -181,7 +181,7 @@ const WaiverForm = () => {
                 onChange={handleCheckboxChange}
               />
               I acknowledge and agree to the terms and conditions outlined in
-              this Dumpster Damage Waiver Form.
+              this Bartending Services Waiver Form.
             </label>
             <div className="flex justify-center m-2">
               <Button

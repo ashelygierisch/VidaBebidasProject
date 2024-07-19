@@ -1,14 +1,10 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-
+import Link from 'next/link';
+import About from '../about/page';
+import { Button } from '@nextui-org/react';
 const ThankYou = () => {
-  const router = useRouter();
-
-  const handleGoHome = () => {
-    router.push('/');
-  };
-
   return (
     <div className="flex flex-col items-center justify-center h-screen m-3 ">
       <div className="bg-white p-6 rounded-lg shadow-lg text-black">
@@ -24,12 +20,14 @@ const ThankYou = () => {
           please don't hesitate to contact us.
         </p>
         <p className="mb-4">We can t wait to make your event special!</p>
-        <button
-          onClick={handleGoHome}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
-        >
-          Return to Home
-        </button>
+        <Link href={'/about'}>
+          <Button
+            className="bg-[#FFD700] border rounded-sm border-white text-black hover:border-[#DC143C] hover:animate-pulse"
+            variant="shadow"
+          >
+            Learn More About Michael
+          </Button>
+        </Link>
       </div>
     </div>
   );

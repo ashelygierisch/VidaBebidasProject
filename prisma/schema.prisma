@@ -19,6 +19,6 @@ model User {
    email String @unique
    address String?
    phone String
-  elecronicSignature String?
+   elecronicSignature String?
    confirmWaiver Boolean? @default(false)
 }

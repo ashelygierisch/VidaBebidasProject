@@ -53,14 +53,17 @@ const BookingForm = () => {
       toast.error('Please choose a Service');
     }
 
+    const bookingDate = dayjs(selectedDate).format('YYYY-MM-DD');
+    const bookingTime = dayjs(selectedTime).format('hh:mm A');
+
     const response = await fetch('/api/bookings', {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        date: dayjs(selectedDate).format('YYYY-MM-DD'),
-        time: dayjs(selectedTime).format('h:mm A'),
+        date: bookingDate,
+        time: bookingTime,
         name,
         email,
         phone,
@@ -72,9 +75,11 @@ const BookingForm = () => {
 
     const data = await response.json();
 
-    console.log('info needed', data);
-
-    router.push(`/waiver?email=${email}&name=${name}`);
+    if (response.ok) {
+      router.push(`/waiver?email=${email}&name=${name}`);
+    } else {
+      toast.error(data.error || 'An error occurred. Please try again.');
+    }
   };
 
   return (

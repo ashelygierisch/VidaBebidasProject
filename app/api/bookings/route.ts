@@ -8,23 +8,55 @@ export async function POST(request: Request) {
     const { date, time, name, address, email, phone, service, message } =
       await request.json();
 
-    const user = await prisma.user.create({
-      data: {
-        selectedDate: date,
-        selectedTime: time,
-        name,
-        email,
-        address,
-        phone,
-        service,
-        message,
+    const existingBooking = await prisma.booking.findFirst({
+      where: {
+        date,
       },
     });
 
-    return NextResponse.json(user, {
+    if (existingBooking) {
+      return NextResponse.json(
+        {
+          error:
+            'The selected date is already booked. We apologize for any inconvenience. Please choose another slot or contact us for assistance.',
+        },
+        { status: 409 }
+      );
+    }
+
+    let user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          name,
+          email,
+          phone,
+          address,
+        },
+      });
+    }
+
+    const newBooking = await prisma.booking.create({
+      data: {
+        date,
+        time,
+        service,
+        message,
+        userId: user.id,
+      },
+    });
+
+    return NextResponse.json(newBooking, {
       status: 200,
     });
   } catch (error) {
     console.log('error', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 }

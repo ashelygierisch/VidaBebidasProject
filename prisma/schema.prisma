@@ -18,6 +18,7 @@ model User {
    service String
    email String @unique
    address String?
+   message String
    phone String
    elecronicSignature String?
    confirmWaiver Boolean? @default(false)

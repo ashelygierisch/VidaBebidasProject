@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
 import { toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
-
+import BookedDates from './bookedDates';
 const BookingForm = () => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
@@ -213,6 +213,11 @@ const BookingForm = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </label>
+        <div className="flex flex-col justify-center items-center text-red-700 bg-red-100 border border-red-300 rounded-lg p-4">
+          <h2 className="text-2xl font-bold mb-3">Booked Dates:</h2>
+          <BookedDates />
+        </div>
+
         <div className="flex flex-col justify-center items-center text-black bg-white border-1 rounded-lg ">
           <h2 className="text-2xl text-black m-3 ">Calendar</h2>
           <DateCalendar

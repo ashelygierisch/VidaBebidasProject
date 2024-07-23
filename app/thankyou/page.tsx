@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import About from '../about/page';
 import { Button } from '@nextui-org/react';
+import Image from 'next/image';
+
 const ThankYou = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen m-3 ">
@@ -20,6 +22,17 @@ const ThankYou = () => {
           please don't hesitate to contact us.
         </p>
         <p className="mb-4">We can t wait to make your event special!</p>
+        <div className="mb-6 md:mb-0 flex justify-center align-center m-5">
+          <a href="/" className="flex items-center">
+            <Image
+              src="/logo-white.png"
+              className=" me-3 pb-5 h-[70px]"
+              alt="FlowBite Logo"
+              width={300}
+              height={100}
+            />
+          </a>
+        </div>
         <Link href={'/about'}>
           <Button
             className="bg-[#FFD700] border rounded-sm border-white text-black hover:border-[#DC143C] hover:animate-pulse"

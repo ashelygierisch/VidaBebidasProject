@@ -105,7 +105,7 @@ const BookingForm = () => {
 
   return (
     <div className="flex justify-center ">
-      <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-white">
+      <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-400 w-[400px] border-2 rounded-md border-white">
         <h1 className="font-bold text-2xl text-center text-black">
           VidaBebidasProject Booking Form
         </h1>

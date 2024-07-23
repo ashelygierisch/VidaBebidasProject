@@ -7,9 +7,11 @@ import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
 import { toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
 import BookedDates from './bookedDates';
+import BookingDetails from './bookingDetails';
 const BookingForm = () => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
+  const [bookedDates, setBookedDates] = useState<Dayjs[]>([]);
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -22,9 +24,22 @@ const BookingForm = () => {
   const router = useRouter();
   useEffect(() => {
     setMounted(true);
+    fetchBookedDates();
   }, []);
 
-  if (!mounted) return null;
+  const fetchBookedDates = async () => {
+    try {
+      const response = await fetch('/api/get-booked-dates');
+      if (!response.ok) throw new Error('Failed to fetch booked dates');
+      const data = await response.json();
+      const formattedDates = data.map((booking: { date: string }) =>
+        dayjs(booking.date)
+      );
+      setBookedDates(formattedDates);
+    } catch (error) {
+      console.error('Error fetching booked dates:', error);
+    }
+  };
 
   const createUser = async () => {
     if (!selectedDate) {
@@ -82,37 +97,22 @@ const BookingForm = () => {
     }
   };
 
+  const isDateBooked = (date: Dayjs) => {
+    return bookedDates.some((bookedDate) => bookedDate.isSame(date, 'day'));
+  };
+
+  if (!mounted) return null;
+
   return (
     <div className="flex justify-center ">
-      <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-[#FFD700]">
-        <h1 className="font-bold text-2xl">VidaBebidasProject Booking Form</h1>
+      <form className=" flex flex-col lg:justify-center justify-start  gap-5 p-4 bg-gray-500 w-[400px] border-2 rounded-md border-white">
+        <h1 className="font-bold text-2xl text-center text-black">
+          VidaBebidasProject Booking Form
+        </h1>
         <p className="text-sm text-[#FFD700]">
           Please note the following details before Booking:
         </p>
-        <ul className="bg-white text-black border-1 rounded-lg m-2 text-sm">
-          <li className="p-2 ">
-            <span className="font-bold underline">Responsibility:</span> All
-            liquor, beer, and beverages must be provided by the host.
-          </li>
-          <li className="p-2 ">
-            <span className="font-bold underline">Bartender Provisions:</span> I
-            will supply lime juice, Tajín, salt, juice mixers, bartender
-            materials, and exceptional service.
-          </li>
-          <li className="p-2 ">
-            <span className="font-bold underline">
-              Package Recommendations:
-            </span>{' '}
-            For the Reposado Package and Añejo Package, it is highly recommended
-            that the bartender procure the liquor to ensure all necessary
-            ingredients are available for the event.
-          </li>
-          <li className="p-2">
-            <span className="font-bold underline">Budget Variations:</span>{' '}
-            Please be aware that the budget may vary based on the choice of
-            house liquor or upscale liquor.
-          </li>
-        </ul>
+        <BookingDetails />
         <div className="flex  flex-col gap-4">
           <label className="input input-bordered flex items-center gap-2 text-sm ">
             Name
@@ -213,8 +213,8 @@ const BookingForm = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </label>
-        <div className="flex flex-col justify-center items-center text-red-700 bg-red-100 border border-red-300 rounded-lg p-4">
-          <h2 className="text-2xl font-bold mb-3">Booked Dates:</h2>
+        <div className="flex flex-col justify-center items-center text-red-700 bg-white border border-red-300 rounded-lg p-6 shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Unavailable Dates</h2>
           <BookedDates />
         </div>
 
@@ -222,6 +222,7 @@ const BookingForm = () => {
           <h2 className="text-2xl text-black m-3 ">Calendar</h2>
           <DateCalendar
             disablePast
+            shouldDisableDate={isDateBooked}
             value={selectedDate}
             onChange={(newDate) => setSelectedDate(newDate)}
           />

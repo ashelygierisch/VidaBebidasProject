@@ -41,7 +41,7 @@ const BookedDates = () => {
         className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
         shadow="sm"
       >
-        <CardBody className="flex flex-col justify-center items-center text-red-700 bg-red-100 border border-red-300 rounded-lg p-4">
+        <CardBody className="flex flex-col justify-center items-center text-red-700 bg-red-100 border border-red-300 rounded-lg p-4 h-[300px] overflow-auto">
           <ul className="list-none p-0">
             {bookedDates.map((booking, index) => (
               <li

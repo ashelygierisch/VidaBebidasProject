@@ -90,8 +90,11 @@ const BookingForm = () => {
     });
 
     const data = await response.json();
-
+    console.log('Response Data:', data); // Log the entire response
+    const { bookingId } = data;
+    console.log('Booking ID:', bookingId); // Logging to verify the booking ID
     if (response.ok) {
+      sessionStorage.setItem('bookingId', bookingId);
       router.push(`/waiver?email=${email}&name=${name}`);
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');

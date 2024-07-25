@@ -42,7 +42,7 @@ const WaiverForm = () => {
       toast.error('Please provide a Signature');
     } else {
       toast.success('Waiver Accepted and Booking Successful!');
-      router.push('/thankyou'); // Redirect to a thank you page or another page
+      router.push('/thankyou');
     }
   };
 
@@ -78,7 +78,7 @@ const WaiverForm = () => {
                 <div className="h-85 overflow-y-auto border border-gray-300 p-4 bg-white text-black">
                   <p className="m-3 font-serif ">
                     This Waiver and Agreement is made between
-                    VidaBebidasProject/Michael Estrada ("Bartender") and the
+                    VidaBebidasProject/Michael Estrada (Bartender) and the
                     client booking, {name}. By accepting this Agreement, the
                     Client acknowledges and agrees to the terms and conditions
                     set forth below.

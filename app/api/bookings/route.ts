@@ -48,9 +48,13 @@ export async function POST(request: Request) {
         userId: user.id,
       },
     });
+    console.log('New booking created:', newBooking);
+    console.log('Booking ID:', newBooking.id);
 
-    return NextResponse.json(newBooking, {
-      status: 200,
+    return NextResponse.json({
+      bookingId: newBooking.id,
+      userId: user.id,
+      message: 'Booking created successfully',
     });
   } catch (error) {
     console.log('error', error);

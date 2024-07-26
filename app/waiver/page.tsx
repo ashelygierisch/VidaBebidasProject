@@ -24,6 +24,14 @@ const WaiverForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    const bookingId = sessionStorage.getItem('bookingId'); //getting the booking ID from local storage
+
+    if (!bookingId) {
+      toast.error('Booking ID not found');
+      return;
+    }
+
     const response = await fetch('api/waiver', {
       method: 'POST',
       headers: {
@@ -33,6 +41,7 @@ const WaiverForm = () => {
         fullName,
         isChecked,
         email,
+        bookingId, //Passing it into the API to fetch the booking details in the route to pass to nodemailer to send to client and customer
       }),
     });
 

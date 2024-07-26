@@ -90,9 +90,9 @@ const BookingForm = () => {
     });
 
     const data = await response.json();
-    console.log('Response Data:', data); // Log the entire response
+    console.log('Response Data:', data);
     const { bookingId } = data;
-    console.log('Booking ID:', bookingId); // Logging to verify the booking ID
+    console.log('Booking ID:', bookingId);
     if (response.ok) {
       sessionStorage.setItem('bookingId', bookingId);
       router.push(`/waiver?email=${email}&name=${name}`);

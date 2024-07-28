@@ -1,12 +1,16 @@
 'use client';
-import React from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useEffect } from 'react';
+
 import Link from 'next/link';
-import About from '../about/page';
+
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 
 const ThankYou = () => {
+  useEffect(() => {
+    sessionStorage.removeItem('bookingId');
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center h-screen m-3 ">
       <div className="bg-white p-6 rounded-lg shadow-lg text-black">
@@ -19,7 +23,7 @@ const ThankYou = () => {
         <p className="mb-4">
           You will receive a confirmation email shortly with all the details of
           your booking. If you have any questions or need further assistance,
-          please don't hesitate to contact us.
+          please dont hesitate to contact us.
         </p>
         <p className="mb-4">We can t wait to make your event special!</p>
         <div className="mb-6 md:mb-0 flex justify-center align-center m-5">

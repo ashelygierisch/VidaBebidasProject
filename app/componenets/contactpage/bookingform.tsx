@@ -217,7 +217,7 @@ const BookingForm = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </label>
-        <div className="flex flex-col justify-center items-center text-red-700 bg-white border border-red-300 rounded-lg p-6 shadow-md">
+        <div className="flex flex-col justify-center items-center text-red-700 bg-white border border-red-300 rounded-lg p-6 shadow-md overflow-auto">
           <h2 className="text-2xl font-bold mb-4">Booked Dates</h2>
           <BookedDates />
         </div>

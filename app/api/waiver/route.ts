@@ -72,11 +72,16 @@ export async function POST(req: Request) {
     );
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'Outlook',
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
       },
+      logger: true,
+      debug: true,
     });
 
     const usersEmail = user.email;
@@ -84,8 +89,8 @@ export async function POST(req: Request) {
     console.log(usersEmail);
 
     const mailOptions = {
-      from: process.env.EMAIL_USERNAME,
-      to: 'oscarleal234@gmail.com',
+      from: `"VidaBebidasProject" <${process.env.EMAIL_USERNAME}>`,
+      to: [`${user.email}`, `${process.env.EMAIL_USERNAME}`],
       subject: 'Booking and Waiver Confirmation',
       html: template,
     };

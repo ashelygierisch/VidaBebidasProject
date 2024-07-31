@@ -17,13 +17,13 @@ const ThankYou = () => {
         <div className="bg-white p-6 rounded-lg shadow-lg text-black">
           <h1 className="text-3xl font-bold mb-4">Thank You!</h1>
           <p className="text-lg mb-4">
-            Thank you for booking with VidaBebidasProject! We are excited to be
-            a part of your event and look forward to providing exceptional
+            Thank you for booking with VidaBebidasProject! I am excited to be a
+            part of your event and look forward to providing exceptional
             service.
           </p>
           <p className="mb-4">
-            You will receive a confirmation email shortly with all the details
-            of your booking.{' '}
+            I will be in contact with you soon, and you will receive a
+            confirmation email shortly with all the details of your booking.{' '}
             <span className="font-bold text-red-700">
               Please check your inbox and spam folder,
             </span>{' '}

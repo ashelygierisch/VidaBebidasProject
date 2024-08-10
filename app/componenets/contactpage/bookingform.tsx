@@ -48,6 +48,7 @@ const BookingForm = () => {
         dayjs(booking.date)
       );
       setBookedDates(formattedDates);
+      console.log('Updated bookedDates state:', formattedDates);
     } catch (error) {
       console.error('Error fetching booked dates:', error);
     }
@@ -106,6 +107,7 @@ const BookingForm = () => {
     console.log('Booking ID:', bookingId);
     if (response.ok) {
       sessionStorage.setItem('bookingId', bookingId);
+      fetchBookedDates();
       router.push(`/waiver?email=${email}&name=${name}`);
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');

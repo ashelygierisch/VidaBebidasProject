@@ -1,3 +1,4 @@
+
 import GoogleForm from '@/app/componenets/contactpage/form';
 import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 
@@ -7,7 +8,7 @@ import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 //   price: number;
 //   descriptions: string[];
 // };
-
+import BookingForm from '../../componenets/contactpage/bookingform'
 async function getPackagebyId(pckId: string) {
   const response = await fetch(
     `https://vida-bebidas-project.vercel.app/api/packages/${pckId}`,
@@ -27,10 +28,7 @@ export default async function PackageID({ params }: any) {
 
   return (
     <div className="mt-[100px]">
-      <div className="flex justify-center items-center m-10">
-        <GoogleForm />
-      </div>
-      <div className="flex lg:flex-nowrap flex-wrap text-start">
+      <div className="flex flex-wrap text-start">
         <Card
           isBlurred
           className="border-none bg-background/60 dark:bg-default-100/50 w-65"
@@ -64,6 +62,9 @@ export default async function PackageID({ params }: any) {
             </div>
           </CardBody>
         </Card>
+      </div>
+      <div className="flex justify-center items-center m-10">
+        <BookingForm/>
       </div>
     </div>
   );

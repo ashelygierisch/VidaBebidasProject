@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.4",
     "@mui/x-date-pickers": "^7.10.0",
-    "@nextui-org/react": "^2.2.10",
+    "@nextui-org/react": "^2.4.6",
     "@prisma/client": "^5.17.0",
     "@react-three/drei": "^9.105.4",
     "@react-three/fiber": "^8.16.2",

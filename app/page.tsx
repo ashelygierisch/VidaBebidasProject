@@ -21,8 +21,6 @@ export default function Home() {
       <Summary />
       <VideoCatch />
       <Reviews />
-
-      {/* <ServicesSection /> */}
     </div>
   );
 }

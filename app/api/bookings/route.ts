@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 //added env files to vercel
+//Re doing final merge
 export async function POST(request: Request) {
   try {
     const { date, time, name, address, email, phone, service, message } =

@@ -13,7 +13,15 @@ const BookedDates = () => {
   useEffect(() => {
     const fetchBookedDates = async () => {
       try {
-        const response = await fetch('/api/get-booked-dates');
+        const response = await fetch('/api/get-booked-dates', {
+          headers: {
+            'Cache-Control':
+              'no-store, no-cache, must-revalidate, proxy-revalidate',
+            Pragma: 'no-cache',
+            Expires: '0',
+          },
+          cache: 'no-store',
+        });
 
         if (!response.ok) {
           throw new Error('Network response was not ok');

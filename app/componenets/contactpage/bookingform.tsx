@@ -30,7 +30,9 @@ const BookingForm = () => {
 
   const fetchBookedDates = async () => {
     try {
-      const response = await fetch('/api/get-booked-dates');
+      const response = await fetch('/api/get-booked-dates', {
+        cache: 'no-store',
+      });
       if (!response.ok) throw new Error('Failed to fetch booked dates');
       const data = await response.json();
       const formattedDates = data.map((booking: { date: string }) =>

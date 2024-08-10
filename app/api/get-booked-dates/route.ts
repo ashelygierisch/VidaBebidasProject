@@ -20,6 +20,9 @@ export async function GET() {
     // Return the fetched bookings as JSON
     return NextResponse.json(bookings, {
       status: 200,
+      headers: {
+        'Cache-Control': 'no-store, max-age=0',
+      },
     });
   } catch (error) {
     console.error('Error fetching booked dates:', error);

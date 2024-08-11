@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/get-booked-dates",
       "headers": [
         {
           "key": "Cache-Control",

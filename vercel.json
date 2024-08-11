@@ -1,11 +1,11 @@
 {
   "headers": [
     {
-      "source": "/get-booked-dates",
+      "source": "/api/get-booked-dates",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-store, max-age=0, must-revalidate"
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
         }
       ]
     }

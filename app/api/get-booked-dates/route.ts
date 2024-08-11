@@ -17,7 +17,6 @@ export async function GET() {
       },
     });
 
-    // Return the fetched bookings as JSON
     return NextResponse.json(bookings, {
       status: 200,
       headers: {

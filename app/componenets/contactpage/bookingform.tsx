@@ -110,6 +110,7 @@ const BookingForm = () => {
       sessionStorage.setItem('bookingId', bookingId);
       fetchBookedDates();
       router.push(`/waiver?email=${email}&name=${name}`);
+      router.refresh();
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');
     }

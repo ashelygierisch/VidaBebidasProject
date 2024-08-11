@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { DateCalendar, TimePicker } from '@mui/x-date-pickers';
 import { toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
-// import BookedDates from './bookedDates';
+import BookedDates from './bookedDates';
 import BookingDetails from './bookingDetails';
 
 const BookingForm = () => {
@@ -23,37 +23,6 @@ const BookingForm = () => {
 
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  useEffect(() => {
-    setMounted(true);
-    fetchBookedDates();
-  }, []);
-
-  const fetchBookedDates = async () => {
-    try {
-      const response = await fetch(
-        `/api/get-booked-dates?${new Date().getTime()}`,
-        {
-          headers: {
-            'Cache-Control':
-              'no-store, no-cache, must-revalidate, proxy-revalidate',
-            Pragma: 'no-cache',
-            Expires: '0',
-          },
-          cache: 'no-store',
-        }
-      );
-      if (!response.ok) throw new Error('Failed to fetch booked dates');
-      const data = await response.json();
-      console.log('Fetched bookings data:', data);
-      const formattedDates = data.map((booking: { date: string }) =>
-        dayjs(booking.date)
-      );
-      setBookedDates(formattedDates);
-      console.log('first fetch state:', formattedDates);
-    } catch (error) {
-      console.error('Error fetching booked dates:', error);
-    }
-  };
 
   const createUser = async () => {
     if (!selectedDate) {
@@ -108,19 +77,11 @@ const BookingForm = () => {
     console.log('Booking ID:', bookingId);
     if (response.ok) {
       sessionStorage.setItem('bookingId', bookingId);
-      await fetchBookedDates(); // Ensure the fetch completes
-      setBookedDates([...bookedDates]); // Force state update
       router.push(`/waiver?email=${email}&name=${name}`);
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');
     }
   };
-
-  const isDateBooked = (date: Dayjs) => {
-    return bookedDates.some((bookedDate) => bookedDate.isSame(date, 'day'));
-  };
-
-  if (!mounted) return null;
 
   return (
     <div className="flex justify-center py-10 bg-black min-h-screen">
@@ -232,15 +193,15 @@ const BookingForm = () => {
             onChange={(e) => setMessage(e.target.value)}
           />
         </label>
-        {/* <div className="flex flex-col justify-center items-center text-red-700 bg-white border border-red-300 rounded-lg p-6 shadow-md overflow-auto">
+        <div className="flex flex-col justify-center items-center text-red-700 bg-white border border-red-300 rounded-lg p-6 shadow-md overflow-auto">
           <h2 className="text-2xl font-bold mb-4">Booked Dates</h2>
           <BookedDates />
-        </div> */}
+        </div>
         <div className="flex flex-col justify-center items-center text-black bg-white border border-gray-300 rounded-lg p-6 shadow-md">
           <h2 className="text-2xl font-bold mb-4">Calendar</h2>
           <DateCalendar
             disablePast
-            shouldDisableDate={isDateBooked}
+            // shouldDisableDate={isDateBooked}
             value={selectedDate}
             onChange={(newDate) => setSelectedDate(newDate)}
           />

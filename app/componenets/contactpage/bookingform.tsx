@@ -108,9 +108,9 @@ const BookingForm = () => {
     console.log('Booking ID:', bookingId);
     if (response.ok) {
       sessionStorage.setItem('bookingId', bookingId);
-      fetchBookedDates();
+      await fetchBookedDates(); // Ensure the fetch completes
+      setBookedDates([...bookedDates]); // Force state update
       router.push(`/waiver?email=${email}&name=${name}`);
-      router.refresh();
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');
     }

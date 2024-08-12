@@ -194,7 +194,7 @@ const BookingForm = () => {
           />
         </label>
         <div className="flex flex-col justify-center items-center text-black bg-white border border-yellow-500 rounded-lg p-6 shadow-md overflow-auto">
-          <h2 className="text-2xl font-bold ">Selected the Day of Event</h2>
+          <h2 className="text-2xl font-bold ">Select the Day of Your Event</h2>
           {/* <BookedDates /> */}
         </div>
         <div className="flex flex-col justify-center items-center text-black bg-white border border-gray-300 rounded-lg p-6 shadow-md">

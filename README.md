@@ -42,7 +42,7 @@ VidaBebidas Project is a comprehensive, full-stack website designed to serve as 
 
 ## Live
 
-- https://vida-bebidas-project.vercel.app/
+- [https://vida-bebidas-project.vercel.app/](https://www.vidabevidasproject.me/)
 
 ## License
 

@@ -16,7 +16,7 @@ const MainHero = () => {
         alt="Bar Bottles"
         objectFit="cover"
         layout="fill"
-        className="absolute inset-0 z-0 "
+        className="absolute inset-0 z-0 opacity-50"
         placeholder="blur"
       />
 

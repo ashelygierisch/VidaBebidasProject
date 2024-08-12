@@ -41,7 +41,7 @@ const VideoCatch = () => {
         </div>
         <div className="video-overlay">
           <video
-            src={require('../../../public/MB.mp4')}
+            src={require('../../../public/MB2.mp4')}
             autoPlay
             playsInline
             loop

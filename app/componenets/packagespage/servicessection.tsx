@@ -21,7 +21,7 @@ const ServicesSection = () => {
                     <Image
                       alt="Album cover"
                       className="object-cover"
-                      height={200}
+                      height={400}
                       shadow="md"
                       src={pck.image}
                       width="100%"

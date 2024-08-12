@@ -63,9 +63,8 @@ const Footer = () => {
               target="_blank"
             >
               {' '}
-              Created by{' '}
+              Created by Os World
             </a>
-            Oscar Leal
           </span>
         </div>
       </div>

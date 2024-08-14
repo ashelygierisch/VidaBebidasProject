@@ -110,7 +110,7 @@ const BookingForm = () => {
           <input
             type="email"
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-white text-base"
-            placeholder="daisy@site.com"
+            placeholder="alvin@gmail.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

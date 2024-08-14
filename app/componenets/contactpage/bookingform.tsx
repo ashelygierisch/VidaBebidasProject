@@ -85,7 +85,7 @@ const BookingForm = () => {
 
   return (
     <div className="flex justify-center py-10 bg-black min-h-screen">
-      <form className="flex flex-col gap-5 p-6 bg-white w-full max-w-lg border border-gray-300 rounded-lg shadow-lg">
+      <form className="flex flex-col gap-5 p-6 bg-white w-full max-w-lg border border-gray-300 rounded-lg shadow-lg m-2">
         <h1 className="font-bold text-3xl text-center text-gray-800">
           VidaBebidasProject Booking Form
         </h1>

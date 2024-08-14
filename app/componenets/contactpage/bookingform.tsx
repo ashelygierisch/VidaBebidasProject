@@ -98,7 +98,7 @@ const BookingForm = () => {
             Name
             <input
               type="text"
-              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white"
+              className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
               placeholder="Alvin"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -109,7 +109,7 @@ const BookingForm = () => {
           Email
           <input
             type="email"
-            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-white"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-white text-base"
             placeholder="daisy@site.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -166,7 +166,7 @@ const BookingForm = () => {
           Address of Event
           <input
             type="text"
-            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
             placeholder="1234 Mockingbird Lane, Dallas, TX 75209"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -176,7 +176,7 @@ const BookingForm = () => {
           Phone Number
           <input
             type="tel"
-            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
             placeholder="469-768-6711"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -185,7 +185,7 @@ const BookingForm = () => {
         <label className="flex flex-col gap-2 text-sm text-gray-700">
           Questions|Comments
           <textarea
-            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none text-white"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none text-white text-base"
             maxLength={200}
             placeholder="Do you go and get the liquor..?"
             rows={4}

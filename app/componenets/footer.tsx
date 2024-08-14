@@ -49,7 +49,7 @@ const Footer = () => {
               target="_blank"
               aria-label="Instagram"
             >
-              <span className="icon-[ph--instagram-logo-thin] text-lg"></span>
+              <span className="icon-[entypo-social--instagram]" />
             </a>
           </div>
         </div>

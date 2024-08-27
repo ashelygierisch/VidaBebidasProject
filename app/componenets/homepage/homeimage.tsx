@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from '@nextui-org/react';
 
-import Mike from '../../../public/MikeHome.jpg';
+import Mike from '../../../public/MikeHome.webp';
 
 const HomeImage = () => {
   return (

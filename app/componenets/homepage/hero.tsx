@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import HeroBG from '../../../public/HeroBG.jpeg';
+import HeroBG from '../../../public/HeroBG.webp';
 
 import { motion } from 'framer-motion';
 

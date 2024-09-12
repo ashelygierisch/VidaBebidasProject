@@ -139,7 +139,7 @@ const Navigation = () => {
                   <p>
                     <span className="icon-[material-symbols--phone-forwarded] inline-block"></span>
                     {'   '}
-                    <a href="tel:214-809-7270" className="text-white m-2">
+                    <a href="tel:214-893-2926" className="text-white m-2">
                       +1 (214-893-2926)
                     </a>
                   </p>

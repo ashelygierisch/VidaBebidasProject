@@ -128,10 +128,10 @@ const Navigation = () => {
                     <span className="icon-[mdi--email] text-blue-300"></span>
                     {'   '}
                     <a
-                      href="mailto:saludos@vidabebidasproject.com"
+                      href="mailto:vidabebidasproject@outlook.com"
                       className="m-2 text-white hover:text-blue-300"
                     >
-                      saludos@vidabebidasproject.com
+                      vidabebidasproject@outlook.com
                     </a>
                   </p>
                 </DropdownItem>

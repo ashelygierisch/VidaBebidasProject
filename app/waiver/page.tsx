@@ -46,7 +46,7 @@ const WaiverForm = () => {
     });
 
     console.log('Form Submitted', fullName, isChecked);
-
+    console.log('Post response', response);
     if (fullName === '') {
       toast.error('Please provide a Signature');
     } else {

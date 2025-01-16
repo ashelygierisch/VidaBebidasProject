@@ -58,7 +58,7 @@ const MainHero = () => {
             </Link>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             className="flex justify-center z-10"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 10 }}
@@ -72,7 +72,7 @@ const MainHero = () => {
                 Leave a Review
               </Button>
             </Link>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </div>

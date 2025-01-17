@@ -34,8 +34,7 @@ const ImportantInfo = () => {
               <a className="font-bold">
                 Host responsibility & Bartender provisions:
               </a>{' '}
-              are dependent on package selected & booking completion between
-              Bartender & Customer.
+              are dependent on package selected & booking completion.
             </li>
             <li className="p-1 marker:text-[#FFD700]">
               <a className="font-bold">Deposits: </a>

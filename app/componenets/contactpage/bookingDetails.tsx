@@ -32,8 +32,7 @@ const BookingDetails = () => {
                 {' '}
                 Host responsibility & Bartender provisions:
               </span>{' '}
-              are dependent on package selected & booking completion between
-              Bartender & Customer.
+              are dependent on package selected & booking completion.
             </li>
             <li className="p-2 border-b border-gray-200">
               <span className="font-semibold text-lg text-yellow-600">

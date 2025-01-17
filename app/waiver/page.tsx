@@ -97,31 +97,14 @@ const WaiverForm = () => {
                       <span className="font-bold underline ">
                         1. Host Responsibility:
                       </span>{' '}
-                      The Client understands and agrees that all liquor, beer,
-                      and beverages must be provided by the host. The Bartender
-                      is not responsible for providing alcoholic beverages
-                      unless specified in the package.
+                      are dependent on package selected & booking completion.
                     </li>
 
                     <li className="m-2">
                       <span className="font-bold underline">
                         2. Bartender Provisions:
                       </span>{' '}
-                      The Bartender will supply lime juice, Tajín, salt, juice
-                      mixers, bartender materials, and exceptional service to
-                      ensure a memorable experience.
-                    </li>
-
-                    <li className="m-2">
-                      <span className="font-bold underline">
-                        {' '}
-                        3. Package Recommendations:
-                      </span>{' '}
-                      For the Reposado Package and Añejo Package, it is highly
-                      recommended that the Bartender procure the liquor to
-                      ensure all necessary ingredients are available for the
-                      event. This ensures the highest quality and availability
-                      of necessary ingredients.
+                      are dependent on package selected & booking completion.
                     </li>
 
                     <li className="m-2">

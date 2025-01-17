@@ -28,28 +28,35 @@ const BookingDetails = () => {
         <CardBody>
           <ul className="text-white space-y-4 text-base">
             <li className="p-2 border-b border-gray-200">
-              <span className="font-semibold text-lg">Responsibility:</span> All
-              liquor, beer, and beverages must be provided by the host.
+              <span className="font-semibold text-lg text-yellow-600">
+                {' '}
+                Host responsibility & Bartender provisions:
+              </span>{' '}
+              are dependent on package selected & booking completion between
+              Bartender & Customer.
             </li>
             <li className="p-2 border-b border-gray-200">
-              <span className="font-semibold text-lg">
-                Bartender Provisions:
-              </span>{' '}
-              I will supply lime juice, Tajín, salt, juice mixers, bartender
-              materials, and exceptional service.
+              <span className="font-semibold text-lg text-yellow-600">
+                Deposits:
+              </span>
+              {'  '}
+              <span className="font-bold text-[#ff0000]">Non-Refundable</span>
             </li>
             <li className="p-2 border-b border-gray-200">
-              <span className="font-semibold text-lg">
-                Package Recommendations:
+              <span className="font-semibold text-lg text-yellow-600">
+                Driving Time Convenience:
               </span>{' '}
-              For the Reposado Package and Añejo Package, it is highly
-              recommended that the bartender procure the liquor to ensure all
-              necessary ingredients are available for the event.
+              <ul className="font-sans list-disc list-inside m-2">
+                <li className="p-1 marker:text-[#ff0000]">1hr ($20) </li>
+                <li className="p-1 marker:text-[#ff0000]">2hr ($40)</li>
+                <li className="p-1 marker:text-[#ff0000]">3hr($60)</li>
+              </ul>
             </li>
-            <li className="p-2">
-              <span className="font-semibold text-lg">Budget Variations:</span>{' '}
-              Please be aware that the budget may vary based on the choice of
-              house liquor or upscale liquor.
+            <li className="p-2 ">
+              <span className="font-semibold text-lg text-yellow-600">
+                All packages:
+              </span>{' '}
+              100 people standard max, each additional person is $1 added.
             </li>
           </ul>
         </CardBody>

@@ -28,14 +28,14 @@ const VideoCatch = () => {
   return (
     <div className="video-container border-b-1 border-[#FFFFF0]">
       <div className={`${isVideoLoaded ? 'hidden' : 'block'}`}>
-        <Image 
-          src={Mike} 
+        <Image
+          src={Mike}
           alt="Michael Poster"
-          priority 
+          priority
           className="w-full h-auto"
         />
       </div>
-      
+
       <div className={isVideoLoaded ? 'visible' : 'hidden'}>
         <div className="content">
           <motion.div
@@ -59,7 +59,7 @@ const VideoCatch = () => {
             autoPlay
             playsInline
             loop
-            
+            muted
             poster={Mike.src}
             preload="auto"
             onLoadedData={handleVideoLoaded}

@@ -129,7 +129,7 @@ const BookingForm = () => {
                 onChange={(e) => setService(e.target.value)}
               />
               <label htmlFor="SilverPackage" className="text-sm">
-                SilverPackage ($150)
+                SilverPackage ($250 1-6hrs)
               </label>
             </li>
             <li className="flex items-center gap-2">
@@ -143,7 +143,7 @@ const BookingForm = () => {
                 onChange={(e) => setService(e.target.value)}
               />
               <label htmlFor="ReposadoPackage" className="text-sm">
-                ReposadoPackage ($200)
+                ReposadoPackage ($325 1-6hrs)
               </label>
             </li>
             <li className="flex items-center gap-2">
@@ -157,7 +157,7 @@ const BookingForm = () => {
                 onChange={(e) => setService(e.target.value)}
               />
               <label htmlFor="AñejoPackage" className="text-sm">
-                AñejoPackage ($250)
+                AñejoPackage ($400 1-5hrs)
               </label>
             </li>
           </ul>

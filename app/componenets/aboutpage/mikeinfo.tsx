@@ -12,15 +12,15 @@ const MikeInfo = () => {
             Michael Estrada
           </h2>
           <p className="text-wrap text-center lg:text-2xl leading-7 m-3 mb-1">
-            Michael is a dedicated and professional bartender who brings
-            exceptional service to every event through his business,
-            VidaBebidasProject. With three customizable packages, he caters to a
-            variety of customer needs, ensuring a tailored and memorable
-            experience for all. When he&apos;s not providing top-notch
-            bartending at venues, Michael works full-time at a restaurant,
-            honing his skills and passion for mixology. His commitment to
-            excellence and professionalism makes VidaBebidasProject a trusted
-            choice for any occasion.
+            Born and raised in Dallas, Texas Michael is a dedicated and
+            professional bartender who brings exceptional service to every event
+            through his business, VidaBebidasProject. With three customizable
+            packages, he caters to a variety of customer needs, ensuring a
+            tailored and memorable experience for all. When he&apos;s not
+            providing top-notch bartending at venues, Michael works full-time at
+            a restaurant, honing his skills and passion for mixology. His
+            commitment and dedication makes Vidabebidasproject a trusted choice
+            for any occasion.
           </p>
           <div className="flex justify-center m-3">
             <Link href={'/packages'}>

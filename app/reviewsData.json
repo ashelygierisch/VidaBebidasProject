@@ -1,31 +1,41 @@
 [
   {
     "id": 1,
+    "reviews": "Next time yall have a party, get my boy Michael, he’s always on point, shows up on time, responsible, has everything yall would need!",
+    "author": "Luigi G."
+  },
+  {
+    "id": 2,
+    "reviews": "Highly recommended Michael man, great service, very professional, hit your boy up!",
+    "author": "Oliver"
+  },
+  {
+    "id": 3,
     "reviews": "Absolutely amazing! Our event was a huge success thanks to the incredible cocktails and service provided by Michael.His professionalism, creativity, and attention to detail truly impressed us and our guests. Highly recommend for any event!",
     "author": "Leticia R."
   },
   {
-    "id": 2,
+    "id": 4,
     "reviews": "We had an amazing experience with Michael. Our guests couldn't stop complimenting the drinks! The Watermelon Paloma, Blackberry Coconut Mojito, Pineapple Fizz, and Green Tea shots were all hits. The fruits and garnishes were incredibly fresh, adding a special touch to each cocktail. Michael was very professional and provided us with a detailed list of items to purchase. Next time, we'll definitely stock up more on ingredients for the Green Tea shots—they were a huge favorite among our friends. The Watermelon Paloma was my personal favorite, and he's able to make them virgin. Will definitely be booking him again for my next event. Highly recommend!",
     "author": "Yareli."
   },
   {
-    "id": 3,
+    "id": 5,
     "reviews": "From start to finish, Michael was a pleasure to work with. His package options were flexible, and he helped us choose the perfect one for our party. The cocktails were fantastic, and his friendly demeanor made everyone feel welcome. Highly recommend VidaBebidasProject!",
     "author": "Juan L."
   },
   {
-    "id": 4,
+    "id": 6,
     "reviews": "Michael, thanks for the great service you provided in our wedding!! We love the blackberry Coconut Mojito!",
     "author": "Chico Z."
   },
   {
-    "id": 5,
+    "id": 7,
     "reviews": "Thank you for shaking, stirring, and serving up smiles all night long! I look forward to working with you again. A toast to you!",
     "author": "FTW Events"
   },
   {
-    "id": 6,
+    "id": 8,
     "reviews": "The best bartender in DFW, he came to my baby shower and did his thing, everyone loved their drinks and his service. He is very friendly, polite, & affordable. I will definitely hire him again. 10/10.",
     "author": "Hope"
   }

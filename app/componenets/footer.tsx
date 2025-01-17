@@ -1,71 +1,91 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { AiOutlineInstagram, AiOutlineLinkedin } from 'react-icons/ai';
-import { useTheme } from 'next-themes';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
+import Link from 'next/link';
 
 const Footer = () => {
-  let { resolvedTheme } = useTheme();
-
   return (
-    <footer className="">
-      <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div className="md:flex md:flex-col md:justify-center">
-          <div className="mb-6 md:mb-0 flex justify-center align-center m-5">
-            <a href="/" className="flex items-center">
-              <Image
-                src="/logo-white.png"
-                className=" me-3 pb-5 h-[70px]"
-                alt="FlowBite Logo"
-                width={300}
-                height={100}
-              />
-            </a>
-          </div>
-          <div className="flex justify-center mt-4 sm:justify-center sm:mt-0">
+    <footer className="bg-black/30 border-t border-[#FFFFF0]/30">
+      <div className="mx-auto w-full max-w-screen-xl px-4 py-12">
+        <div className="flex flex-col items-center space-y-8">
+          {/* Logo */}
+          <Link href="/" className="transition-transform hover:scale-105">
+            <Image
+              src="/logo-white.png"
+              alt="Vidabebidasproject Logo"
+              width={300}
+              height={100}
+              className="h-[70px] w-auto"
+              priority
+            />
+          </Link>
+
+          {/* Social Links */}
+          <div className="flex items-center space-x-6">
             <a
               href="https://www.facebook.com/story.php?story_fbid=7194571487328980&id=100003286008993&mibextid=WC7FNe&rdid=w9ZRwtbtRdW4CB6z"
-              className="text-white hover:text-[#DC143C] dark:hover:text-[#FFD700]"
-              aria-label="FaceBook"
+              className="text-white/80 hover:text-[#DC143C] transition-colors duration-300"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <svg
-                className="w-4 h-4"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 8 19"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="sr-only">Facebook page</span>
+              <FaFacebookF className="w-6 h-6" />
             </a>
             <a
               href="https://www.instagram.com/vidabebidasproject?igsh=MXc5bHB4cGlpdHN0NQ=="
-              className="text-white hover:text-[#DC143C] dark:hover:text-[#FFD700] ms-5"
-              target="_blank"
+              className="text-white/80 hover:text-[#DC143C] transition-colors duration-300"
               aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <span className="icon-[entypo-social--instagram]" />
+              <FaInstagram className="w-6 h-6" />
             </a>
           </div>
-        </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <div className="flex justify-center  ">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2024
+
+          {/* Navigation Links - Optional */}
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-white/70">
+            <Link
+              href="/about"
+              className="hover:text-[#FFD700] transition-colors duration-300"
+            >
+              About
+            </Link>
+            <Link
+              href="/packages"
+              className="hover:text-[#FFD700] transition-colors duration-300"
+            >
+              Packages
+            </Link>
+            <Link
+              href="/booking"
+              className="hover:text-[#FFD700] transition-colors duration-300"
+            >
+              Book Now
+            </Link>
+            <Link
+              href="/reviews"
+              className="hover:text-[#FFD700] transition-colors duration-300"
+            >
+              Reviews
+            </Link>
+          </div>
+
+          {/* Divider */}
+          <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[#FFFFF0]/30 to-transparent" />
+
+          {/* Copyright */}
+          <div className="text-sm text-white/50">
+            © 2024 Vidabebidasproject <span className="mx-2">•</span>
             <a
               href="https://www.osworld.dev/"
-              className="hover:underline"
+              className="hover:text-[#FFD700] transition-colors duration-300"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              {' '}
               Created by Os World
             </a>
-          </span>
+          </div>
         </div>
       </div>
     </footer>

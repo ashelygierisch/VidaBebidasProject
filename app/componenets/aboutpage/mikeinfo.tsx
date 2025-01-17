@@ -12,7 +12,7 @@ const MikeInfo = () => {
             Michael Estrada
           </h2>
           <p className="text-wrap text-center lg:text-2xl leading-7 m-3 mb-1">
-            Born and raised in Dallas, Texas Michael is a dedicated and
+            Born and raised in Dallas, Texas, Michael is a
             professional bartender who brings exceptional service to every event
             through his business, VidaBebidasProject. With three customizable
             packages, he caters to a variety of customer needs, ensuring a

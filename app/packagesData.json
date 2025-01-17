@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Silver Package",
-    "image": "https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "image": "https://mikessite.s3.us-east-2.amazonaws.com/SilverPic.webp",
     "price": "250",
     "time": "1-6 Hours",
     "descriptions": ["Service package:", "Service/Bar materials- ice"]
@@ -10,7 +10,7 @@
   {
     "id": 2,
     "name": "Reposado Package",
-    "image": "https://images.pexels.com/photos/4667040/pexels-photo-4667040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "image": "https://mikessite.s3.us-east-2.amazonaws.com/ReposadoPic.webp",
     "price": "325",
     "time": "1-6 Hours",
     "descriptions": [
@@ -25,7 +25,7 @@
   {
     "id": 3,
     "name": "Añejo Package",
-    "image": "https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "image": "https://mikessite.s3.us-east-2.amazonaws.com/AnejoPic.webp",
     "price": "400",
     "time": "1-5 Hours",
     "descriptions": [
@@ -35,7 +35,8 @@
       "Garnishes",
       "3 cocktails",
       "4 classic drinks",
-      "2 mixed shots"
+      "2 mixed shots",
+      "Table set up if needed"
     ]
   }
 ]

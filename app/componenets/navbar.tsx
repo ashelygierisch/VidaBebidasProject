@@ -42,7 +42,7 @@ const Navigation = () => {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className="navbar font-open bg-black text-white fixed z-20"
+      className="navbar font-open bg-black text-white fixed z-30"
       isBordered
     >
       <div className="absolute top-0 left-0">

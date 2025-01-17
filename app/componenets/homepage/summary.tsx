@@ -21,7 +21,7 @@ const Summary = () => {
           <span className="text-[#FFD700] font-medium hover:text-[#FFF000] transition-colors duration-300">
             memorable experiences
           </span>{' '}
-          to every event from the bar to the guests!
+          to every event, from the bar to the guests!
         </p>
         <div className="flex justify-center">
           <Link href={'/about'}>

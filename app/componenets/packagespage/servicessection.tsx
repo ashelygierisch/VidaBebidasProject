@@ -33,6 +33,10 @@ const ServicesSection = () => {
                       Price of Package:{' '}
                       <a className="font-bold text-[#FFD700]">${pck.price}</a>
                     </p>
+                    <p className="text-start font-sans">
+                      Duration:{' '}
+                      <a className="font-bold text-[#FFD700]">{pck.time}</a>
+                    </p>
                     <ul className=" font-sans list-disc list-inside">
                       {pck.descriptions.map((description, index) => (
                         <li key={index} className="p-1 marker:text-[#FFD700]">

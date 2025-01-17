@@ -54,14 +54,14 @@ const Reviews = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Link href="/reviews">
+            <Link href="/booking">
               <Button
                 className="px-8 py-6 bg-[#FFD700] text-black border-2 border-[#DC143C] 
                   rounded-md hover:bg-[#FFD700]/90 hover:scale-105 
                   transition-all duration-300 text-lg font-medium"
                 variant="shadow"
               >
-                Share Your Experience
+                Book Now
               </Button>
             </Link>
           </motion.div>

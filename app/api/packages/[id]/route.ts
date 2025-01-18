@@ -1,32 +1,40 @@
 import { NextResponse } from 'next/server';
 
-const packages: any = [
+const packages = [
   {
     id: 1,
-    name: 'Silver Package',
-    image:
-      'https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    price: 150,
-    description:
-      "Serving choice of beer. Providing an assortment of beverages including Coke, Sprite, water, and more. Offering straight or chilled shots, garnished with salt or Tajín. Crafting classic mixed drinks such as Crown and Sprite, Buchanan's and Pineapple, Tequila and Soda, and more.",
+    name: "Silver Package",
+    image: "https://mikessite.s3.us-east-2.amazonaws.com/SilverPic.webp",
+    price: "250",
+    time: "1-6 Hours",
+    descriptions: [
+      "Service package:",
+      "Service/Bar materials- ice",
+    ],
   },
   {
     id: 2,
-    name: 'Reposado Package',
-    image:
-      'https://images.pexels.com/photos/4667040/pexels-photo-4667040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    price: 200,
-    description:
-      "Serving beers, either dressed with salt/Tajín or with a michelada setup. Providing an assortment of beverages including Coke, Sprite, water, and more. Offering straight or chilled shots, garnished with salt or Tajín. Crafting classic mixed drinks such as Crown and Sprite, Buchanan's and Pineapple, Tequila and Soda, and more. Preparing three custom mixed shots of your choice, including Green Teas, White Teas, Vegas Bombs, Mexican Candy, Lemon Drops, and more. Creating one cocktail with fresh lime juice, with options including Palomas, Pineapple Margaritas, Strawberry/Mango Margaritas, and more.",
+    name: "Reposado Package",
+    image: "https://mikessite.s3.us-east-2.amazonaws.com/ReposadoPic.webp",
+    price: "325",
+    time: "1-6 Hours",
+    descriptions: [
+      "Set Menu Package: ",
+      "Service/Bar materials - ice, cups, straws, tajin",
+      "2 cocktails",
+      "2 classic drinks",
+      "1 mixed shot",
+      "Table set up if needed",
+    ],
   },
   {
     id: 3,
-    name: 'Añejo Package',
-    image:
-      'https://images.pexels.com/photos/340996/pexels-photo-340996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    price: 250,
-    description:
-      'Serving beers with either a michelada setup or dressed with salt.Providing an assortment of beverages including Coke, Sprite, water, and more.Offering straight or chilled shots, garnished with salt or Tajín. Crafting classic mixed drinks such as Crown and Sprite, Buchanans and Pineapple, Tequila and Soda, and more.Preparing four custom mixed shots of your choice, including Green Teas, White Teas, Vegas Bombs, Mexican Candy, Lemon Drops, and more.Creating three cocktails with fresh lime juice, with options including Ranch Waters, Grapefruit or Watermelon Palomas, Pineapple Margaritas, Strawberry or Mango Margaritas, Classic Lime Margaritas, Flavored Lemon Drop Drinks, Old Fashioneds, Whiskey Sours, and more.',
+    name: "Añejo Package",
+    image: "https://mikessite.s3.us-east-2.amazonaws.com/AnejoPic.webp",
+    price: "400",
+    time: "1-5 Hours",
+    descriptions: 
+      "Open Bar package:Service/bar materials - ice, cups, straws, tajin, Mixers, Garnishes3 cocktails, 4 classic drinks,2 mixed shots, Table set up if needed",
   },
 ];
 
@@ -35,5 +43,6 @@ export const GET = async (request: Request, context: any) => {
 
   return NextResponse.json({
     pck: packages.find((x: any) => x.id.toString() === params.id),
+    headers: { 'Cache-Control': 'no-store' } 
   });
 };

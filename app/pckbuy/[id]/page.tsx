@@ -14,7 +14,7 @@ async function getPackagebyId(pckId: string) {
     `https://vida-bebidas-project.vercel.app/api/packages/${pckId}`,
     {
       method: 'GET',
-      cache: 'no-cache',
+      cache: 'no-store',
     }
   );
 
@@ -52,12 +52,17 @@ export default async function PackageID({ params }: any) {
                   Price of Package:{' '}
                   <a className="font-bold text-[#FFD700]">${pck.price}</a>
                 </p>
-
+                <p className="text-start font-sans">
+                Duration:{' '}
+                  <a className="font-bold text-[#FFD700]">${pck.time}</a>
+                </p>
                 <ul className="font-sans list-disc list-inside">
-                  <li className="p-1 marker:text-[#FFD700]">
-                    {pck.description}
-                  </li>
-                </ul>
+
+    <li  className="p-1 marker:text-[#FFD700]">
+      {pck.descriptions}
+    </li>
+</ul>
+
               </div>
             </div>
           </CardBody>

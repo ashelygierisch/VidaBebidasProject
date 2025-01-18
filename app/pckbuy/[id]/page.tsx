@@ -1,14 +1,15 @@
-
 import GoogleForm from '@/app/componenets/contactpage/form';
 import { Card, CardBody, Image, Button, Slider } from '@nextui-org/react';
 
-// type Package = {
-//   image: string;
-//   name: string;
-//   price: number;
-//   descriptions: string[];
-// };
-import BookingForm from '../../componenets/contactpage/bookingform'
+type Package = {
+  id: string;
+  image: string;
+  name: string;
+  price: number;
+  time: string;
+  descriptions: string[];
+};
+import BookingForm from '../../componenets/contactpage/bookingform';
 async function getPackagebyId(pckId: string) {
   const response = await fetch(
     `https://vida-bebidas-project.vercel.app/api/packages/${pckId}`,
@@ -21,10 +22,19 @@ async function getPackagebyId(pckId: string) {
   return response.json();
 }
 
-export default async function PackageID({ params }: any) {
-  const { pck } = await getPackagebyId(params.id);
+export default async function PackageID({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const packageDetails = await getPackagebyId(params.id);
 
-  console.log(pck);
+  if (!packageDetails) {
+    return <div>Package not found.</div>;
+  }
+
+  console.log('this is the package they selected', packageDetails);
+  const { id, image, name, time, price, descriptions } = packageDetails;
 
   return (
     <div className="mt-[100px]">
@@ -42,34 +52,33 @@ export default async function PackageID({ params }: any) {
                   className="object-cover"
                   height={200}
                   shadow="md"
-                  src={pck.image}
+                  src={image}
                   width="100%"
                 />
               </div>
               <div className="flex flex-col col-span-1 gap-4">
-                <h1 className="text-4xl text-center">{pck.name}</h1>
+                <h1 className="text-4xl text-center">{name}</h1>
                 <p className="text-start font-sans">
                   Price of Package:{' '}
-                  <a className="font-bold text-[#FFD700]">${pck.price}</a>
+                  <a className="font-bold text-[#FFD700]">${price}</a>
                 </p>
                 <p className="text-start font-sans">
-                Duration:{' '}
-                  <a className="font-bold text-[#FFD700]">${pck.time}</a>
+                  Duration: <a className="font-bold text-[#FFD700]">${time}</a>
                 </p>
                 <ul className="font-sans list-disc list-inside">
-
-    <li  className="p-1 marker:text-[#FFD700]">
-      {pck.descriptions}
-    </li>
-</ul>
-
+                  {/* {descriptions.map((description: string, index: number) => (
+                    <li className="p-1 marker:text-[#FFD700]" key={index}>
+                      {description}
+                    </li>
+                  ))} */}
+                </ul>
               </div>
             </div>
           </CardBody>
         </Card>
       </div>
       <div className="flex justify-center items-center m-10">
-        <BookingForm/>
+        <BookingForm />
       </div>
     </div>
   );

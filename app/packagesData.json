@@ -9,13 +9,13 @@
       "Service Package: $300.00 for 5 hours set pay.",
       "Bartender provides: service and bar materials.",
       "Everything else is provided by the host:",
-      "- Cups",
-      "- Ice",
-      "- Tajin",
-      "- Running water or water bottles to clean tins",
-      "- Mixers",
-      "- Garnishes",
-      "- Bar setup or bar station (must be provided by host)"
+      "Cups",
+      "Ice",
+      "Tajin",
+      "Running water or water bottles to clean tins",
+      "Mixers",
+      "Garnishes",
+      "Bar setup or bar station (must be provided by host)"
     ]
   },
   {
@@ -27,16 +27,16 @@
     "descriptions": [
       "Set Menu Package: $400.00 for 5 hours set pay.",
       "Bartender provides:",
-      "- Service",
-      "- Bar materials",
-      "- Ice for the bar",
-      "- Limes",
-      "- Salt & Tajin",
-      "- Bar setup/station",
-      "- Cups",
-      "- 2 cocktails (e.g., Paloma, pineapple margarita)",
-      "- 2 classic drinks (e.g., vodka cranberry, tequila soda)",
-      "- 1 shot of the night (e.g., green tea, Mexican candy)"
+      "Service",
+      "Bar materials",
+      "Ice for the bar",
+      "Limes",
+      "Salt & Tajin",
+      "Bar setup/station",
+      "Cups",
+      "2 cocktails (e.g., Paloma, pineapple margarita)",
+      "2 classic drinks (e.g., vodka cranberry, tequila soda)",
+      "1 shot of the night (e.g., green tea, Mexican candy)"
     ]
   },
   {
@@ -48,17 +48,17 @@
     "descriptions": [
       "Open Bar Package: $500.00 for 5 hours set pay.",
       "Bartender provides:",
-      "- Service",
-      "- Bar materials",
-      "- Ice for the bar",
-      "- Limes & Oranges",
-      "- Salt & Tajin",
-      "- Bar setup/station",
-      "- Cups",
-      "- Mixers (e.g., pineapple juice, cranberry juice)",
-      "- 3 cocktails (e.g., Paloma, pineapple margarita)",
-      "- 4 classic drinks (e.g., vodka cranberry, tequila soda)",
-      "- 2 shots of the night (e.g., green tea, Mexican candy)"
+      "Service",
+      "Bar materials",
+      "Ice for the bar",
+      "Limes & Oranges",
+      "Salt & Tajin",
+      "Bar setup/station",
+      "Cups",
+      "Mixers (e.g., pineapple juice, cranberry juice)",
+      "3 cocktails (e.g., Paloma, pineapple margarita)",
+      "4 classic drinks (e.g., vodka cranberry, tequila soda)",
+      "2 shots of the night (e.g., green tea, Mexican candy)"
     ]
   }
 ]

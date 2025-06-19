@@ -26,7 +26,7 @@ const Carousel = () => {
         </GalleryMotion>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 z-40">
           <a
-            href="#slide3"
+            href="#slide4"
             className="btn btn-circle bg-transparent border-[#FFFFF0]"
           >
             ❮
@@ -88,7 +88,7 @@ const Carousel = () => {
             ❮
           </a>
           <a
-            href="#slide1"
+            href="#slide4"
             className="btn btn-circle bg-transparent border-[#FFFFF0]"
           >
             ❯
@@ -103,7 +103,8 @@ const Carousel = () => {
           <Image
             isBlurred
             width={800}
-            src="/Bar.png"
+            src={Bar.src}
+
             alt="New Gallery Image"
             className="imagegallery rounded-none"
           />

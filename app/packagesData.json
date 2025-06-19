@@ -3,40 +3,62 @@
     "id": 1,
     "name": "Silver Package",
     "image": "https://mikessite.s3.us-east-2.amazonaws.com/SilverPic.webp",
-    "price": "250",
-    "time": "1-6 Hours",
-    "descriptions": ["Service package:", "Service/Bar materials- ice"]
+    "price": "300",
+    "time": "5 Hours",
+    "descriptions": [
+      "Service Package: $300.00 for 5 hours set pay.",
+      "Bartender provides: service and bar materials.",
+      "Everything else is provided by the host:",
+      "- Cups",
+      "- Ice",
+      "- Tajin",
+      "- Running water or water bottles to clean tins",
+      "- Mixers",
+      "- Garnishes",
+      "- Bar setup or bar station (must be provided by host)"
+    ]
   },
   {
     "id": 2,
     "name": "Reposado Package",
     "image": "https://mikessite.s3.us-east-2.amazonaws.com/ReposadoPic.webp",
-    "price": "325",
-    "time": "1-6 Hours",
+    "price": "400",
+    "time": "5 Hours",
     "descriptions": [
-      "Set Menu Package: ",
-      "Service/Bar materials - ice, cups, straws, tajin",
-      "2 cocktails",
-      "2 classic drinks",
-      "1 mixed shot",
-      "Table set up if needed"
+      "Set Menu Package: $400.00 for 5 hours set pay.",
+      "Bartender provides:",
+      "- Service",
+      "- Bar materials",
+      "- Ice for the bar",
+      "- Limes",
+      "- Salt & Tajin",
+      "- Bar setup/station",
+      "- Cups",
+      "- 2 cocktails (e.g., Paloma, pineapple margarita)",
+      "- 2 classic drinks (e.g., vodka cranberry, tequila soda)",
+      "- 1 shot of the night (e.g., green tea, Mexican candy)"
     ]
   },
   {
     "id": 3,
-    "name": "Añejo Package",
+    "name": "Anejo Package",
     "image": "https://mikessite.s3.us-east-2.amazonaws.com/AnejoPic.webp",
-    "price": "400",
-    "time": "1-5 Hours",
+    "price": "500",
+    "time": "5 Hours",
     "descriptions": [
-      "Open Bar package:",
-      "Service/bar materials - ice, cups, straws, tajin",
-      "Mixers",
-      "Garnishes",
-      "3 cocktails",
-      "4 classic drinks",
-      "2 mixed shots",
-      "Table set up if needed"
+      "Open Bar Package: $500.00 for 5 hours set pay.",
+      "Bartender provides:",
+      "- Service",
+      "- Bar materials",
+      "- Ice for the bar",
+      "- Limes & Oranges",
+      "- Salt & Tajin",
+      "- Bar setup/station",
+      "- Cups",
+      "- Mixers (e.g., pineapple juice, cranberry juice)",
+      "- 3 cocktails (e.g., Paloma, pineapple margarita)",
+      "- 4 classic drinks (e.g., vodka cranberry, tequila soda)",
+      "- 2 shots of the night (e.g., green tea, Mexican candy)"
     ]
   }
 ]

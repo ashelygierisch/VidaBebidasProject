@@ -34,7 +34,7 @@ const ImportantInfo = () => {
               <a className="font-bold">
                 Host responsibility & Bartender provisions:
               </a>{' '}
-              are dependent on package selected & booking completion.
+              HOST PROVIDES LIQUOR IN ALL PACKAGES. 
             </li>
             <li className="p-1 marker:text-[#FFD700]">
               <a className="font-bold">Deposits: </a>
@@ -49,8 +49,11 @@ const ImportantInfo = () => {
               </ul>
             </li>
             <li className="p-1 marker:text-[#FFD700]">
-              <a className="font-bold">All packages:</a> 100 people standard
-              max, each additional person is $1 added.
+              <a className="font-bold">All packages:</a> 100 PEOPLE MINIMUM BEFORE: 
+              $1.00 PER PERSON BASED OFF PEOPLE ATTENDING THE EVENT. 
+            </li>
+            <li className="p-1 marker:text-[#FFD700]">
+              <a className="font-bold">All packages:</a> $75.00 FOR EXTRA HOUR(S)
             </li>
           </ul>
         </CardBody>

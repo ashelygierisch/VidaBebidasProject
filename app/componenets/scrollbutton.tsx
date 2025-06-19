@@ -10,6 +10,7 @@ const ScrollButton = () => {
       </ScrollToTop>
     </div>
   );
+  
 };
 
 export default ScrollButton;

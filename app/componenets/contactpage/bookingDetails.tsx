@@ -26,13 +26,16 @@ const BookingDetails = () => {
         </CardHeader>
         <Divider />
         <CardBody>
-          <ul className="text-white space-y-4 text-base">
+          <ul className="text-white space-y-4 text-base ">
             <li className="p-2 border-b border-gray-200">
               <span className="font-semibold text-lg text-yellow-600">
                 {' '}
                 Host responsibility & Bartender provisions:
               </span>{' '}
-              are dependent on package selected & booking completion.
+              HOST PROVIDES LIQUOR IN ALL PACKAGES. 
+<li className='mt-2'>
+$75.00 FOR EXTRA HOUR(S)
+</li>
             </li>
             <li className="p-2 border-b border-gray-200">
               <span className="font-semibold text-lg text-yellow-600">

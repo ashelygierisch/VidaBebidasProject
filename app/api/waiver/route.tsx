@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       process.env.EMAIL_USERNAME || 'vidabebidasproject@outlook.com';
 
     await resend.emails.send({
-      from: 'VidaBevidasProject@vidabevidasproject.me',
+      from: 'VidaBevidasProject@vidabevidasproject.com', //updated to new domain
       to: [user.email, adminEmail],
       subject: 'Booking Details',
       react: (
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error, email not sent' },
       { status: 500 }
     );
   }

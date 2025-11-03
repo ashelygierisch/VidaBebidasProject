@@ -41,7 +41,7 @@ async function testSalesforceConnection() {
     console.log('📅 Testing Events query...');
     const events = await conn
       .sobject("Event__c")
-      .find({}, "Id, Date_Time__c, Name, Guess_Count__c, Client__c, Package__c, Status__c, Total_Cost__c");
+      .find({}, "Id, Date_Time__c,Name,Guess_Count__c, Client__c, Package__c, Status__c,	Total_Cost__c, Client__r.Name, Client__r.Event_Address__c, Client__r.Email__c, Client__r.Phone__c, Client__r.Company__c ");
 
     console.log(`✅ Successfully fetched ${events.length} events`);
     

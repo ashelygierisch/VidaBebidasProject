@@ -19,9 +19,9 @@ export async function GET(req) {
     
     const events = await conn
       .sobject("Event__c")
-      .find({}, "	Date_Time__c,Name,Guess_Count__c, Client__c, Package__c, Status__c,	Total_Cost__c ");
+      .find({}, "	Date_Time__c,Name,Guess_Count__c, Client__c, Package__c, Status__c,	Total_Cost__c, Client__r.Name, Client__r.Event_Address__c, CLient___r.email_c, Client__r.Phone_c, Client__r.Company_c ");
 
-    console.log("Events fetched:", events);
+    console.log("Events fetched and client details:", events);
     return Response.json(events);
 
   } catch (error) {

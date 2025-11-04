@@ -20,7 +20,7 @@ const BookingForm = () => {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
-
+const [guessCount,setGuessCount]=useState('')
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -51,32 +51,41 @@ const BookingForm = () => {
       toast.error('Please choose a Service');
     }
 
-    const bookingDate = dayjs(selectedDate).format('YYYY-MM-DD');
-    const bookingTime = dayjs(selectedTime).format('hh:mm A');
+    // Combine date and time into a single ISO 8601 datetime string
+    // Format: "YYYY-MM-DDTHH:mm:ss" (Salesforce expects this format)
+    const combinedDateTime = dayjs(selectedDate)
+      .hour(dayjs(selectedTime).hour())
+      .minute(dayjs(selectedTime).minute())
+      .second(0)
+      .format('YYYY-MM-DDTHH:mm:ss');
 
-    const response = await fetch('/api/bookings', {
+    const response = await fetch('/api/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        date: bookingDate,
-        time: bookingTime,
-        name,
-        email,
-        phone,
-        address,
-        message,
-        service,
+        Date_Time__c: combinedDateTime,
+        Name: name,
+        email: email,
+        Phone__c: phone,
+        Event_Address__c: address,
+        Message__c: message,
+        Package__c: service,
+        Guess_Count__c: guessCount
       }),
     });
 
     const data = await response.json();
     console.log('Response Data:', data);
-    const { bookingId } = data;
-    console.log('Booking ID:', bookingId);
+    
+    // Extract event ID from the response object
+    // The API returns: { success: true, event: { id: "...", ... }, ... }
+    const eventId = data.event?.id;
+    console.log('Event ID:', eventId);
+    
     if (response.ok) {
-      sessionStorage.setItem('bookingId', bookingId);
+      sessionStorage.setItem('bookingId', eventId);
       router.push(`/waiver?email=${email}&name=${name}`);
     } else {
       toast.error(data.error || 'An error occurred. Please try again.');
@@ -170,6 +179,16 @@ const BookingForm = () => {
             placeholder="1234 Mockingbird Lane, Dallas, TX 75209"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+          />
+        </label>
+        <label className="flex flex-col gap-2 text-sm text-gray-700">
+          Estimated Guess Count
+        <input
+            type="text"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
+            placeholder="50"
+            value={guessCount}
+            onChange={(e) => setGuessCount(e.target.value)}
           />
         </label>
         <label className="flex flex-col gap-2 text-sm text-gray-700">

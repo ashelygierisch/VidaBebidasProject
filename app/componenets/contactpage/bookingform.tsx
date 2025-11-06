@@ -16,6 +16,7 @@ const BookingForm = () => {
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [eventName,setEventName]=useState('')
   const [service, setService] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
@@ -36,6 +37,10 @@ const [guessCount,setGuessCount]=useState('')
 
     if (!email) {
       toast.error('Please enter your email');
+      return;
+    }
+    if (!eventName) {
+      toast.error('Please enter a name for the event');
       return;
     }
     if (!address) {
@@ -67,6 +72,7 @@ const [guessCount,setGuessCount]=useState('')
       body: JSON.stringify({
         Date_Time__c: combinedDateTime,
         Name: name,
+        Event_Name__c: eventName,
         email: email,
         Phone__c: phone,
         Event_Address__c: address,
@@ -132,12 +138,12 @@ const [guessCount,setGuessCount]=useState('')
                 type="radio"
                 name="service"
                 className="radio radio-warning"
-                id="SilverPackage"
-                value="SilverPackage"
-                checked={service === 'SilverPackage'}
+                id="Silver Package"
+                value="Silver Package"
+                checked={service === 'Silver Package'}
                 onChange={(e) => setService(e.target.value)}
               />
-              <label htmlFor="SilverPackage" className="text-sm">
+              <label htmlFor="Silver Package" className="text-sm">
                 SilverPackage ($250 1-6hrs)
               </label>
             </li>
@@ -146,12 +152,12 @@ const [guessCount,setGuessCount]=useState('')
                 type="radio"
                 name="service"
                 className="radio radio-warning"
-                id="ReposadoPackage"
-                value="ReposadoPackage"
-                checked={service === 'ReposadoPackage'}
+                id="Reposado Package"
+                value="Reposado Package"
+                checked={service === 'Reposado Package'}
                 onChange={(e) => setService(e.target.value)}
               />
-              <label htmlFor="ReposadoPackage" className="text-sm">
+              <label htmlFor="Reposado Package" className="text-sm">
                 ReposadoPackage ($325 1-6hrs)
               </label>
             </li>
@@ -160,23 +166,33 @@ const [guessCount,setGuessCount]=useState('')
                 type="radio"
                 name="service"
                 className="radio radio-warning"
-                id="AñejoPackage"
-                value="AñejoPackage"
-                checked={service === 'AñejoPackage'}
+                id="Añejo Package"
+                value="Añejo Package"
+                checked={service === 'Añejo Package'}
                 onChange={(e) => setService(e.target.value)}
               />
-              <label htmlFor="AñejoPackage" className="text-sm">
+              <label htmlFor="Añejo Package" className="text-sm">
                 AñejoPackage ($400 1-5hrs)
               </label>
             </li>
           </ul>
         </label>
         <label className="flex flex-col gap-2 text-sm text-gray-700">
+          Name of Event
+          <input
+            type="text"
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
+            placeholder="Ex: Marias Wedding"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+          />
+        </label>
+        <label className="flex flex-col gap-2 text-sm text-gray-700">
           Address of Event
           <input
             type="text"
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
-            placeholder="1234 Mockingbird Lane, Dallas, TX 75209"
+            placeholder="Ex: 1234 Mockingbird Lane, Dallas, TX 75209"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -186,7 +202,7 @@ const [guessCount,setGuessCount]=useState('')
         <input
             type="text"
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
-            placeholder="50"
+            placeholder="ex: 50"
             value={guessCount}
             onChange={(e) => setGuessCount(e.target.value)}
           />
@@ -196,7 +212,7 @@ const [guessCount,setGuessCount]=useState('')
           <input
             type="tel"
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
-            placeholder="469-768-6711"
+            placeholder="ex: 469-768-6711"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
@@ -206,7 +222,7 @@ const [guessCount,setGuessCount]=useState('')
           <textarea
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none text-white text-base"
             maxLength={200}
-            placeholder="Do you go and get the liquor..?"
+            placeholder="ex: Do you go and get the liquor..?"
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}

@@ -57,7 +57,7 @@ const [guessCount,setGuessCount]=useState('')
     }
 
     // Combine date and time into a single ISO 8601 datetime string
-    // Format: "YYYY-MM-DDTHH:mm:ss" (Salesforce expects this format)
+    // Format: "YYYY-MM-DDTHH:mm:ss"
     const combinedDateTime = dayjs(selectedDate)
       .hour(dayjs(selectedTime).hour())
       .minute(dayjs(selectedTime).minute())

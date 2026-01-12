@@ -52,20 +52,124 @@ export async function GET() {
   }
 }
 
-  // export async function POST(request: Request){
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
 
-  //   try {
-  //       const body= request.json();
+    const {
+      eventDate,
+      startTime,
+      endTime,
+      serviceType,
 
-  //       const {date, time, service, message, userId}=body;
+      clientName,
+      clientEmail,
+      clientPhone,
+
+      venueName,
+      venueType,
+      address,
+      city,
+      guestCount,
+      barType,
+      message,
+
+      source,
+      promoCampaign,
+      electronicSignature
+    } = body
+
+   const {data:existingUser, error:userError}=await supabase.from('User')
+   .select('id')
+    .eq('email', clientEmail)
+    .single()
+
+    let userId
+
+    if (userError && userError.code !== 'PGRST116') { 
+      throw userError
+    }
+
+  if(existingUser){
+    userId=existingUser.id
+  }else{
+    const { data: newUser, error: userError } = await supabase
+    .from('User')
+    .insert([{ name: clientName, email:clientEmail, phone:clientPhone, electronicSignature,         createdAt: new Date().toISOString() }])
+    .select('id')
+    .single()
+  
+  if (userError) throw userError
+  userId = newUser.id 
+
+  }
+   
+ 
+  const {data: existingBooking, error: bookingCheckError}= await supabase.from('bookings')
+    .select('id')
+    .eq('eventDate', eventDate)
+    .single()
+  
+    if (bookingCheckError && bookingCheckError.code !== 'PGRST116') {
+      throw bookingCheckError
+    }
+
+    if (existingBooking) {
+      return NextResponse.json(
+        { error: 'This date is already booked' },
+        { status: 409 } 
+      )
+    }
+
+//Create the booking
+    const { data: newBooking, error:bookingError } = await supabase
+      .from('bookings')
+      .insert([
+        {
+          eventDate,
+          startTime,
+          endTime,
+          serviceType,
+
+          clientName,
+          clientEmail,
+          clientPhone,
+
+          venueName,
+          venueType,
+          city,
+          address,
+          guestCount,
+          barType,
+          message,
+
+          source,
+          promoCampaign,
+
+          status: 'PENDING',
+          depositPaid: false,
+
+          userId,
+          createdAt: new Date().toISOString()
+        }
+      ])
+      .select()
+      .single()
 
 
-        
-  //       const booking= await prisma.booking.create({
-  //         data: 
-  //         {
-  //           date, time, service, message, userId
-  //         }
-  //       }
-  //   }
-  // }
+      if (bookingError) {
+        throw bookingError
+      }
+
+      return NextResponse.json(
+        { booking: newBooking, message: 'Booking created successfully' },
+        { status: 201 }
+      )
+
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: 'Failed to create booking' }),
+      { status: 500 }
+    )
+  }
+}

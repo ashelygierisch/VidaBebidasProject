@@ -11,22 +11,86 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(uuid()) @map("_id") 
-  name              String
-  email             String    @unique
-  address           String?
-  phone             String
+  id                  String    @id @default(uuid())
+  name                String
+  email               String    @unique
+  phone               String?
   electronicSignature String?
-  confirmWaiver     Boolean?  @default(false)
-  bookings          Booking[] @relation("UserBookings")
+  confirmWaiver       Boolean   @default(false)
+
+  bookings            Booking[]
+
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  @@map("users")
 }
 
 model Booking {
-  id         String   @id @default(uuid()) @map("_id")
-  date       DateTime
-  time       DateTime
-  service    String
-  message    String
-  userId     String   @map("userId") 
-  user       User     @relation("UserBookings", fields: [userId], references: [id], onDelete: Cascade)
+  id            String   @id @default(uuid())
+
+  // 📅 Event timing
+  eventDate     DateTime
+  startTime     DateTime
+  endTime       DateTime?
+
+  // 🧾 Service details
+  serviceType   String
+  guestCount    Int?
+  barType       String?
+  message       String?
+
+  // 📍 Location
+  venueName     String?
+  venueType     String?
+  address       String
+  city          String?
+
+  // 👤 Client info
+  clientName    String
+  clientEmail   String
+  clientPhone   String?
+
+  // 🔔 Workflow & automation
+  status        BookingStatus @default(PENDING)
+  depositPaid  Boolean       @default(false)
+  reminderSent Boolean       @default(false)
+  confirmedAt  DateTime?
+  completedAt  DateTime?
+
+  // 📈 Growth & attribution
+  source        BookingSource?
+  promoCampaign String?
+
+  // 🔐 Ownership
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // 🕒 Metadata
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([eventDate])
+  @@index([status])
+  @@index([source])
+  @@index([clientEmail])
+
+  @@map("bookings")
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELED
+}
+
+
+enum BookingSource {
+  INSTAGRAM
+  REFERRAL
+  VENUE
+  WEBSITE
+  PROMOTION
 }

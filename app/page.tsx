@@ -14,9 +14,11 @@ import Summary from './componenets/homepage/summary';
 export default function Home() {
   const [welcome, setWelcome] = useState('Welcome');
 
+  
   return (
     <div>
       <MainHero />
+      
       <HomeImage />
       <Summary />
       <VideoCatch />

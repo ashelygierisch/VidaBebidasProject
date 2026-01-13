@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/api/send/route.js"
-  ],
+, "app/lib/posthog.tsx"  ],
   "exclude": ["node_modules"]
 }

@@ -76,7 +76,9 @@ export async function POST(request: Request) {
 
       source,
       promoCampaign,
-      electronicSignature
+      electronicSignature,
+      confirmWaiver,
+      waiverVersion
     } = body
 
    const {data:existingUser, error:userError}=await supabase.from('User')
@@ -92,16 +94,40 @@ export async function POST(request: Request) {
 
   if(existingUser){
     userId=existingUser.id
+    
+    // Update user's waiver info if they're signing again (for quick checks)
+    if (electronicSignature && confirmWaiver) {
+      await supabase
+        .from('User')
+        .update({
+          electronicSignature,
+          confirmWaiver: true,
+          waiverSignedAt: new Date().toISOString()
+        })
+        .eq('id', userId)
+    }
   }else{
-    const { data: newUser, error: userError } = await supabase
-    .from('User')
-    .insert([{ name: clientName, email:clientEmail, phone:clientPhone, electronicSignature,         createdAt: new Date().toISOString() }])
-    .select('id')
-    .single()
+    // Create new user with waiver info
+    const waiverSignedAt = (electronicSignature && confirmWaiver) 
+      ? new Date().toISOString() 
+      : null
+    
+    const { data: newUser, error: createUserError } = await supabase
+      .from('User')
+      .insert([{ 
+        name: clientName, 
+        email: clientEmail, 
+        phone: clientPhone,
+        electronicSignature: electronicSignature || null,
+        confirmWaiver: confirmWaiver || false,
+        waiverSignedAt,
+        createdAt: new Date().toISOString() 
+      }])
+      .select('id')
+      .single()
   
-  if (userError) throw userError
-  userId = newUser.id 
-
+    if (createUserError) throw createUserError
+    userId = newUser.id 
   }
    
  
@@ -145,6 +171,14 @@ export async function POST(request: Request) {
 
           source,
           promoCampaign,
+
+          // 🖊️ Waiver (per-booking signature)
+          electronicSignature: electronicSignature || null,
+          confirmWaiver: confirmWaiver || false,
+          waiverSignedAt: (electronicSignature && confirmWaiver) 
+            ? new Date().toISOString() 
+            : null,
+          waiverVersion: waiverVersion || null,
 
           status: 'PENDING',
           depositPaid: false,

@@ -2,6 +2,7 @@
 
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { PostHogProvider } from './lib/posthog'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -11,7 +12,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         defaultTheme="dark"
         themes={['light', 'dark', 'mytheme']}
       >
+        <PostHogProvider>
+
         {children}
+        </PostHogProvider>
       </NextThemesProvider>
     </NextUIProvider>
   );

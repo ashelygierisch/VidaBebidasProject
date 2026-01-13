@@ -15,8 +15,12 @@ model User {
   name                String
   email               String    @unique
   phone               String?
+  address             String?
+  
+  // 🖊️ Waiver (for quick checks - most recent signature)
   electronicSignature String?
   confirmWaiver       Boolean   @default(false)
+  waiverSignedAt      DateTime?
 
   bookings            Booking[]
 
@@ -61,6 +65,12 @@ model Booking {
   // 📈 Growth & attribution
   source        BookingSource?
   promoCampaign String?
+
+  // 🖊️ Waiver (per-booking signature for legal protection)
+  electronicSignature String?
+  confirmWaiver       Boolean   @default(false)
+  waiverSignedAt      DateTime?
+  waiverVersion       String?   // Track which version of waiver was signed
 
   // 🔐 Ownership
   userId        String

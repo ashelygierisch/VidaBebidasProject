@@ -6,7 +6,7 @@ const SourceList = ( {source, onSourceChange}: any) => {
 
     const options=['INSTAGRAM','REFERRAL', 'VENUE', 'WEBSITE', 'PROMOTION' ]
 
-    const id = `source-${options.indexOf}`
+
 
 
   return (
@@ -21,12 +21,12 @@ const SourceList = ( {source, onSourceChange}: any) => {
                       type="radio"
                       name="source"
                       className="radio radio-warning"
-                      id={id}
+                      id={`sourceid-${index}`} 
                       value={option}
                       checked={source === option}
                       onChange={(e) => onSourceChange(e.target.value)}
                 />
-                <label htmlFor="socila handle" className="text-sm">
+                <label htmlFor={`sourceid-${index}`}  className="text-sm">
                   {option}
                 </label>
               </li>

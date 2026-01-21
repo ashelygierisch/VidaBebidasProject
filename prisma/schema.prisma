@@ -43,6 +43,7 @@ model Booking {
   guestCount    Int?
   barType       String?
   message       String?
+  barSpace      Boolean @default(false)
 
   // 📍 Location
   venueName     String?

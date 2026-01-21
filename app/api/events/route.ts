@@ -4,17 +4,17 @@ import { createClient } from "@supabase/supabase-js";
 // Create Supabase client with service role key for server-side operations
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY! // Use service role key for API routes
+  process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
 );
 
 export async function GET() {
   try {
 
     const { data: users, error } = await supabase
-      .from("User")
+      .from("users")
       .select(`
         *,
-        bookings:Booking(*)
+        bookings(*)
       `);
 
     if (error) {
@@ -81,7 +81,7 @@ export async function POST(request: Request) {
       waiverVersion
     } = body
 
-   const {data:existingUser, error:userError}=await supabase.from('User')
+   const {data:existingUser, error:userError}=await supabase.from('users')
    .select('id')
     .eq('email', clientEmail)
     .single()
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     // Update user's waiver info if they're signing again (for quick checks)
     if (electronicSignature && confirmWaiver) {
       await supabase
-        .from('User')
+        .from('users')
         .update({
           electronicSignature,
           confirmWaiver: true,
@@ -113,7 +113,7 @@ export async function POST(request: Request) {
       : null
     
     const { data: newUser, error: createUserError } = await supabase
-      .from('User')
+      .from('users')
       .insert([{ 
         name: clientName, 
         email: clientEmail, 

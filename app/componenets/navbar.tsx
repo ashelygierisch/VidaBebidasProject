@@ -64,7 +64,7 @@ const Navigation = () => {
         <NavbarBrand>
           <Link href="/">
             <Image
-              src="/logo-white.png"
+              src="/VB-Logo-2026.png"
               alt="Logo"
               width={150}
               height="55"
@@ -78,9 +78,9 @@ const Navigation = () => {
         <NavbarBrand className="hidden lg:flex">
           <Link href="/">
             <Image
-              src="/logo-white.png"
+              src="/VB-Logo-2026.png"
               alt="Logo"
-              width={300}
+              width={150}
               height="55"
               priority
             />

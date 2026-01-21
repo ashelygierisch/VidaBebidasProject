@@ -29,10 +29,14 @@ const BookingForm = () => {
   const [address,setAddress]=useState('')
   const [guessCount,setGuessCount]=useState('')
   const [barType, setbarType] = useState('');
+
+  const [date, setDate] = useState<Date | undefined>(undefined)
+  const [startTime, setStartTime]=useState('01:30:00');
+  const [endTime, setEndTime]=useState('02:30:00')
+
   const [message, setMessage] = useState('');
 
   const [barOption, setBarOption]=useState('')
-  const [date,setDate]=useState('')
   const [source,setSource]=useState('')
 
   const [mounted, setMounted] = useState(false);
@@ -252,7 +256,7 @@ const ClientBooking={
         </label>
         <div className="flex flex-col justify-center items-center text-black bg-white border border-yellow-500 rounded-lg p-6 shadow-md overflow-auto">
           <h2 className="text-2xl font-bold ">Select the Day of Your Event</h2>
-          <BookingCalender date={date} onDateChange={(value:any)=>setDate(value)} />
+          <BookingCalender date={date} startTimne={startTime} onStartDateChange={(value:any)=>setStartTime(value)} endTime={endTime} onEndDateChange={(value:any)=> setEndTime(value)} onDateChange={(value:any)=>setDate(value)} />
         </div>
 <div>
  <SourceList source={source} onSourceChange={(value: any) => setSource(value)} />

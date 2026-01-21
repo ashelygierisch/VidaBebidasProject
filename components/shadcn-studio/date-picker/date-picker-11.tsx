@@ -10,12 +10,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
-const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateChange, onEndDateChange}:any) => {
+const DatePickerAndTimeRangePicker = () => {
   const [open, setOpen] = useState(false)
-//   const [date, setDate] = useState<Date | undefined>(undefined)
-
-// const [startTime, setStartTime]=useState('01:30:00');
-// const [endTime, setEndTime]=useState('02:30:00')
+  const [date, setDate] = useState<Date | undefined>(undefined)
 
   return (
     <div className='flex flex-col gap-6'>
@@ -25,7 +22,7 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
         </Label>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <Button variant='outline' id='date' className='w-full justify-between font-normal text-white'>
+            <Button variant='outline' id='date' className='w-full justify-between font-normal'>
               {date ? date.toLocaleDateString() : 'Pick a date'}
               <ChevronDownIcon />
             </Button>
@@ -35,14 +32,14 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
               mode='single'
               selected={date}
               onSelect={date => {
-                onDateChange(date)
+                setDate(date)
                 setOpen(false)
               }}
             />
           </PopoverContent>
         </Popover>
       </div>
-      <div className='flex gap-2 autoflow'>
+      <div className='flex gap-4'>
         <div className='flex flex-col gap-3'>
           <Label htmlFor='time-from' className='px-1'>
             From
@@ -50,11 +47,9 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
           <Input
             type='time'
             id='time-from'
-            step='60'
-            value={startTime}
-            onChange={(e)=>onStartDateChange(e.target.value)}
-         
-            className='bg-background text-white appearance-none [&::-webkit-calendar-picker-indicator] [&::-webkit-calendar-picker-indicator]'
+            step='1'
+            defaultValue='01:30:00'
+            className='bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
           />
         </div>
         <div className='flex flex-col gap-3'>
@@ -64,10 +59,9 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
           <Input
             type='time'
             id='time-to'
-            step='60'
-            value={endTime}
-           onChange={(e)=>onEndDateChange(e.target.value)}
-            className='bg-background text-white appearance-none [&::-webkit-calendar-picker-indicator] [&::-webkit-calendar-picker-indicator]'
+            step='1'
+            defaultValue='02:30:00'
+            className='bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'
           />
         </div>
       </div>
@@ -75,18 +69,4 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
   )
 }
 
-export default BookingCalendar
-
-
-
-
-
-  
-  //Fetch all dates that are booked
-  //pass them into the disable property of calendar component to block those dates from being re booked
-
-
-  // const bookedDates= ()=> {
-
-  //   const res= await fetch('/api/')
-  // }
+export default DatePickerAndTimeRangePicker

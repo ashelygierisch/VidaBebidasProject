@@ -62,6 +62,8 @@ model Booking {
   reminderSent Boolean       @default(false)
   confirmedAt  DateTime?
   completedAt  DateTime?
+  requiresStaffConfirmation Boolean @default(false)
+
 
   // 📈 Growth & attribution
   source        BookingSource?

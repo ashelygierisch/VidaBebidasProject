@@ -5,17 +5,15 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardHeader, CardBody, Divider, Image } from '@nextui-org/react';
+
 const WaiverForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
   const name = searchParams.get('name');
 
-  useEffect(() => {
-    console.log('Email:', email);
-    console.log('Name:', name);
-  }, [email, name]);
-  const [fullName, setFullName] = useState('');
+  
+  const [electronicSignature, setElectronicSignature] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -27,32 +25,30 @@ const WaiverForm = () => {
 
     const bookingId = sessionStorage.getItem('bookingId'); //getting the booking ID from local storage
 
-    if (!bookingId) {
-      toast.error('Booking ID not found');
-      return;
+    const ClientBooking= sessionStorage.getItem('clientbookinginfo')
+
+    
+    console.log('Waiver Signed', electronicSignature, isChecked);
+
+    if(ClientBooking){
+
+      const bookingInfo=JSON.parse(ClientBooking)
+
+      bookingInfo.confirmWaiver=isChecked
+      bookingInfo.electronicSignature=electronicSignature
+
+      if (electronicSignature === '') {
+        toast.error('Please provide a Signature');
+      } else {
+      
+        sessionStorage.setItem('clientbookinginfo', JSON.stringify(bookingInfo))
+        router.push('/thankyou');
+      }
+    }else{
+      console.log('No Booking Data Found')
     }
 
-    const response = await fetch('api/waiver', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        fullName,
-        isChecked,
-        email,
-        bookingId, //Passing it into the API to fetch the booking details in the route to pass to nodemailer to send to client and customer
-      }),
-    });
-
-    console.log('Form Submitted', fullName, isChecked);
-    console.log('Post response', response);
-    if (fullName === '') {
-      toast.error('Please provide a Signature');
-    } else {
-      toast.success('Waiver Accepted and Booking Successful!');
-      router.push('/thankyou');
-    }
+  
   };
 
   return (
@@ -67,21 +63,65 @@ const WaiverForm = () => {
             width={40}
           />
           <div className="flex flex-col">
+      
             <p className="text-md font-bold">
               Waiver and Agreement for Bartending Services
             </p>
+            
           </div>
         </CardHeader>
         <Divider />
         <CardBody>
+          {/* Booking Details Section */}
+          <div className="mb-6">
+            <div className="bg-gray-800 rounded-lg p-4 mb-4">
+              <h3 className="text-lg font-bold text-yellow-600 mb-4 text-center">
+                Important Information
+              </h3>
+              <ul className="text-white space-y-4 text-base">
+                <li className="p-2 border-b border-gray-600">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    Host responsibility & Bartender provisions:
+                  </span>{' '}
+                  HOST PROVIDES LIQUOR IN ALL PACKAGES.
+                  <div className="mt-2">$75.00 FOR EXTRA HOUR(S)</div>
+                </li>
+                <li className="p-2 border-b border-gray-600">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    Deposits:
+                  </span>
+                  {'  '}
+                  <span className="font-bold text-[#ff0000]">Non-Refundable</span>
+                </li>
+                <li className="p-2 border-b border-gray-600">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    Driving Time Convenience:
+                  </span>{' '}
+                  <ul className="font-sans list-disc list-inside m-2">
+                    <li className="p-1 marker:text-[#ff0000]">1hr ($20) </li>
+                    <li className="p-1 marker:text-[#ff0000]">2hr ($40)</li>
+                    <li className="p-1 marker:text-[#ff0000]">3hr($60)</li>
+                  </ul>
+                </li>
+                <li className="p-2">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    All packages:
+                  </span>{' '}
+                  100 people standard max, each additional person is $1 added.
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <form
             className="max-w-lg mx-auto text-left border-1 rounded-lg "
             onSubmit={handleSubmit}
           >
             <div className="flex justify-center">
               <div className="waiver-form">
+           
                 <p className="text-center text-[#FFD700] m-2">
-                  Please read and accept the waiver terms to proceed with your
+                  Please review the booking information above and read and accept the waiver terms below to proceed with your
                   booking.
                 </p>
                 <div className="h-85 overflow-y-auto border border-gray-300 p-4 bg-white text-black">
@@ -175,13 +215,14 @@ const WaiverForm = () => {
                     </li>
                   </ul>
                 </div>
+           
                 <label className="block m-2">
                   Electronic Signature:
                   <input
                     type="text"
                     className="w-full border rounded px-2 py-1 mt-1"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    value={electronicSignature}
+                    onChange={(e) => setElectronicSignature(e.target.value)}
                   />
                 </label>
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
 import Providers from './providers';
+import "@radix-ui/themes/styles.css";
 
 import { Open_Sans, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';

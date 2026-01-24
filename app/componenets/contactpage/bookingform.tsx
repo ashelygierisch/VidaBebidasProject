@@ -12,7 +12,8 @@ import BookingDetails from './bookingDetails';
 import SourceList from './sourcelist';
 import BookingCalender from './bookingCalendar';
 
-import BarOptions from './baroptions';
+import BarOptions from './baroptions'
+import VenueType from './venuetype';
 import { setDate } from 'date-fns';
 const BookingForm = () => {
   // const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
@@ -27,12 +28,12 @@ const BookingForm = () => {
   const [venueName,setVenueName]=useState('');
   const [city, setCity]=useState('')
   const [address,setAddress]=useState('')
-  const [guessCount,setGuessCount]=useState('')
+  const [guestCount,setGuestCount]=useState('')
   const [barType, setbarType] = useState('');
 
   const [date, setDate] = useState<Date | undefined>(undefined)
-  const [startTime, setStartTime]=useState('01:30:00');
-  const [endTime, setEndTime]=useState('02:30:00')
+  const [startTime, setStartTime]=useState('00:00:00');
+  const [endTime, setEndTime]=useState('00:00:00')
 
   const [message, setMessage] = useState('');
 
@@ -98,14 +99,21 @@ const ClientBooking={
   clientEmail,
   clientPhone,
   venueType,
+  date,
+  startTime,
+  endTime,
   venueName,
   city,
   address,
+  guestCount,
+  message,
+  source,
   barType
 }
     sessionStorage.setItem('clientbookinginfo', JSON.stringify(ClientBooking))
      
 
+    console.log("Client & Booking Info stored", ClientBooking)
     router.push(`/waiver?email=${clientEmail}&name=${clientName}`);
 
 
@@ -201,6 +209,10 @@ const ClientBooking={
           />
         </label>
         <label className="flex flex-col gap-2 text-sm text-gray-700">
+          Type of Event
+<VenueType venueType={venueType}  onVenueChangeType={(e:any)=>setvenueType(e)} />
+        </label>
+        <label className="flex flex-col gap-2 text-sm text-gray-700">
           Address of Event
           <input
             type="text"
@@ -226,8 +238,8 @@ const ClientBooking={
             type="text"
             className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white text-base"
             placeholder="ex: 50"
-            value={guessCount}
-            onChange={(e) => setGuessCount(e.target.value)}
+            value={guestCount}
+            onChange={(e) => setGuestCount(e.target.value)}
           />
         </label>
         <label className="flex flex-col gap-2 text-sm text-gray-700">

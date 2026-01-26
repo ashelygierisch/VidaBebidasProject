@@ -42,7 +42,7 @@ const WaiverForm = () => {
       } else {
       
         sessionStorage.setItem('clientbookinginfo', JSON.stringify(bookingInfo))
-        router.push('/thankyou');
+        router.push('/review');
       }
     }else{
       console.log('No Booking Data Found')
@@ -128,7 +128,7 @@ const WaiverForm = () => {
                   <p className="m-3 font-serif ">
                     This Waiver and Agreement is made between
                     VidaBebidasProject/Michael Estrada (Bartender) and the
-                    client booking, {name}. By accepting this Agreement, the
+                    client booking, <span className='font-bold'>{name}</span>. By accepting this Agreement, the
                     Client acknowledges and agrees to the terms and conditions
                     set forth below.
                   </p>
@@ -246,7 +246,7 @@ const WaiverForm = () => {
                     }`}
                     disabled={!isChecked}
                   >
-                    Complete Booking
+                    Review Booking
                   </Button>
                 </div>
               </div>

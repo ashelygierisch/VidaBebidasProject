@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import { createClient } from "@supabase/supabase-js";
-
+import { randomUUID } from 'crypto';
 // Create Supabase client with service role key for server-side operations
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
 );
+
+console.log('Key prefix:', process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY?.substring(0, 20));
+
 
 export async function GET() {
   try {
@@ -55,7 +58,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-
+    console.log('1. Received body:', body);
     const {
       eventDate,
       startTime,
@@ -71,7 +74,7 @@ export async function POST(request: Request) {
       address,
       city,
       guestCount,
-      barType,
+     barOption,
       message,
 
       source,
@@ -86,15 +89,18 @@ export async function POST(request: Request) {
     .eq('email', clientEmail)
     .single()
 
+    console.log('2. User lookup result:', { existingUser, userError });
+
     let userId
 
     if (userError && userError.code !== 'PGRST116') { 
       throw userError
     }
+  console.log('3. userId:', userId);
 
   if(existingUser){
     userId=existingUser.id
-    
+   
     // Update user's waiver info if they're signing again (for quick checks)
     if (electronicSignature && confirmWaiver) {
       await supabase
@@ -115,13 +121,15 @@ export async function POST(request: Request) {
     const { data: newUser, error: createUserError } = await supabase
       .from('users')
       .insert([{ 
+        id: randomUUID(),
         name: clientName, 
         email: clientEmail, 
         phone: clientPhone,
         electronicSignature: electronicSignature || null,
         confirmWaiver: confirmWaiver || false,
         waiverSignedAt,
-        createdAt: new Date().toISOString() 
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }])
       .select('id')
       .single()
@@ -131,27 +139,29 @@ export async function POST(request: Request) {
   }
    
  
-  const {data: existingBooking, error: bookingCheckError}= await supabase.from('bookings')
-    .select('id')
-    .eq('eventDate', eventDate)
-    .single()
-  
-    if (bookingCheckError && bookingCheckError.code !== 'PGRST116') {
-      throw bookingCheckError
-    }
+// Check if date already has bookings
+const { data: existingBookings, error: bookingCheckError } = await supabase
+  .from('bookings')
+  .select('id')
+  .eq('eventDate', eventDate);
 
-    if (existingBooking) {
-      return NextResponse.json(
-        { error: 'This date is already booked' },
-        { status: 409 } 
-      )
-    }
+if (bookingCheckError) {
+  throw bookingCheckError;
+}
+
+// Determine status based on existing bookings
+const hasExistingBooking = existingBookings && existingBookings.length > 0;
+const bookingStatus = hasExistingBooking ? 'REQUESTED' : 'PENDING';
+const needsConfirmation = hasExistingBooking;
+
+console.log('4. About to create booking with eventDate:', eventDate);
 
 //Create the booking
     const { data: newBooking, error:bookingError } = await supabase
       .from('bookings')
       .insert([
         {
+          id: randomUUID(),
           eventDate,
           startTime,
           endTime,
@@ -166,9 +176,12 @@ export async function POST(request: Request) {
           city,
           address,
           guestCount,
-          barType,
+          barOption,
           message,
 
+          status: bookingStatus,
+          requiresStaffConfirmation: needsConfirmation,
+          updatedAt: new Date().toISOString(),
           source,
           promoCampaign,
 
@@ -179,8 +192,6 @@ export async function POST(request: Request) {
             ? new Date().toISOString() 
             : null,
           waiverVersion: waiverVersion || null,
-
-          status: 'PENDING',
           depositPaid: false,
 
           userId,
@@ -190,6 +201,7 @@ export async function POST(request: Request) {
       .select()
       .single()
 
+      console.log('5. Booking result:', { newBooking, bookingError });
 
       if (bookingError) {
         throw bookingError
@@ -200,10 +212,17 @@ export async function POST(request: Request) {
         { status: 201 }
       )
 
-  } catch (error) {
-    return new Response(
-      JSON.stringify({ error: 'Failed to create booking' }),
-      { status: 500 }
-    )
-  }
+    } catch (error) {
+      // Log the full error to your server console
+      console.error('Booking creation error:', error);
+      
+      // Return more details in the response (for debugging)
+      return NextResponse.json(
+        { 
+          error: 'Failed to create booking',
+          details: error instanceof Error ? error.message : String(error)
+        },
+        { status: 500 }
+      )
+    }
 }

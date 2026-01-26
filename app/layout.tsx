@@ -28,7 +28,9 @@ export default function RootLayout({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <LocalizationProviderWrapper>
         <body className={Font.className}>
-          <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
+          <Toaster position="top-center" toastOptions={{ duration: 8000 }}   containerStyle={{
+    top: '40%',  // ← This pushes it toward the middle
+  }}/>
           <Head>
             <link rel="icon" href="/favicon.ico" sizes="any" />
           </Head>

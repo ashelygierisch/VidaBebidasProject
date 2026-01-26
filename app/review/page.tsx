@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-
+import { toast } from 'react-hot-toast';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 
@@ -14,7 +14,7 @@ interface BookingInfo {
     
     // Event details
     venueType: string;
-    date: Date | string;  // Could be Date object or ISO string
+    eventdate: Date | string;  // Could be Date object or ISO string
     startTime: string;     // Format like '00:00:00'
     endTime: string;       // Format like '00:00:00'
     venueName: string;
@@ -22,19 +22,25 @@ interface BookingInfo {
     address: string;
     guestCount: string | number;  // Could be string from input or number
     
-    // Service details
-    barType: string;
-    message: string;
-    source: string;
-    
-    // Waiver information (added in waiver page)
-    confirmWaiver?: boolean;           // Optional because added later
-    electronicSignature?: string;      // Optional because added later
+     
+  // Service details
+  serviceType: string;         // ← Changed from 'barType'
+  barOption: string;           // ← Added
+  message: string;
+  source: string;
+  isDateAlreadyBooked?: boolean;  // ← Added (optional)
+  
+  // Waiver information
+  confirmWaiver?: boolean;
+  electronicSignature?: string;
   }
 
 
 
 const ReviewPage = () => {
+const router=useRouter()
+
+
 
     const [bookingInfo, setBookingInfo] = useState<BookingInfo | null>(null);
     useEffect(()=>{
@@ -82,7 +88,58 @@ const ReviewPage = () => {
       return time;
     };
 
-    
+    const completeBooking = async () => {
+      if (!bookingInfo) return;
+      
+      // Format date string (e.g., "2026-02-15")
+      const dateStr = typeof bookingInfo.eventdate === 'string' 
+        ? bookingInfo.eventdate.split('T')[0] 
+        : new Date(bookingInfo.eventdate).toISOString().split('T')[0];
+      
+      const payload = {
+        eventDate: `${dateStr}T${bookingInfo.startTime}`,
+        startTime: `${dateStr}T${bookingInfo.startTime}`,
+        endTime: bookingInfo.endTime ? `${dateStr}T${bookingInfo.endTime}` : null,
+        serviceType: bookingInfo.serviceType, // or a separate field
+        
+        clientName: bookingInfo.clientName,
+        clientEmail: bookingInfo.clientEmail,
+        clientPhone: bookingInfo.clientPhone,
+        
+        venueName: bookingInfo.venueName,
+        venueType: bookingInfo.venueType,
+        address: bookingInfo.address,
+        city: bookingInfo.city,
+        guestCount: parseInt(bookingInfo.guestCount as string) || null,
+        barOption: bookingInfo.barOption,
+        message: bookingInfo.message,
+        
+        source: bookingInfo.source, // ensure it matches enum
+        electronicSignature: bookingInfo.electronicSignature,
+        confirmWaiver: bookingInfo.confirmWaiver,
+      };
+      
+      const response = await fetch('/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      
+      if (response.ok) {
+        router.push(`/thankyou?name=${bookingInfo.clientName}`);
+      } else {
+        const errorData = await response.json();
+        console.log( 'API Error', errorData)
+        toast.error(errorData.error || 'Failed to complete booking please contact us at +1 (214-893-2926) ');
+      }
+    };
+
+    const redoBooking=async ()=>{
+        sessionStorage.clear()
+
+       router.push(`/booking`)
+
+    }
   return (
     <div className="mt-[6rem] py-4 px-4 sm:px-6 lg:px-8">
         {/* Booking Details Section */}
@@ -104,7 +161,7 @@ const ReviewPage = () => {
                   </div>
                   <div className="border-b border-gray-300 pb-2 sm:pb-3">
                     <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase mb-1">Service Package</p>
-                    <p className="text-base sm:text-lg font-semibold text-yellow-600 break-words">{bookingInfo.barType || 'Not specified'}</p>
+                    <p className="text-base sm:text-lg font-semibold text-yellow-600 break-words">{bookingInfo.serviceType || 'Not specified'}</p>
                   </div>
                   <div className="border-b border-gray-300 pb-2 sm:pb-3">
                     <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase mb-1">Guest Count</p>
@@ -116,7 +173,7 @@ const ReviewPage = () => {
                 <div className="space-y-3 sm:space-y-4">
                   <div className="border-b border-gray-300 pb-2 sm:pb-3">
                     <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase mb-1">Event Date</p>
-                    <p className="text-base sm:text-lg font-bold text-gray-800 break-words">{formatDate(bookingInfo.date)}</p>
+                    <p className="text-base sm:text-lg font-bold text-gray-800 break-words">{formatDate(bookingInfo.eventdate)}</p>
                   </div>
                   <div className="border-b border-gray-300 pb-2 sm:pb-3">
                     <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase mb-1">Start Time</p>
@@ -176,14 +233,14 @@ const ReviewPage = () => {
           <Button
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse text-center "
           variant="shadow"
-        //   onClick={createUser}
+          onClick={completeBooking}
         >
           Complete Booking
         </Button>
         <Button
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse text-center "
           variant="shadow"
-        //   onClick={createUser}
+          onClick={redoBooking}
         >
           Re-Do Booking
         </Button>

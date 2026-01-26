@@ -1,3 +1,6 @@
+console.log('Bookings route - Key prefix:', process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY?.substring(0, 20));
+console.log('Bookings route - URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
+
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 const supabase = createClient(
@@ -8,13 +11,14 @@ const supabase = createClient(
 
 export async function GET() {
     try {
-  
+      console.log('Fetching bookings...');
       const { data: bookedDates, error } = await supabase
         .from("bookings")
         .select(`
-          eventDate
+       *
         `);
-  
+        console.log('Query result:', { bookedDates, error }); 
+
       if (error) {
         console.error('Supabase error:', error);
         return NextResponse.json(
@@ -23,11 +27,8 @@ export async function GET() {
         );
       }
   
-      if (!bookedDates) {
-        return NextResponse.json(
-          { error: 'No bookings found' },
-          { status: 404 }
-        );
+      if (!bookedDates || bookedDates.length === 0) {
+        return NextResponse.json([], { status: 200 });
       }
   
       console.log("All booked dates:", bookedDates);

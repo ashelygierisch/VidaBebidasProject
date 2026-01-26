@@ -14,12 +14,13 @@ import BookingCalender from './bookingCalendar';
 
 import BarOptions from './baroptions'
 import VenueType from './venuetype';
-import { setDate } from 'date-fns';
+import { isDate, setDate } from 'date-fns';
+import { error } from 'console';
 const BookingForm = () => {
-  // const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-  // const [selectedTime, setSelectedTime] = useState<Dayjs | null>(null);
-  // const [bookedDates, setBookedDates] = useState<Dayjs[]>([]);
   
+  const [bookedDates, setBookedDates] = useState<Date[]>([]);
+const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
+
   const [clientEmail, setclientEmail] = useState('');
   const [clientName, setclientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
@@ -29,9 +30,9 @@ const BookingForm = () => {
   const [city, setCity]=useState('')
   const [address,setAddress]=useState('')
   const [guestCount,setGuestCount]=useState('')
-  const [barType, setbarType] = useState('');
+  const [serviceType, setserviceType] = useState('');
 
-  const [date, setDate] = useState<Date | undefined>(undefined)
+  const [eventdate, setEventDate] = useState<Date | undefined>(undefined)
   const [startTime, setStartTime]=useState('00:00:00');
   const [endTime, setEndTime]=useState('00:00:00')
 
@@ -46,9 +47,59 @@ const BookingForm = () => {
 
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const res = await fetch('/api/bookings', {
+          cache: 'no-store', 
+        });
+        const data = await res.json();
+        console.log('Fetched booked dates:', data);  // ← Add this
+        const dates = data.map((booking: any) => new Date(booking.eventDate));
+        setBookedDates(dates);
+      } catch (error) {
+        console.error('Failed to fetch booked dates:', error);
+      }
+    };
+    fetchBookedDates();
+  }, []);
 
 
-  const createUser = async () => {
+
+  const handleDateChange = (selectedDate: Date) => {
+    const isBooked = bookedDates.some(
+      d => d.toDateString() === selectedDate?.toDateString()
+    );
+
+    console.log('Is booked?', isBooked);
+    
+    if (isBooked) {
+      toast(
+        'This date already has a booking. You can still request service- staff will confirm availability.',
+        {
+          icon: '⚠️',
+          duration: 10000,
+          style: {
+            background: '#FEF3C7',
+            color: '#92400E',
+            padding: '16px',
+            fontSize: '16px',
+            fontWeight: '500',
+            border: '2px solid #F59E0B',
+            maxWidth: '500px',
+            textAlign: 'center',
+          },
+        }
+      );
+      setIsDateAlreadyBooked(true);
+    } else {
+      setIsDateAlreadyBooked(false);
+    }
+    
+    setEventDate(selectedDate);
+  };
+  
+  const storeInfo = async () => {
     // if (!selectedDate) {
     //   toast.error('Please select a date');
     //   return;
@@ -82,33 +133,30 @@ const BookingForm = () => {
       toast.error('Please enter a city')
     }
 
-    if (!barType) {
+    if (!serviceType) {
       toast.error('Please choose a Service');
     }
 
-    // Combine date and time into a single ISO 8601 datetime string
-    // Format: "YYYY-MM-DDTHH:mm:ss"
-    // const combinedDateTime = dayjs(selectedDate)
-    //   .hour(dayjs(selectedTime).hour())
-    //   .minute(dayjs(selectedTime).minute())
-    //   .second(0)
-    //   .format('YYYY-MM-DDTHH:mm:ss');
+
+
 
 const ClientBooking={
   clientName,
   clientEmail,
   clientPhone,
   venueType,
-  date,
+  eventdate,
   startTime,
   endTime,
   venueName,
   city,
   address,
   guestCount,
+  isDateAlreadyBooked,
   message,
   source,
-  barType
+ serviceType,
+ barOption,
 }
     sessionStorage.setItem('clientbookinginfo', JSON.stringify(ClientBooking))
      
@@ -119,16 +167,14 @@ const ClientBooking={
 
   };
 
+
   return (
     <div className="flex justify-center py-10 bg-black min-h-screen">
       <form className="flex flex-col gap-5 p-6 bg-white w-full max-w-lg border border-gray-300 rounded-lg shadow-lg m-2">
         <h1 className="font-bold text-3xl text-center text-gray-800">
           VidaBebidasProject Booking Form
         </h1>
-        {/* <p className="text-sm text-yellow-600">
-          Please note the following details before Booking:
-        </p>
-        <BookingDetails /> */}
+
         <div className="flex flex-col gap-4">
           <label className="flex flex-col gap-2 text-sm text-gray-700">
             Name
@@ -161,8 +207,8 @@ const ClientBooking={
                 className="radio radio-warning"
                 id="Silver Package"
                 value="Silver Package"
-                checked={barType=== 'Silver Package'}
-                onChange={(e) => setbarType(e.target.value)}
+                checked={serviceType=== 'Silver Package'}
+                onChange={(e) => setserviceType(e.target.value)}
               />
               <label htmlFor="Silver Package" className="text-sm">
                 SilverPackage ($250 1-6hrs)
@@ -175,8 +221,8 @@ const ClientBooking={
                 className="radio radio-warning"
                 id="Reposado Package"
                 value="Reposado Package"
-                checked={barType=== 'Reposado Package'}
-                onChange={(e) => setbarType(e.target.value)}
+                checked={serviceType=== 'Reposado Package'}
+                onChange={(e) => setserviceType(e.target.value)}
               />
               <label htmlFor="Reposado Package" className="text-sm">
                 ReposadoPackage ($325 1-6hrs)
@@ -189,8 +235,8 @@ const ClientBooking={
                 className="radio radio-warning"
                 id="Añejo Package"
                 value="Añejo Package"
-                checked={barType === 'Añejo Package'}
-                onChange={(e) => setbarType(e.target.value)}
+                checked={serviceType === 'Añejo Package'}
+                onChange={(e) => setserviceType(e.target.value)}
               />
               <label htmlFor="Añejo Package" className="text-sm">
                 AñejoPackage ($400 1-5hrs)
@@ -268,7 +314,7 @@ const ClientBooking={
         </label>
         <div className="flex flex-col justify-center items-center text-black bg-white border border-yellow-500 rounded-lg p-6 shadow-md overflow-auto">
           <h2 className="text-2xl font-bold ">Select the Day of Your Event</h2>
-          <BookingCalender date={date} startTimne={startTime} onStartDateChange={(value:any)=>setStartTime(value)} endTime={endTime} onEndDateChange={(value:any)=> setEndTime(value)} onDateChange={(value:any)=>setDate(value)} />
+          <BookingCalender date={eventdate} startTime={startTime} onStartDateChange={(value:any)=>setStartTime(value)} endTime={endTime} onEndDateChange={(value:any)=> setEndTime(value)} onDateChange={handleDateChange} />
         </div>
 <div>
  <SourceList source={source} onSourceChange={(value: any) => setSource(value)} />
@@ -276,7 +322,7 @@ const ClientBooking={
         <Button
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
           variant="shadow"
-          onClick={createUser}
+          onClick={storeInfo}
         >
           Continue
         </Button>

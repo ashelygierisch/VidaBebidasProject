@@ -64,7 +64,7 @@ model Booking {
   completedAt  DateTime?
   requiresStaffConfirmation Boolean @default(false)
 
-
+  barOption String?
   // 📈 Growth & attribution
   source        BookingSource?
   promoCampaign String?
@@ -94,6 +94,7 @@ model Booking {
 
 enum BookingStatus {
   PENDING
+  REQUESTED
   CONFIRMED
   COMPLETED
   CANCELED

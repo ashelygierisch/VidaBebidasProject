@@ -17,6 +17,7 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
 // const [startTime, setStartTime]=useState('01:30:00');
 // const [endTime, setEndTime]=useState('02:30:00')
 
+
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex w-full max-w-xs flex-col gap-3'>
@@ -33,6 +34,7 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
           <PopoverContent className='w-auto overflow-hidden p-0' align='start'>
             <Calendar
               mode='single'
+              disabled={{ before: new Date() }}
               selected={date}
               onSelect={date => {
                 onDateChange(date)
@@ -45,7 +47,7 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
       <div className='flex gap-2 autoflow'>
         <div className='flex flex-col gap-3'>
           <Label htmlFor='time-from' className='px-1'>
-            From
+           Start Time
           </Label>
           <Input
             type='time'
@@ -54,19 +56,6 @@ const BookingCalendar = ({date, onDateChange, startTime, endTime, onStartDateCha
             value={startTime}
             onChange={(e)=>onStartDateChange(e.target.value)}
          
-            className='bg-background text-white appearance-none [&::-webkit-calendar-picker-indicator] [&::-webkit-calendar-picker-indicator]'
-          />
-        </div>
-        <div className='flex flex-col gap-3'>
-          <Label htmlFor='time-to' className='px-1'>
-            To
-          </Label>
-          <Input
-            type='time'
-            id='time-to'
-            step='60'
-            value={endTime}
-           onChange={(e)=>onEndDateChange(e.target.value)}
             className='bg-background text-white appearance-none [&::-webkit-calendar-picker-indicator] [&::-webkit-calendar-picker-indicator]'
           />
         </div>

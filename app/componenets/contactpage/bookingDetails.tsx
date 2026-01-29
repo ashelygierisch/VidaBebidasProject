@@ -37,13 +37,14 @@ const BookingDetails = () => {
 $75.00 FOR EXTRA HOUR(S)
 </li>
             </li>
-            <li className="p-2 border-b border-gray-200">
-              <span className="font-semibold text-lg text-yellow-600">
-                Deposits:
-              </span>
-              {'  '}
-              <span className="font-bold text-[#ff0000]">Non-Refundable</span>
-            </li>
+            <li className="p-2 border-b border-gray-600 flex-col">
+                  <span className="font-semibold text-lg text-yellow-600">
+                  Deposit Fee: 
+                  </span>
+                  {'  '}
+                  <span className='text-green font-bold text-[#99ff00]'>$100  {'  '}</span>
+                  <span className="font-bold text-[#ff0000]">(Non-Refundable)</span>
+                </li>
             <li className="p-2 border-b border-gray-200">
               <span className="font-semibold text-lg text-yellow-600">
                 Driving Time Convenience:

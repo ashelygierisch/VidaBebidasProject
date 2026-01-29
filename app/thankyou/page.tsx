@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
-
+import ConfettiAnimation from '../componenets/confettianimation';
 
 interface BookingInfo {
   // Client information
@@ -45,6 +45,8 @@ const ThankYou = () => {
       const parsed=JSON.parse(ClientBooking)
 
       setBookingInfo(parsed)
+
+      
     
     }else{
       console.log('No Booking Data Found')
@@ -85,6 +87,7 @@ const ThankYou = () => {
 
   return (
     <div className="mt-[6rem] py-4 px-4 sm:px-6 lg:px-8">
+       <ConfettiAnimation />
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-2rem)] py-8">
         <div className="bg-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg text-black w-full max-w-4xl">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-center sm:text-left">

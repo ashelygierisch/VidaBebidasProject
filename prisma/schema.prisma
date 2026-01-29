@@ -15,7 +15,6 @@ model User {
   name                String
   email               String    @unique
   phone               String?
-  address             String?
   
   // 🖊️ Waiver (for quick checks - most recent signature)
   electronicSignature String?

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",
-    "preview-email": "npx email dev -p 3030"
+    "preview-email": "node node_modules/react-email/dist/cli/index.js dev -p 3030",
+    "email": "node node_modules/react-email/dist/cli/index.js dev"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -49,9 +50,10 @@
     "nodemailer": "^6.9.14",
     "plaiceholder": "^3.0.0",
     "posthog-js": "^1.333.0",
-    "posthog-node": "^5.20.0",
+    "posthog-node": "^5.21.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.10",
+    "react-confetti": "^6.4.0",
     "react-day-picker": "^9.13.0",
     "react-dom": "^18.3.1",
     "react-email": "^3.0.1",
@@ -61,6 +63,7 @@
     "react-remove-scroll": "^2.7.2",
     "react-scroll-up": "^1.4.0",
     "react-toastify": "^10.0.5",
+    "react-use": "^17.6.0",
     "resend": "^1.1.0",
     "sass": "^1.75.0",
     "sharp": "^0.33.4",
@@ -74,6 +77,7 @@
   "devDependencies": {
     "@iconify/json": "^2.2.202",
     "@iconify/tailwind": "^0.1.4",
+    "@react-email/preview-server": "^5.2.5",
     "@types/file-saver": "^2.0.7",
     "@types/next": "^9.0.0",
     "@types/node": "^20.14.12",

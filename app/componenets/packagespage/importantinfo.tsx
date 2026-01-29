@@ -36,10 +36,15 @@ const ImportantInfo = () => {
               </a>{' '}
               HOST PROVIDES LIQUOR IN ALL PACKAGES. 
             </li>
-            <li className="p-1 marker:text-[#FFD700]">
-              <a className="font-bold">Deposits: </a>
-              <span className="font-bold text-[#ff0000]">Non-Refundable</span>
-            </li>
+            <li className="p-1 marker:text-[#FFD700] border-b border-gray-600 flex-col">
+           
+                  <span className="font-semibold text-lg text-yellow-600">
+                  Deposit Fee: 
+                  </span>
+                  {'  '}
+                  <span className='text-green font-bold text-[#99ff00]'>$100  {'  '}</span>
+                  <span className="font-bold text-[#ff0000]">(Non-Refundable)</span>
+                </li>
             <li className="p-1 marker:text-[#FFD700]">
               <a className="font-bold">Driving Time Convenience: </a>
               <ul className="font-sans list-disc list-inside m-2">

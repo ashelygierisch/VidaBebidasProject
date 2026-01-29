@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createClient } from "@supabase/supabase-js";
 import { randomUUID } from 'crypto';
+
+import posthog from '@/app/lib/posthog--server';
+import { sendBookingConfirmation } from '@/app/lib/email';
+
 // Create Supabase client with service role key for server-side operations
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -203,14 +207,35 @@ console.log('4. About to create booking with eventDate:', eventDate);
 
       console.log('5. Booking result:', { newBooking, bookingError });
 
+
+      await sendBookingConfirmation(newBooking);
+
       if (bookingError) {
         throw bookingError
       }
 
-      return NextResponse.json(
+      posthog.capture({
+        distinctId: clientEmail, 
+        event: 'Booking Created',
+        properties: { 
+          source: source,
+          serviceType: serviceType,
+          city: city,
+          guestCount: guestCount,
+          venueType: venueType,
+          bookingStatus: bookingStatus,
+        }
+      });
+      
+    
+      await posthog.flush();
+
+
+      return NextResponse.json( 
         { booking: newBooking, message: 'Booking created successfully' },
         { status: 201 }
-      )
+      );
+
 
     } catch (error) {
       // Log the full error to your server console

@@ -6,6 +6,9 @@ import { toast } from 'react-hot-toast';
 import { Button } from '@nextui-org/react';
 import Image from 'next/image';
 
+import posthog from 'posthog-js';
+
+
 interface BookingInfo {
     // Client information
     clientName: string;
@@ -40,11 +43,13 @@ interface BookingInfo {
 const ReviewPage = () => {
 const router=useRouter()
 
-
+const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [bookingInfo, setBookingInfo] = useState<BookingInfo | null>(null);
     useEffect(()=>{
-  
+      // Track review page view for funnel analytics
+      posthog?.capture('Review Page Viewed');
+
       const ClientBooking= sessionStorage.getItem('clientbookinginfo')
     
   
@@ -89,8 +94,9 @@ const router=useRouter()
     };
 
     const completeBooking = async () => {
-      if (!bookingInfo) return;
-      
+      if (!bookingInfo || isSubmitting) return;
+
+      setIsSubmitting(true);
       // Format date string (e.g., "2026-02-15")
       const dateStr = typeof bookingInfo.eventdate === 'string' 
         ? bookingInfo.eventdate.split('T')[0] 
@@ -125,17 +131,43 @@ const router=useRouter()
         body: JSON.stringify(payload),
       });
       
+      
       if (response.ok) {
+        
+        posthog?.identify(bookingInfo.clientEmail, {
+          name: bookingInfo.clientName,
+          email: bookingInfo.clientEmail,
+          phone: bookingInfo.clientPhone
+        });
+
+        
+        posthog?.capture('Booking Confirmed', {
+          serviceType: bookingInfo.serviceType,
+          venueType: bookingInfo.venueType,
+          guestCount: bookingInfo.guestCount,
+          city: bookingInfo.city,
+          barOption: bookingInfo.barOption,
+          source: bookingInfo.source,
+          waiverSigned: bookingInfo.confirmWaiver ?? false
+        });
+
+        sessionStorage.removeItem('clientbookinginfo');
         router.push(`/thankyou?name=${bookingInfo.clientName}`);
       } else {
         const errorData = await response.json();
         console.log( 'API Error', errorData)
         toast.error(errorData.error || 'Failed to complete booking please contact us at +1 (214-893-2926) ');
+        setIsSubmitting(false);
       }
     };
 
     const redoBooking=async ()=>{
         sessionStorage.clear()
+posthog?.capture('Booking Redo', {
+  serviceType: bookingInfo?.serviceType,
+  venueType: bookingInfo?.venueType,
+  guestCount: bookingInfo?.guestCount,
+});
 
        router.push(`/booking`)
 
@@ -143,6 +175,7 @@ const router=useRouter()
   return (
     <div className="mt-[6rem] py-4 px-4 sm:px-6 lg:px-8">
         {/* Booking Details Section */}
+
         {bookingInfo && (
             <div className="mb-6 p-3 sm:p-4 lg:p-6 bg-gray-50 rounded-lg border-2 border-yellow-500 shadow-md">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center mb-4 sm:mb-6 text-[#DC143C]">
@@ -233,9 +266,11 @@ const router=useRouter()
           <Button
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse text-center "
           variant="shadow"
+          isLoading={isSubmitting}
+          disabled={isSubmitting}
           onClick={completeBooking}
         >
-          Complete Booking
+            {isSubmitting ? 'Submitting...' : 'Complete Booking'}
         </Button>
         <Button
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse text-center "

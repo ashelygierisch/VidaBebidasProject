@@ -15,29 +15,59 @@ import {
   Text,
 } from '@react-email/components';
 import dayjs from 'dayjs';
-interface BookingTemplateProps {
-  date: string;
-  time: string;
+interface BookingInfo {
+  // Client information
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  
+  // Event details
+  venueType: string;
+  eventdate: Date | string;  // Could be Date object or ISO string
+  startTime: string;     // Format like '00:00:00'
+  endTime: string;       // Format like '00:00:00'
+  venueName: string;
+  city: string;
   address: string;
-  message: string;
-  email: string;
-  phone: string;
-  name: string;
-  service: string;
+  guestCount: string | number;  // Could be string from input or number
+  
+   
+// Service details
+serviceType: string;         // ← Changed from 'barType'
+barOption: string;           // ← Added
+message: string;
+source: string;
+isDateAlreadyBooked?: boolean;  // ← Added (optional)
+
+// Waiver information
+confirmWaiver?: boolean;
+electronicSignature?: string;
 }
 
 export const BookingTemplate = ({
-  date,
-  time,
+  clientName,
+  clientEmail,
+  clientPhone,
+  venueType,
+  eventdate,  
+  startTime,   
+  endTime,      
+  venueName,
+  city,
   address,
-  name,
-  message,
-  email,
-  phone,
-  service,
-}: BookingTemplateProps) => {
-  const formattedDate = dayjs(date).format('MMMM D, YYYY');
+  guestCount,  
+serviceType,     
+barOption,          
+message,
+source,
+isDateAlreadyBooked,  
+confirmWaiver,
+electronicSignature,
+}: BookingInfo) => {
+  const formattedDate = dayjs(eventdate).format('MMMM D, YYYY');
 
+  const formatedStartTime=dayjs(startTime).format('hh:mm A')
+  const formatedEndTime=dayjs(endTime).format('hh:mm A')
   return (
     <Html>
       <Head />
@@ -51,7 +81,7 @@ export const BookingTemplate = ({
                   style={image}
                   width={620}
                   src={
-                    'https://mikessite.s3.us-east-2.amazonaws.com/logo-white.png'
+                    'https://mikessite.s3.us-east-2.amazonaws.com/VB-Logo-2026.png'
                   }
                 />
               </Row>
@@ -65,7 +95,7 @@ export const BookingTemplate = ({
                       textAlign: 'center',
                     }}
                   >
-                    Hi {name},
+                    Hi {clientName},
                   </Heading>
                   <Heading
                     as="h2"
@@ -77,38 +107,89 @@ export const BookingTemplate = ({
                     }}
                   >
                     Thank you for choosing VidaBebidasProject! Your booking has
-                    been received, and I will reach out to you at my earliest
-                    convenience to confirm the details below.
+                    been received, and I will reach out to you at my earliest convenience to confirm the details below and to
+                    collect the $100 deposit to finalize your booking.
                   </Heading>
                 </Column>
               </Row>
 
-              <Row className="p-5 ">
+              <Row style={{ padding: '20px' }}>
                 <Column>
+                  {/* Event Details Section */}
+                  <Text style={sectionHeader}>Event Details</Text>
                   <Text style={paragraph}>
-                    <b>Your appointment is confirmed with us for: </b>
-                    {formattedDate} at {time}.
+                    <b>Event Date: </b>
+                    {formattedDate}
                   </Text>
-                  <Text style={{ ...paragraph, marginTop: -7 }}>
-                    <b>Choice of Service: </b>
-                    {service}
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Event Time: </b>
+                    {formatedStartTime} - {formatedEndTime}
                   </Text>
-                  <Text style={{ ...paragraph, marginTop: -7 }}>
-                    <b>Address Provided: </b>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Event Type: </b>
+                    {venueType}
+                  </Text>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Guest Count: </b>
+                    {guestCount}
+                  </Text>
+
+                  {/* Venue Details Section */}
+                  <Text style={sectionHeader}>Venue Information</Text>
+                  <Text style={paragraph}>
+                    <b>Event Name: </b>
+                    {venueName}
+                  </Text>
+                  <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Address: </b>
                     {address}
                   </Text>
                   <Text style={{ ...paragraph, marginTop: -5 }}>
-                    <b>Questions/Comments: </b>
-                    {message}
+                    <b>City: </b>
+                    {city}
+                  </Text>
+
+                  {/* Service Details Section */}
+                  <Text style={sectionHeader}>Service Details</Text>
+                  <Text style={paragraph}>
+                    <b>Service Type: </b>
+                    {serviceType}
                   </Text>
                   <Text style={{ ...paragraph, marginTop: -5 }}>
+                    <b>Bar Space: </b>
+                    {barOption}
+                  </Text>
+
+                  {/* Contact Information Section */}
+                  <Text style={sectionHeader}>Your Contact Information</Text>
+                  <Text style={paragraph}>
                     <b>Email: </b>
-                    {email}
+                    {clientEmail}
                   </Text>
                   <Text style={{ ...paragraph, marginTop: -5 }}>
-                    <b>Phone Number </b>
-                    {phone}
+                    <b>Phone: </b>
+                    {clientPhone}
                   </Text>
+
+                  {/* Additional Notes */}
+                  {message && (
+                    <>
+                      <Text style={sectionHeader}>Additional Notes</Text>
+                      <Text style={paragraph}>{message}</Text>
+                    </>
+                  )}
+
+                  {/* Waiver Confirmation */}
+                  {confirmWaiver && electronicSignature && (
+                    <>
+                      <Text style={sectionHeader}>Waiver Confirmation</Text>
+                      <Text style={paragraph}>
+                        <b>Electronic Signature: </b>
+                        {electronicSignature}
+                      </Text>
+                    </>
+                  )}
+
                   <Row>
                     <Img
                       style={image}
@@ -139,15 +220,25 @@ export const BookingTemplate = ({
 };
 
 BookingTemplate.PreviewProps = {
-  date: 'October 24 2024',
-  time: '4:00 PM',
-  address: '504 South Storey st',
-  message: 'Testing',
-  email: 'oscarleal234@gmail.com',
-  phone: '469-777-0341',
-  name: 'Oscar',
-  service: 'Reposado Package',
-} as BookingTemplateProps;
+  clientName: 'Oscar',
+  clientEmail: 'oscar@test.com',
+  clientPhone: '214-XXX-XXXX',
+  venueType: 'GradParty',
+  eventdate: 'February 8, 2026',
+  startTime: '2026-02-08T14:00:00',
+  endTime: '2026-02-08T14:00:00',
+  venueName: 'The Grand Ballroom',
+  city: 'Dallas',
+  address: '123 Main Street, Dallas, TX 75201',
+  guestCount: 150,
+  serviceType: 'Anejo Package',
+  barOption: 'Yes-there will be a dedicated bar space',
+  message: 'Looking forward to celebrating with you!',
+  source: 'Website',
+  isDateAlreadyBooked: false,
+  confirmWaiver: true,
+  electronicSignature: 'Oscar Martinez',
+} as BookingInfo;
 
 export default BookingTemplate;
 
@@ -159,6 +250,16 @@ const main = {
 
 const paragraph = {
   fontSize: 16,
+};
+
+const sectionHeader = {
+  fontSize: 18,
+  fontWeight: 'bold' as const,
+  color: '#333',
+  marginTop: 20,
+  marginBottom: 10,
+  borderBottom: '1px solid #eee',
+  paddingBottom: 5,
 };
 
 const logo = {

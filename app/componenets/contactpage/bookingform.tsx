@@ -26,6 +26,8 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
   const [clientName, setclientName] = useState('');
   const [clientPhone, setClientPhone] = useState('');
 
+  const[status,setStatus]=useState("PENDING");
+
   const [venueType,setvenueType]=useState('')
   const [venueName,setVenueName]=useState('');
   const [city, setCity]=useState('')
@@ -103,8 +105,10 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
         }
       );
       setIsDateAlreadyBooked(true);
+
     } else {
       setIsDateAlreadyBooked(false);
+    
     }
     
     setEventDate(selectedDate);
@@ -168,6 +172,7 @@ const ClientBooking={
   venueName,
   city,
   address,
+  status,
   guestCount,
   isDateAlreadyBooked,
   message,

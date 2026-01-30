@@ -17,6 +17,7 @@ interface BookingData {
     barOption: string;
     message: string;
     source: string;
+    requiresStaffConfirmation?: boolean
     confirmWaiver?: boolean;
     electronicSignature?: string;
   }
@@ -29,6 +30,7 @@ export async function sendBookingConfirmation(bookingData: BookingData) {
         clientName,
         clientEmail,
         clientPhone,
+
         venueType,
         eventDate,
         startTime,
@@ -40,6 +42,7 @@ export async function sendBookingConfirmation(bookingData: BookingData) {
         serviceType,
         barOption,
         message,
+        requiresStaffConfirmation,
         source,
         confirmWaiver,
         electronicSignature,
@@ -60,6 +63,7 @@ export async function sendBookingConfirmation(bookingData: BookingData) {
         venueName,
         city,
         address,
+        isDateAlreadyBooked: requiresStaffConfirmation,
         guestCount,
         serviceType,
         barOption,

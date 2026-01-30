@@ -110,6 +110,17 @@ electronicSignature,
                     been received, and I will reach out to you at my earliest convenience to confirm the details below and to
                     collect the $100 deposit to finalize your booking.
                   </Heading>
+                  {isDateAlreadyBooked && (
+  <Text style={{ 
+    backgroundColor: '#fff3cd', 
+    color: '#856404', 
+    padding: '12px', 
+    borderRadius: '4px',
+    marginTop: '10px' 
+  }}>
+    ⚠️ We are already booked for this date, but we will confirm bartender availability to ensure service is doable.
+  </Text>
+)}
                 </Column>
               </Row>
 

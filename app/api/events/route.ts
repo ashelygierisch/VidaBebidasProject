@@ -78,9 +78,10 @@ export async function POST(request: Request) {
       address,
       city,
       guestCount,
-     barOption,
+      barOption,
       message,
 
+      status,
       source,
       promoCampaign,
       electronicSignature,

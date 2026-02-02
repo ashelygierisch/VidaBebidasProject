@@ -136,7 +136,7 @@ const WaiverForm = () => {
                 <div className="h-85 overflow-y-auto border border-gray-300 p-4 bg-white text-black">
                   <p className="m-3 font-serif ">
                   This Waiver and Agreement is made between VidaBebidasProject/Michael Estrada 
-("Bartender") and {name} ("Client"). By accepting this Agreement, the Client 
+(&quot;Bartender&quot;) and {name} (&quot;Client&quot;). By accepting this Agreement, the Client 
 acknowledges and agrees to the terms and conditions set forth below.
                   </p>
                   <ul className="text-sm">

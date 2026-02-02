@@ -257,7 +257,7 @@ posthog?.capture('Booking Redo', {
               {bookingInfo.message && (
                 <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-300">
                   <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase mb-2">Your Message</p>
-                  <p className="text-sm sm:text-base text-gray-700 italic break-words">"{bookingInfo.message}"</p>
+                  <p className="text-sm sm:text-base text-gray-700 italic break-words">&quot;{bookingInfo.message}&quot;</p>
                 </div>
               )}
             </div>

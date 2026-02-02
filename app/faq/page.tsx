@@ -41,7 +41,7 @@ const faqData: FAQItem[] = [
     question: "What is included with the bar setup?",
     answer: (
       <div>
-        <p className="mb-2">Whether there's a designated bar area at your venue or we provide our mobile bar, the setup includes:</p>
+        <p className="mb-2">Whether there&apos;s a designated bar area at your venue or we provide our mobile bar, the setup includes:</p>
         <ul className="list-disc list-inside ml-4 text-gray-300 space-y-1">
           <li>Bar materials (shakers, strainers, jiggers, etc.)</li>
           <li>Bar mats</li>

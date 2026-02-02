@@ -120,7 +120,7 @@ const ThankYou = () => {
               +1 (214-893-2926)
             </a>
           </p>
-          <p className="mb-4 sm:mb-6 text-sm sm:text-base">We can't wait to make your event special!</p>
+          <p className="mb-4 sm:mb-6 text-sm sm:text-base">We can&apos;t wait to make your event special!</p>
           <div className="mb-6 sm:mb-8 flex justify-center items-center">
             <a href="/" className="flex items-center">
               <Image

@@ -282,7 +282,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="mt-[100px] bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

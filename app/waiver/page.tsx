@@ -116,7 +116,7 @@ const WaiverForm = () => {
                   <span className="font-semibold text-lg text-yellow-600">
                     All packages:
                   </span>{' '}
-                  100 people standard max, each additional person is $1 added.
+                  Up to 75 guests included, each additional person is $1 added.
                 </li>
               </ul>
             </div>
@@ -226,8 +226,8 @@ acknowledges and agrees to the terms and conditions set forth below.
                         {' '}
                         Guest Capacity:
                       </span>{' '}
-                      All packages include service for up to <span className="font-bold">100 guests</span> as the standard maximum. 
-                      For events exceeding 100 guests, an additional fee of <span className="font-bold">$1 per person</span> will be charged. 
+                      All packages include service for up to <span className="font-bold">75 guests</span> as the standard maximum. 
+                      For events exceeding 75 guests, an additional fee of <span className="font-bold">$1 per person</span> will be charged. 
                       The Client is responsible for providing an accurate headcount prior to the event. 
                       If the actual guest count exceeds the number provided, the Client agrees to pay the additional per-person fee.
                     </li>

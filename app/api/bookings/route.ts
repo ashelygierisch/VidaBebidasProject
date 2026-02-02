@@ -1,52 +1,94 @@
-console.log('Bookings route - Key prefix:', process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY?.substring(0, 20));
-console.log('Bookings route - URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
-
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+
+// Force dynamic - prevents Next.js from caching this route
+export const dynamic = 'force-dynamic';
+
 const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
-  );
-  
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
+);
 
+// GET - Fetch all bookings
 export async function GET() {
-    try {
-      console.log('Fetching bookings...');
-      const { data: bookedDates, error } = await supabase
-        .from("bookings")
-        .select(`
-       *
-        `);
-        console.log('Query result:', { bookedDates, error }); 
+  try {
+    const { data: bookings, error } = await supabase
+      .from("bookings")
+      .select("*")
+      .order('eventDate', { ascending: true });
 
-      if (error) {
-        console.error('Supabase error:', error);
-        return NextResponse.json(
-          { error: 'Failed to fetch booking dates', details: error.message },
-          { status: 500 }
-        );
-      }
-  
-      if (!bookedDates || bookedDates.length === 0) {
-        return NextResponse.json([], { status: 200 });
-      }
-  
-      console.log("All booked dates:", bookedDates);
-  
-      return NextResponse.json(bookedDates, {
-        status: 200,
-        headers: {
-          'Cache-Control':
-            'no-store, no-cache, must-revalidate, proxy-revalidate',
-          Pragma: 'no-cache',
-          Expires: '0',
-        },
-      });
-    } catch (error) {
-      console.error('Unexpected error:', error);
+    if (error) {
+      console.error('Supabase error:', error);
       return NextResponse.json(
-        { error: 'Internal server error' },
+        { error: 'Failed to fetch bookings', details: error.message },
         { status: 500 }
       );
     }
+
+    return NextResponse.json(bookings || [], {
+      status: 200,
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      },
+    });
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
+}
+
+// PATCH - Update a booking (status, depositPaid, etc.)
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json();
+    const { id, ...updates } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Booking ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Add updatedAt timestamp
+    updates.updatedAt = new Date().toISOString();
+
+    // If status is being changed to CONFIRMED, set confirmedAt
+    if (updates.status === 'CONFIRMED') {
+      updates.confirmedAt = new Date().toISOString();
+    }
+
+    // If status is being changed to COMPLETED, set completedAt
+    if (updates.status === 'COMPLETED') {
+      updates.completedAt = new Date().toISOString();
+    }
+
+    const { data, error } = await supabase
+      .from('bookings')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase update error:', error);
+      return NextResponse.json(
+        { error: 'Failed to update booking', details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(data, { status: 200 });
+  } catch (error) {
+    console.error('Update error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}

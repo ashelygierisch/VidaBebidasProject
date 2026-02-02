@@ -5,13 +5,14 @@ import { randomUUID } from 'crypto';
 import posthog from '@/app/lib/posthog--server';
 import { sendBookingConfirmation } from '@/app/lib/email';
 
+// Force dynamic - prevents Next.js from caching this route
+export const dynamic = 'force-dynamic';
+
 // Create Supabase client with service role key for server-side operations
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
 );
-
-console.log('Key prefix:', process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY?.substring(0, 20));
 
 
 export async function GET() {
@@ -211,6 +212,40 @@ console.log('4. About to create booking with eventDate:', eventDate);
 
       await sendBookingConfirmation(newBooking);
 
+      // Send push notification to admin on ALL their devices
+try {
+  // Get admin user's ID from Supabase auth
+  const { data: adminUsers } = await supabase.auth.admin.listUsers();
+  const adminUser = adminUsers?.users?.[0]; // Assuming single admin
+  
+  if (adminUser) {
+    console.log('Sending notification to admin user ID:', adminUser.id);
+    
+    // Send push notification via OneSignal REST API using External User ID
+    // This will deliver to ALL devices where the admin is logged in (laptop, phone, etc.)
+    const notifResponse = await fetch('https://onesignal.com/api/v1/notifications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Basic ${process.env.ONESIGNAL_REST_API_KEY}`,
+      },
+      body: JSON.stringify({
+        app_id: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
+        include_external_user_ids: [adminUser.id], // Uses external user ID instead of player ID
+        headings: { en: 'New Booking Request!' },
+        contents: { 
+          en: `${clientName} booked ${serviceType} for ${new Date(eventDate).toLocaleDateString()}` 
+        },
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/admin/dashboard`,
+      }),
+    });
+    const notifResult = await notifResponse.json();
+    console.log('OneSignal response:', notifResult);
+  }
+} catch (notifError) {
+  // Don't fail the booking if notification fails
+  console.error('Push notification error:', notifError);
+}
       if (bookingError) {
         throw bookingError
       }

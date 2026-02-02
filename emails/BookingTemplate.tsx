@@ -81,7 +81,7 @@ electronicSignature,
                   style={image}
                   width={620}
                   src={
-                    'https://mikessite.s3.us-east-2.amazonaws.com/VB-Logo-2026.png'
+                    'https://mikessite.s3.us-east-2.amazonaws.com/1-removebg-preview.png'
                   }
                 />
               </Row>

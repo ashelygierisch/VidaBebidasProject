@@ -59,7 +59,7 @@ $75.00 FOR EXTRA HOUR(S)
               <span className="font-semibold text-lg text-yellow-600">
                 All packages:
               </span>{' '}
-              100 people standard max, each additional person is $1 added.
+              Up to 75 guests included, each additional person is $1 added.
             </li>
           </ul>
         </CardBody>

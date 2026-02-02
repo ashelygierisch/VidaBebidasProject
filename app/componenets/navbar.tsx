@@ -27,11 +27,12 @@ import {
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Packages', 'About', 'Booking', 'Reviews'];
+  const menuItems = ['Home', 'Packages', 'FAQ', 'About', 'Booking'];
 
   const homeMenuItems = [
     { name: 'Home', path: '/' },
     { name: 'Packages', path: '/packages' },
+    { name: 'FAQ', path: '/faq' },
     { name: 'About', path: '/about' },
     { name: 'Booking', path: '/booking' },
   ];

@@ -1,65 +1,91 @@
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { createClient } from "@supabase/supabase-js";
+import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+// Force dynamic - prevents Next.js from caching this route
+export const dynamic = 'force-dynamic';
 
-//added env files to vercel
-//Re doing final merge
-export async function POST(request: Request) {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
+);
+
+// GET - Fetch all bookings
+export async function GET() {
   try {
-    const { date, time, name, address, email, phone, service, message } =
-      await request.json();
+    const { data: bookings, error } = await supabase
+      .from("bookings")
+      .select("*")
+      .order('eventDate', { ascending: true });
 
-    const existingBooking = await prisma.booking.findFirst({
-      where: {
-        date,
-      },
-    });
-
-    if (existingBooking) {
+    if (error) {
+      console.error('Supabase error:', error);
       return NextResponse.json(
-        {
-          error:
-            'The selected date is already booked. We apologize for any inconvenience. Please choose another slot or contact us for assistance.',
-        },
-        { status: 409 }
+        { error: 'Failed to fetch bookings', details: error.message },
+        { status: 500 }
       );
     }
 
-    let user = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (!user) {
-      user = await prisma.user.create({
-        data: {
-          name,
-          email,
-          phone,
-          address,
-        },
-      });
-    }
-
-    const newBooking = await prisma.booking.create({
-      data: {
-        date,
-        time,
-        service,
-        message,
-        userId: user.id,
+    return NextResponse.json(bookings || [], {
+      status: 200,
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
       },
     });
-    console.log('New booking created:', newBooking);
-    console.log('Booking ID:', newBooking.id);
-
-    return NextResponse.json({
-      bookingId: newBooking.id,
-      userId: user.id,
-      message: 'Booking created successfully',
-    });
   } catch (error) {
-    console.log('error', error);
+    console.error('Unexpected error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}
+
+// PATCH - Update a booking (status, depositPaid, etc.)
+export async function PATCH(request: Request) {
+  try {
+    const body = await request.json();
+    const { id, ...updates } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Booking ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Add updatedAt timestamp
+    updates.updatedAt = new Date().toISOString();
+
+    // If status is being changed to CONFIRMED, set confirmedAt
+    if (updates.status === 'CONFIRMED') {
+      updates.confirmedAt = new Date().toISOString();
+    }
+
+    // If status is being changed to COMPLETED, set completedAt
+    if (updates.status === 'COMPLETED') {
+      updates.completedAt = new Date().toISOString();
+    }
+
+    const { data, error } = await supabase
+      .from('bookings')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Supabase update error:', error);
+      return NextResponse.json(
+        { error: 'Failed to update booking', details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(data, { status: 200 });
+  } catch (error) {
+    console.error('Update error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

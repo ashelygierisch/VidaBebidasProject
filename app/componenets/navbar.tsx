@@ -27,11 +27,12 @@ import {
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = ['Home', 'Packages', 'About', 'Booking', 'Reviews'];
+  const menuItems = ['Home', 'Packages', 'FAQ', 'About', 'Booking'];
 
   const homeMenuItems = [
     { name: 'Home', path: '/' },
     { name: 'Packages', path: '/packages' },
+    { name: 'FAQ', path: '/faq' },
     { name: 'About', path: '/about' },
     { name: 'Booking', path: '/booking' },
   ];
@@ -64,7 +65,7 @@ const Navigation = () => {
         <NavbarBrand>
           <Link href="/">
             <Image
-              src="/logo-white.png"
+              src="/VB-Logo-2026.png"
               alt="Logo"
               width={150}
               height="55"
@@ -78,9 +79,9 @@ const Navigation = () => {
         <NavbarBrand className="hidden lg:flex">
           <Link href="/">
             <Image
-              src="/logo-white.png"
+              src="/VB-Logo-2026.png"
               alt="Logo"
-              width={300}
+              width={150}
               height="55"
               priority
             />

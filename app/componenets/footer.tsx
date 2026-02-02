@@ -12,11 +12,11 @@ const Footer = () => {
           {/* Logo */}
           <Link href="/" className="transition-transform hover:scale-105">
             <Image
-              src="/logo-white.png"
+              src="/VB-Logo-2026.png"
               alt="Vidabebidasproject Logo"
-              width={300}
-              height={100}
-              className="h-[70px] w-auto"
+              width={500}
+              height={300}
+              className="h-[150px] w-auto"
               priority
             />
           </Link>

@@ -5,18 +5,22 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardHeader, CardBody, Divider, Image } from '@nextui-org/react';
+import posthog from 'posthog-js';
+
 const WaiverForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
   const name = searchParams.get('name');
 
-  useEffect(() => {
-    console.log('Email:', email);
-    console.log('Name:', name);
-  }, [email, name]);
-  const [fullName, setFullName] = useState('');
+  
+  const [electronicSignature, setElectronicSignature] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  // Track waiver page view for funnel analytics
+  useEffect(() => {
+    posthog?.capture('Waiver Page Viewed');
+  }, []);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -27,32 +31,32 @@ const WaiverForm = () => {
 
     const bookingId = sessionStorage.getItem('bookingId'); //getting the booking ID from local storage
 
-    if (!bookingId) {
-      toast.error('Booking ID not found');
-      return;
+    const ClientBooking= sessionStorage.getItem('clientbookinginfo')
+
+    
+    console.log('Waiver Signed', electronicSignature, isChecked);
+
+    if(ClientBooking){
+
+      const bookingInfo=JSON.parse(ClientBooking)
+
+      bookingInfo.confirmWaiver=isChecked
+      bookingInfo.electronicSignature=electronicSignature
+
+      if (!electronicSignature.trim() || electronicSignature.trim().toLowerCase() !== bookingInfo.clientName.trim().toLowerCase()) {
+        toast.error('Please provide the correct Signature');
+      } else {
+        // Track waiver signed for funnel analytics
+        posthog?.capture('Waiver Signed');
+      
+        sessionStorage.setItem('clientbookinginfo', JSON.stringify(bookingInfo))
+        router.push('/review');
+      }
+    }else{
+      console.log('No Booking Data Found')
     }
 
-    const response = await fetch('api/waiver', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        fullName,
-        isChecked,
-        email,
-        bookingId, //Passing it into the API to fetch the booking details in the route to pass to nodemailer to send to client and customer
-      }),
-    });
-
-    console.log('Form Submitted', fullName, isChecked);
-    console.log('Post response', response);
-    if (fullName === '') {
-      toast.error('Please provide a Signature');
-    } else {
-      toast.success('Waiver Accepted and Booking Successful!');
-      router.push('/thankyou');
-    }
+  
   };
 
   return (
@@ -67,50 +71,104 @@ const WaiverForm = () => {
             width={40}
           />
           <div className="flex flex-col">
+      
             <p className="text-md font-bold">
               Waiver and Agreement for Bartending Services
             </p>
+            
           </div>
         </CardHeader>
         <Divider />
         <CardBody>
+          {/* Booking Details Section */}
+          <div className="mb-6">
+            <div className="bg-gray-800 rounded-lg p-4 mb-4">
+              <h3 className="text-lg font-bold text-yellow-600 mb-4 text-center">
+                Important Information
+              </h3>
+              <ul className="text-white space-y-4 text-base">
+                <li className="p-2 border-b border-gray-600">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    Host responsibility & Bartender provisions:
+                  </span>{' '}
+                  HOST PROVIDES LIQUOR IN ALL PACKAGES.
+                  <div className="mt-2">$75.00 FOR EXTRA HOUR(S)</div>
+                </li>
+                <li className="p-2 border-b border-gray-600 flex-col">
+                  <span className="font-semibold text-lg text-yellow-600">
+                  Deposit Fee: 
+                  </span>
+                  {'  '}
+                  <span className='text-green font-bold text-[#99ff00]'>$100  {'  '}</span>
+                  <span className="font-bold text-[#ff0000]">(Non-Refundable)</span>
+                </li>
+                <li className="p-2 border-b border-gray-600">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    Driving Time Convenience:
+                  </span>{' '}
+                  <ul className="font-sans list-disc list-inside m-2">
+                    <li className="p-1 marker:text-[#ff0000]">1hr ($20) </li>
+                    <li className="p-1 marker:text-[#ff0000]">2hr ($40)</li>
+                    <li className="p-1 marker:text-[#ff0000]">3hr($60)</li>
+                  </ul>
+                </li>
+                <li className="p-2">
+                  <span className="font-semibold text-lg text-yellow-600">
+                    All packages:
+                  </span>{' '}
+                  Up to 75 guests included, each additional person is $1 added.
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <form
             className="max-w-lg mx-auto text-left border-1 rounded-lg "
             onSubmit={handleSubmit}
           >
             <div className="flex justify-center">
               <div className="waiver-form">
+           
                 <p className="text-center text-[#FFD700] m-2">
-                  Please read and accept the waiver terms to proceed with your
+                  Please review the booking information above and read and accept the waiver terms below to proceed with your
                   booking.
                 </p>
                 <div className="h-85 overflow-y-auto border border-gray-300 p-4 bg-white text-black">
                   <p className="m-3 font-serif ">
-                    This Waiver and Agreement is made between
-                    VidaBebidasProject/Michael Estrada (Bartender) and the
-                    client booking, {name}. By accepting this Agreement, the
-                    Client acknowledges and agrees to the terms and conditions
-                    set forth below.
+                  This Waiver and Agreement is made between VidaBebidasProject/Michael Estrada 
+("Bartender") and {name} ("Client"). By accepting this Agreement, the Client 
+acknowledges and agrees to the terms and conditions set forth below.
                   </p>
                   <ul className="text-sm">
                     <li className="m-2">
-                      <span className="font-bold underline ">
-                        1. Host Responsibility:
+                    1.   <span className="font-bold underline ">
+                       Host Responsibility:
                       </span>{' '}
                       are dependent on package selected & booking completion.
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
-                        2. Bartender Provisions:
+                    2. <span className="font-bold underline">
+                        Bartender Provisions:
                       </span>{' '}
                       are dependent on package selected & booking completion.
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
+                    3.   <span className="font-bold underline">
+                        Deposit Fee:
+                      </span>{' '}
+                      A <span className="font-bold">$100 non-refundable deposit</span> is required to secure your booking. 
+                      This deposit must be received before any bartending services will be provided. 
+                      The deposit will be applied toward the total cost of your selected package. 
+                      In the event of cancellation, regardless of the reason or timing, the deposit will not be refunded. 
+                      By proceeding with this booking, the Client agrees to pay the deposit and acknowledges its non-refundable nature.
+                    </li>
+
+                    <li className="m-2">
+                    4. <span className="font-bold underline">
                         {' '}
-                        4. Budget Variations:
+                       Budget Variations:
                       </span>{' '}
                       The Client acknowledges that the budget may vary based on
                       the choice of house liquor or upscale liquor. The Client
@@ -119,9 +177,9 @@ const WaiverForm = () => {
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
+                    5. <span className="font-bold underline">
                         {' '}
-                        5. Liability Waiver:
+                     Liability Waiver:
                       </span>{' '}
                       The Client agrees to indemnify and hold harmless Vida
                       Bebidas Project, its employees, and agents from any and
@@ -132,9 +190,9 @@ const WaiverForm = () => {
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
+                    6.<span className="font-bold underline">
                         {' '}
-                        6. Age Verification:
+                        Age Verification:
                       </span>{' '}
                       The Client is responsible for ensuring that all guests
                       consuming alcoholic beverages are of legal drinking age.
@@ -144,29 +202,41 @@ const WaiverForm = () => {
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
+                    7. <span className="font-bold underline">
                         {' '}
-                        7. Event Duration and Overtime:
+                       Event Duration and Overtime:
                       </span>{' '}
                       The Bartender will provide services for the agreed-upon
                       duration of the event. Any additional time requested by
                       the Client beyond the initial agreement will be charged at
-                      an overtime rate to be determined by the Bartender.
+                      an overtime rate of <span className="font-bold">$75 per hour</span> if supplies are available. 
                     </li>
 
                     <li className="m-2">
-                      <span className="font-bold underline">
+                    8. <span className="font-bold underline">
                         {' '}
-                        8. Cancellation Policy:
+                        Cancellation Policy:
                       </span>{' '}
                       The Client must provide notice of cancellation at least
                       three days prior to the event.
                     </li>
 
                     <li className="m-2">
+                    9. <span className="font-bold underline">
+                        {' '}
+                        Guest Capacity:
+                      </span>{' '}
+                      All packages include service for up to <span className="font-bold">75 guests</span> as the standard maximum. 
+                      For events exceeding 75 guests, an additional fee of <span className="font-bold">$1 per person</span> will be charged. 
+                      The Client is responsible for providing an accurate headcount prior to the event. 
+                      If the actual guest count exceeds the number provided, the Client agrees to pay the additional per-person fee.
+                    </li>
+
+                    <li className="m-2">
+                    10. 
                       <span className="font-bold underline">
                         {' '}
-                        9. Acceptance of Terms:
+                        Acceptance of Terms:
                       </span>{' '}
                       By accepting below, the Client acknowledges that they have
                       read, understood, and agreed to the terms and conditions
@@ -175,13 +245,15 @@ const WaiverForm = () => {
                     </li>
                   </ul>
                 </div>
+           
                 <label className="block m-2">
                   Electronic Signature:
                   <input
                     type="text"
                     className="w-full border rounded px-2 py-1 mt-1"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder={name ?? ''}
+                    value={electronicSignature ?? ''}
+                    onChange={(e) => setElectronicSignature(e.target.value)}
                   />
                 </label>
 
@@ -205,7 +277,7 @@ const WaiverForm = () => {
                     }`}
                     disabled={!isChecked}
                   >
-                    Complete Booking
+                    Review Booking
                   </Button>
                 </div>
               </div>

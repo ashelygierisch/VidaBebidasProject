@@ -65,11 +65,9 @@ const Dashboard = () => {
         setBookings(data);
         if (showToast) toast.success('Bookings refreshed!');
       } else {
-        console.warn('API did not return an array:', data);
         if (showToast) toast.error('Failed to refresh');
       }
     } catch (error) {
-      console.error('Failed to fetch bookings:', error);
       if (showToast) toast.error('Failed to refresh');
     } finally {
       setIsRefreshing(false);
@@ -94,7 +92,7 @@ const Dashboard = () => {
       try {
         await OneSignal.login(session.user.id);
       } catch (err) {
-        console.error('OneSignal login error:', err);
+        // OneSignal login error - silently continue
       }
 
       // Check notification permission status
@@ -176,7 +174,6 @@ const Dashboard = () => {
         setNotifStatus('Permission dismissed. Tap to try again.');
       }
     } catch (err) {
-      console.error('Notification setup error:', err);
       setNotifStatus('❌ Setup failed. Please try again.');
     } finally {
       setIsSettingUp(false);
@@ -208,7 +205,6 @@ const Dashboard = () => {
       toast.success('Booking deleted!');
       fetchBookings(true);
     } catch (error) {
-      console.error('Delete error:', error);
       toast.error('Failed to delete booking');
     }
   };
@@ -235,7 +231,6 @@ const Dashboard = () => {
 
       toast.success('Booking updated!');
     } catch (error) {
-      console.error('Update error:', error);
       toast.error('Failed to update booking');
     }
   };

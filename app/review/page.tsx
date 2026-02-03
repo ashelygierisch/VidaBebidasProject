@@ -58,9 +58,6 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         const parsed=JSON.parse(ClientBooking)
   
         setBookingInfo(parsed)
-      
-      }else{
-        console.log('No Booking Data Found')
       }
   
     }, [])
@@ -155,7 +152,6 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         router.push(`/thankyou?name=${bookingInfo.clientName}`);
       } else {
         const errorData = await response.json();
-        console.log( 'API Error', errorData)
         toast.error(errorData.error || 'Failed to complete booking please contact us at +1 (214-893-2926) ');
         setIsSubmitting(false);
       }

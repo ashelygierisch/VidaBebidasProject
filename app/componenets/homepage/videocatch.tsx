@@ -20,8 +20,7 @@ const VideoCatch = () => {
     setIsVideoLoaded(true);
   };
 
-  const handleVideoError = (error: any) => {
-    console.error('Video loading error:', error);
+  const handleVideoError = () => {
     setHasError(true);
   };
 

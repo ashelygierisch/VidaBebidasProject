@@ -26,7 +26,6 @@ export async function GET() {
       `);
 
     if (error) {
-      console.error('Supabase error:', error);
       return NextResponse.json(
         { error: 'Failed to fetch users', details: error.message },
         { status: 500 }
@@ -40,8 +39,6 @@ export async function GET() {
       );
     }
 
-    console.log("All users with bookings:", users);
-
     return NextResponse.json(users, {
       status: 200,
       headers: {
@@ -52,7 +49,6 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Unexpected error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -63,7 +59,6 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    console.log('1. Received body:', body);
     const {
       eventDate,
       startTime,
@@ -95,14 +90,11 @@ export async function POST(request: Request) {
     .eq('email', clientEmail)
     .single()
 
-    console.log('2. User lookup result:', { existingUser, userError });
-
     let userId
 
     if (userError && userError.code !== 'PGRST116') { 
       throw userError
     }
-  console.log('3. userId:', userId);
 
   if(existingUser){
     userId=existingUser.id
@@ -160,8 +152,6 @@ const hasExistingBooking = existingBookings && existingBookings.length > 0;
 const bookingStatus = hasExistingBooking ? 'REQUESTED' : 'PENDING';
 const needsConfirmation = hasExistingBooking;
 
-console.log('4. About to create booking with eventDate:', eventDate);
-
 //Create the booking
     const { data: newBooking, error:bookingError } = await supabase
       .from('bookings')
@@ -207,9 +197,6 @@ console.log('4. About to create booking with eventDate:', eventDate);
       .select()
       .single()
 
-      console.log('5. Booking result:', { newBooking, bookingError });
-
-
       await sendBookingConfirmation(newBooking);
 
       // Send push notification to admin on ALL their devices
@@ -219,8 +206,6 @@ try {
   const adminUser = adminUsers?.users?.[0]; // Assuming single admin
   
   if (adminUser) {
-    console.log('Sending notification to admin user ID:', adminUser.id);
-    
     // Send push notification via OneSignal REST API using External User ID
     // This will deliver to ALL devices where the admin is logged in (laptop, phone, etc.)
     const notifResponse = await fetch('https://onesignal.com/api/v1/notifications', {
@@ -239,12 +224,10 @@ try {
         url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/admin/dashboard`,
       }),
     });
-    const notifResult = await notifResponse.json();
-    console.log('OneSignal response:', notifResult);
+    await notifResponse.json();
   }
 } catch (notifError) {
   // Don't fail the booking if notification fails
-  console.error('Push notification error:', notifError);
 }
       if (bookingError) {
         throw bookingError
@@ -274,9 +257,6 @@ try {
 
 
     } catch (error) {
-      // Log the full error to your server console
-      console.error('Booking creation error:', error);
-      
       // Return more details in the response (for debugging)
       return NextResponse.json(
         { 
@@ -307,7 +287,6 @@ export async function DELETE(request: Request){
     const {error}= await supabase.from('bookings').delete().eq('id',id)
   
     if (error) {
-      console.error('Supabase delete error:', error);
       return NextResponse.json(
         { error: 'Failed to delete booking', details: error.message },
         { status: 500 }
@@ -319,7 +298,6 @@ export async function DELETE(request: Request){
       { status: 200 }
     );
   } catch (error) {
-    console.error('Delete error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

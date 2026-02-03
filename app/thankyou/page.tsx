@@ -45,11 +45,6 @@ const ThankYou = () => {
       const parsed=JSON.parse(ClientBooking)
 
       setBookingInfo(parsed)
-
-      
-    
-    }else{
-      console.log('No Booking Data Found')
     }
 
   }, [])

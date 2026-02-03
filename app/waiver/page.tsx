@@ -33,9 +33,6 @@ const WaiverForm = () => {
 
     const ClientBooking= sessionStorage.getItem('clientbookinginfo')
 
-    
-    console.log('Waiver Signed', electronicSignature, isChecked);
-
     if(ClientBooking){
 
       const bookingInfo=JSON.parse(ClientBooking)
@@ -52,8 +49,6 @@ const WaiverForm = () => {
         sessionStorage.setItem('clientbookinginfo', JSON.stringify(bookingInfo))
         router.push('/review');
       }
-    }else{
-      console.log('No Booking Data Found')
     }
 
   

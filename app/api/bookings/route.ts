@@ -18,7 +18,6 @@ export async function GET() {
       .order('eventDate', { ascending: true });
 
     if (error) {
-      console.error('Supabase error:', error);
       return NextResponse.json(
         { error: 'Failed to fetch bookings', details: error.message },
         { status: 500 }
@@ -34,7 +33,6 @@ export async function GET() {
       },
     });
   } catch (error) {
-    console.error('Unexpected error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -76,7 +74,6 @@ export async function PATCH(request: Request) {
       .single();
 
     if (error) {
-      console.error('Supabase update error:', error);
       return NextResponse.json(
         { error: 'Failed to update booking', details: error.message },
         { status: 500 }
@@ -85,7 +82,6 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
-    console.error('Update error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -113,7 +109,6 @@ export async function DELETE(request: Request) {
       .eq('id', id);
 
     if (error) {
-      console.error('Supabase delete error:', error);
       return NextResponse.json(
         { error: 'Failed to delete booking', details: error.message },
         { status: 500 }
@@ -125,7 +120,6 @@ export async function DELETE(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.error('Delete error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

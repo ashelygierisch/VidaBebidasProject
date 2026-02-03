@@ -73,10 +73,8 @@ export async function sendBookingConfirmation(bookingData: BookingData) {
         electronicSignature, }),
     });
 
-    console.log('Email sent:', response);
     return Response.json(response);
   } catch (error) {
-    console.error('Email error:', error);
     return Response.json({ error }, { status: 500 });
   }
 }

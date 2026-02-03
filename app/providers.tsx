@@ -43,7 +43,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           'dialog.blocked.message': 'Follow these instructions to allow notifications:'
         },
       },
-    }).catch(err => console.error('OneSignal init error:', err));
+    }).catch(() => {
+      // OneSignal init error - silently continue
+    });
     
     initializedRef.current = true;
   }, []);

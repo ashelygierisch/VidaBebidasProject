@@ -16,7 +16,6 @@ import BookingCalender from './bookingCalendar';
 import BarOptions from './baroptions'
 import VenueType from './venuetype';
 import { isDate, setDate } from 'date-fns';
-import { error } from 'console';
 const BookingForm = () => {
   
   const [bookedDates, setBookedDates] = useState<Date[]>([]);
@@ -60,17 +59,14 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
           cache: 'no-store', 
         });
         const data = await res.json();
-        console.log('Fetched booked dates:', data);
         // Ensure data is an array before mapping
         if (Array.isArray(data)) {
           const dates = data.map((booking: any) => new Date(booking.eventDate));
           setBookedDates(dates);
         } else {
-          console.warn('API did not return an array:', data);
           setBookedDates([]);
         }
       } catch (error) {
-        console.error('Failed to fetch booked dates:', error);
         setBookedDates([]);
       }
     };
@@ -83,8 +79,6 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
     const isBooked = (bookedDates || []).some(
       d => d.toDateString() === selectedDate?.toDateString()
     );
-
-    console.log('Is booked?', isBooked);
     
     if (isBooked) {
       toast(
@@ -181,9 +175,6 @@ const ClientBooking={
  barOption,
 }
     sessionStorage.setItem('clientbookinginfo', JSON.stringify(ClientBooking))
-     
-
-    console.log("Client & Booking Info stored", ClientBooking)
     
     // Track proceeding to waiver for funnel analytics
     posthog?.capture('Proceeded to Waiver', {

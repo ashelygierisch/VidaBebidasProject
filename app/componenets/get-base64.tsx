@@ -10,6 +10,6 @@ export default async function getBase64(url: string) {
     const { base64 } = await getPlaiceholder(Buffer.from(buffer));
     return base64;
   } catch (e) {
-    if (e instanceof Error) console.log(e.stack);
+    // Error fetching image
   }
 }

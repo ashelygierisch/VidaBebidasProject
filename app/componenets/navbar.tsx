@@ -28,6 +28,7 @@ import {
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const checkActivePath = useActivePath();
   
   // Hide navbar on admin pages
   if (pathname?.startsWith('/admin')) {
@@ -43,8 +44,6 @@ const Navigation = () => {
     { name: 'About', path: '/about' },
     { name: 'Booking', path: '/booking' },
   ];
-
-  const checkActivePath = useActivePath();
 
   return (
     <Navbar

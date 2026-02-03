@@ -512,8 +512,8 @@ const Dashboard = () => {
                         onClick={() => handleDepositToggle(booking.id, booking.depositPaid)}
                         className={`px-3 py-1 text-sm rounded-lg font-medium transition-colors ${
                           booking.depositPaid 
-                            ? 'bg-green-500/20 text-green-400 hover:bg-green-500/30' 
-                            : 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                            ? ' text-green-400 hover:bg-green-500/30' 
+                            : ' text-red-400 hover:bg-red-500/30'
                         }`}
                       >
                         {booking.depositPaid ? '✓ Paid' : '✗ Unpaid'}

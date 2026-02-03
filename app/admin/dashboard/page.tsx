@@ -312,7 +312,7 @@ const Dashboard = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-foreground">Welcome, Michael!</h2>
           <p className="text-muted-foreground mt-1">Manage your bookings and events</p>
-        {/* Enable Notifications Section */}
+{/*         
         <div className="mt-6 p-4 bg-card border border-border rounded-xl">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
@@ -328,7 +328,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        </div>
+        </div> */}
         {/* Stats Row */}
         <div className="flex flex-wrap gap-3 mb-6">
           <div className="flex items-center gap-2 px-3 py-2 bg-card border border-border rounded-lg">

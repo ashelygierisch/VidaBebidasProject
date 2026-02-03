@@ -36,7 +36,7 @@ export default function RootLayout({
       <LocalizationProviderWrapper>
         <body className={Font.className}>
           <Toaster position="top-center" toastOptions={{ duration: 8000 }}   containerStyle={{
-    top: '40%',  // ← This pushes it toward the middle
+    top: '10%',  // ← This pushes it toward the middle
   }}/>
           <Providers>
             <div className="custom-navbar">

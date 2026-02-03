@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { saveAs } from 'file-saver';
 import { motion } from 'framer-motion';
 import { useActivePath } from './helper';
+import { usePathname } from 'next/navigation';
 import {
   DropdownMenu,
   Dropdown,
@@ -26,6 +27,12 @@ import {
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  
+  // Hide navbar on admin pages
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   const menuItems = ['Home', 'Packages', 'FAQ', 'About', 'Booking'];
 
@@ -43,7 +50,8 @@ const Navigation = () => {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
-      className="navbar font-open bg-black text-white fixed z-30"
+      className="navbar font-open bg-black text-white fixed z-50 backdrop-blur-sm"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 1)' }}
       isBordered
     >
       <div className="absolute top-0 left-0">

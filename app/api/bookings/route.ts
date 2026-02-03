@@ -92,3 +92,43 @@ export async function PATCH(request: Request) {
     );
   }
 }
+
+// DELETE - Delete a booking
+export async function DELETE(request: Request) {
+  try {
+    const body = await request.json();
+    const { id } = body;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Booking ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Delete the booking from Supabase
+    const { error } = await supabase
+      .from('bookings')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return NextResponse.json(
+        { error: 'Failed to delete booking', details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: 'Booking deleted successfully', id },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Delete error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}

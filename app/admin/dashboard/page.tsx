@@ -191,6 +191,28 @@ const Dashboard = () => {
     router.push('/admin')
   }
 
+  //delete booking
+  const deleteBooking = async (bookingId: string) => {
+    try {
+      const res = await fetch('/api/bookings', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: bookingId }),
+      });
+  
+      if (!res.ok) {
+        throw new Error('Failed to delete booking');
+      }
+  
+    
+      toast.success('Booking deleted!');
+      fetchBookings(true);
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error('Failed to delete booking');
+    }
+  };
+
   // Update booking status or other fields
   const updateBooking = async (bookingId: string, updates: Partial<Booking>) => {
     try {
@@ -282,7 +304,7 @@ const Dashboard = () => {
 
 
   return (
-    <div className="mt-[100px] bg-background">
+    <div className="bg-background">
       {/* Header */}
       <header className="border-b border-border bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -312,22 +334,6 @@ const Dashboard = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-foreground">Welcome, Michael!</h2>
           <p className="text-muted-foreground mt-1">Manage your bookings and events</p>
-{/*         
-        <div className="mt-6 p-4 bg-card border border-border rounded-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h3 className="font-semibold text-foreground">Push Notifications</h3>
-              <p className="text-sm text-muted-foreground mt-1">{notifStatus}</p>
-            </div>
-            <button 
-              onClick={setupPushNotifications}
-              disabled={isSettingUp}
-              className="w-full sm:w-auto px-6 py-4 bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-600 disabled:bg-yellow-500/50 text-black font-semibold rounded-lg text-base min-h-[48px] touch-manipulation transition-colors"
-            >
-              {isSettingUp ? '⏳ Setting up...' : '🔔 Enable Notifications'}
-            </button>
-          </div>
-        </div>
         {/* Stats Row */}
         </div> 
         <div className="flex flex-wrap gap-3 mb-6">
@@ -424,15 +430,30 @@ const Dashboard = () => {
                       </p>
                     </div>
                     
-                    {/* Status Badge */}
-                    <span className={`flex-shrink-0 px-2 py-1 text-xs rounded-full font-medium ${
-                      booking.status === 'CONFIRMED' ? 'bg-green-500/20 text-green-400' :
-                      booking.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
-                      booking.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
-                      'bg-gray-500/20 text-gray-400'
-                    }`}>
-                      {booking.status}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      {/* Status Badge */}
+                      <span className={`flex-shrink-0 px-2 py-1 text-xs rounded-full font-medium ${
+                        booking.status === 'CONFIRMED' ? 'bg-green-500/20 text-green-400' :
+                        booking.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
+                        booking.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
+                        'bg-gray-500/20 text-gray-400'
+                      }`}>
+                        {booking.status}
+                      </span>
+                      {/* Delete Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (confirm(`Are you sure you want to delete the booking for ${booking.clientName}?`)) {
+                            deleteBooking(booking.id);
+                          }
+                        }}
+                        className="p-1 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded transition-colors"
+                        title="Delete booking"
+                      >
+                        <span className="text-lg">×</span>
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -467,25 +488,39 @@ const Dashboard = () => {
                       <h4 className="font-semibold text-foreground">{booking.clientName}</h4>
                       <p className="text-sm text-muted-foreground">{booking.venueName || booking.venueType}</p>
                     </div>
-                    {/* Status Dropdown */}
-                    <select
-                      value={booking.status}
-                      onChange={(e) => handleStatusChange(booking.id, e.target.value)}
-                      className={`px-3 py-1 text-sm rounded-lg border-0 cursor-pointer font-medium ${
-                        booking.status === 'CONFIRMED' ? 'bg-green-500/20 text-green-400' :
-                        booking.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
-                        booking.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
-                        booking.status === 'CANCELED' ? 'bg-red-500/20 text-red-400' :
-                        booking.status === 'REQUESTED' ? 'bg-orange-500/20 text-orange-400' :
-                        'bg-gray-500/20 text-gray-400'
-                      }`}
-                    >
-                      {BOOKING_STATUSES.map(status => (
-                        <option key={status} value={status} className="bg-gray-800 text-white">
-                          {status}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="flex items-center gap-2">
+                      {/* Status Dropdown */}
+                      <select
+                        value={booking.status}
+                        onChange={(e) => handleStatusChange(booking.id, e.target.value)}
+                        className={`px-3 py-1 text-sm rounded-lg border-0 cursor-pointer font-medium ${
+                          booking.status === 'CONFIRMED' ? 'bg-green-500/20 text-green-400' :
+                          booking.status === 'PENDING' ? 'bg-yellow-500/20 text-yellow-400' :
+                          booking.status === 'COMPLETED' ? 'bg-blue-500/20 text-blue-400' :
+                          booking.status === 'CANCELED' ? 'bg-red-500/20 text-red-400' :
+                          booking.status === 'REQUESTED' ? 'bg-orange-500/20 text-orange-400' :
+                          'bg-gray-500/20 text-gray-400'
+                        }`}
+                      >
+                        {BOOKING_STATUSES.map(status => (
+                          <option key={status} value={status} className="bg-gray-800 text-white">
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+                      {/* Delete Button */}
+                      <button
+                        onClick={() => {
+                          if (confirm(`Are you sure you want to delete the booking for ${booking.clientName}?`)) {
+                            deleteBooking(booking.id);
+                          }
+                        }}
+                        className="p-2 text-red-400 hover:text-red-300 hover:bg-red-500/20 rounded-lg transition-colors"
+                        title="Delete booking"
+                      >
+                        <span className="text-lg">×</span>
+                      </button>
+                    </div>
                   </div>
                   
                   {/* Booking Details */}

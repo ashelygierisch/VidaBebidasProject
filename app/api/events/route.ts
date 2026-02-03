@@ -287,3 +287,42 @@ try {
       )
     }
 }
+
+
+export async function DELETE(){
+
+  try {
+
+    const booking= await request.json();
+
+    const {id}=booking;
+
+    if(!id){
+      return NextResponse.json(
+        {error: 'Booking ID is required'},
+        {status:400}
+      )
+    }
+
+    const {error}= await supabase.from('bookings').delete().eq('id',id)
+  
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return NextResponse.json(
+        { error: 'Failed to delete booking', details: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: 'Booking deleted successfully', id },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Delete error:', error);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
+}

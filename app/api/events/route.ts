@@ -289,7 +289,7 @@ try {
 }
 
 
-export async function DELETE(){
+export async function DELETE(request: Request){
 
   try {
 

@@ -4,15 +4,27 @@ import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { PostHogProvider } from './lib/posthog'
 import { Theme } from "@radix-ui/themes";
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const initializedRef = useRef(false);
+  
   useEffect(() => {
+    // Only initialize OneSignal once
+    if (initializedRef.current) return;
+    
+    // Check if we're on the admin dashboard
+    // Note: This only works on initial page load. If user navigates to admin dashboard
+    // from another page, the button won't appear (OneSignal limitation).
+    const isAdminDashboard = typeof window !== 'undefined' && 
+      window.location.pathname.startsWith('/admin/dashboard');
+    
+    // Initialize OneSignal - only enable notifyButton on admin dashboard
     OneSignal.init({
       appId: "53d2b6e8-bc6e-480e-8a78-f3a993a3d92a",
       safari_web_id: "web.onesignal.auto.32a023df-3e37-4c19-843f-3978a63a946e",
       notifyButton: {
-        enable: true,
+        enable: isAdminDashboard, // Only enable on admin dashboard
         prenotify: false,
         showCredit: false,
         text: {
@@ -32,6 +44,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         },
       },
     }).catch(err => console.error('OneSignal init error:', err));
+    
+    initializedRef.current = true;
   }, []);
   return (
     <NextUIProvider>

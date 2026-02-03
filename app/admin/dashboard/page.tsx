@@ -328,8 +328,8 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        </div> */}
         {/* Stats Row */}
+        </div> 
         <div className="flex flex-wrap gap-3 mb-6">
           <div className="flex items-center gap-2 px-3 py-2 bg-card border border-border rounded-lg">
             <span className="text-sm text-muted-foreground">📅 Total</span>

@@ -138,10 +138,18 @@ export async function POST(request: Request) {
    
  
 // Check if date already has bookings
+// Normalize eventDate to start of day for comparison (ignore time component)
+const eventDateObj = new Date(eventDate);
+const startOfDay = new Date(eventDateObj);
+startOfDay.setHours(0, 0, 0, 0);
+const startOfNextDay = new Date(startOfDay);
+startOfNextDay.setDate(startOfNextDay.getDate() + 1);
+
 const { data: existingBookings, error: bookingCheckError } = await supabase
   .from('bookings')
   .select('id')
-  .eq('eventDate', eventDate);
+  .gte('eventDate', startOfDay.toISOString())
+  .lt('eventDate', startOfNextDay.toISOString());
 
 if (bookingCheckError) {
   throw bookingCheckError;

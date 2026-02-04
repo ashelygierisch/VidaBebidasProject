@@ -563,6 +563,26 @@ const Dashboard = () => {
                         {booking.confirmWaiver ? '✓ Signed' : '✗ Not Signed'}
                       </span>
                     </div>
+                 
+
+                    <div>
+                     <span className='font-medium text-muted-foreground'>
+                     Bar Space: {' '}
+                      </span>
+                      <p className='text-yellow-600'>
+
+                      {booking.barOption}
+                      </p>
+                    </div>
+                    <div>
+                     <span className='font-medium text-muted-foreground'>
+                    Clients Message: {' '}
+                      </span>
+                      <p className='text-yellow-600'>
+
+                      {booking.message}
+                      </p>
+                    </div>
                   </div>
 
                   {/* Waiver Details (if signed) */}

@@ -227,7 +227,7 @@ try {
         include_external_user_ids: [adminUser.id], // Uses external user ID instead of player ID
         headings: { en: 'New Booking Request!' },
         contents: { 
-          en: `${clientName} booked ${serviceType} for ${new Date(eventDate).toLocaleDateString()}, booking is ${status}` 
+          en: `${clientName} booked ${serviceType} for ${new Date(eventDate).toLocaleDateString()}, booking status is ${bookingStatus}` 
         },
         url: `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/admin/dashboard`,
       }),

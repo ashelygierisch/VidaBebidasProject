@@ -214,12 +214,12 @@ const ClientBooking={
                   checked={serviceType=== 'Blanco Package'}
                   onChange={(e) => {
                     setserviceType(e.target.value);
-                    posthog?.capture('Package Selected', { package: e.target.value, price: 600 });
+                    posthog?.capture('Package Selected', { package: e.target.value, price: 500 });
                   }}
                 />
                 <label htmlFor="Blanco Package" className="text-base flex flex-wrap items-center gap-1">
                   <span className="font-bold">Blanco Package</span>
-                  <span className="text-green-600 font-bold">$600</span>
+                  <span className="text-green-600 font-bold">$500</span>
                   <span className="text-gray-500">|</span>
                   <span className="text-orange-500 font-semibold">5 hours</span>
                 </label>
@@ -234,12 +234,12 @@ const ClientBooking={
                   checked={serviceType=== 'Reposado Package'}
                   onChange={(e) => {
                     setserviceType(e.target.value);
-                    posthog?.capture('Package Selected', { package: e.target.value, price: 800 });
+                    posthog?.capture('Package Selected', { package: e.target.value, price: 700 });
                   }}
                 />
                 <label htmlFor="Reposado Package" className="text-base flex flex-wrap items-center gap-1">
                   <span className="font-bold">Reposado Package</span>
-                  <span className="text-green-600 font-bold">$800</span>
+                  <span className="text-green-600 font-bold">$700</span>
                   <span className="text-gray-500">|</span>
                   <span className="text-orange-500 font-semibold">5 hours</span>
                 </label>
@@ -254,12 +254,12 @@ const ClientBooking={
                   checked={serviceType === 'Añejo Package'}
                   onChange={(e) => {
                     setserviceType(e.target.value);
-                    posthog?.capture('Package Selected', { package: e.target.value, price: 1000 });
+                    posthog?.capture('Package Selected', { package: e.target.value, price: 900 });
                   }}
                 />
                 <label htmlFor="Añejo Package" className="text-base flex flex-wrap items-center gap-1">
                   <span className="font-bold">Añejo Package</span>
-                  <span className="text-green-600 font-bold">$1000</span>
+                  <span className="text-green-600 font-bold">$900</span>
                   <span className="text-gray-500">|</span>
                   <span className="text-orange-500 font-semibold">5 hours</span>
                 </label>

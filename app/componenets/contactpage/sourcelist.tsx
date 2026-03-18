@@ -12,7 +12,7 @@ const SourceList = ( {source, onSourceChange}: any) => {
   return (
     <div role="group" aria-required="true" aria-labelledby="source-label">
       <label id="source-label" className="flex flex-col gap-2 text-sm text-gray-700">
-          How Did you hear about us
+          <span className="inline-flex items-baseline gap-0.5">How did you hear about us?<span className="text-red-500 text-[0.75em] ml-0.5" aria-hidden="true">*</span></span>
           <ul className="flex flex-col gap-2">
             {options.map((option,index)  => (
 

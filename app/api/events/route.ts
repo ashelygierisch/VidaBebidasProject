@@ -14,6 +14,8 @@ const supabase = createClient(
   process.env.NEXT_PRIVATE_SUPABASE_PRIVATE_KEY! // Service role key for server-side API routes
 );
 
+const VALID_SOURCES = ['INSTAGRAM', 'REFERRAL', 'VENUE', 'WEBSITE', 'PROMOTION'];
+
 
 export async function GET() {
   try {
@@ -84,6 +86,25 @@ export async function POST(request: Request) {
       confirmWaiver,
       waiverVersion
     } = body
+
+    if (!source || !VALID_SOURCES.includes(source)) {
+      posthog.capture({
+        distinctId: clientEmail || 'unknown',
+        event: 'Booking Failed',
+        properties: {
+          reason: 'validation',
+          field: 'source',
+          errorDetails: 'Booking source is required',
+          clientEmail: clientEmail || null,
+          serviceType: serviceType || null,
+        },
+      });
+      await posthog.flush();
+      return NextResponse.json(
+        { error: 'Booking source is required', field: 'source' },
+        { status: 400 }
+      );
+    }
 
    const {data:existingUser, error:userError}=await supabase.from('users')
    .select('id')
@@ -265,14 +286,31 @@ try {
 
 
     } catch (error) {
-      // Return more details in the response (for debugging)
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error('Booking creation failed:', error);
+      try {
+        const body = await request.clone().json().catch(() => ({}));
+        posthog.capture({
+          distinctId: body?.clientEmail || 'unknown',
+          event: 'Booking Failed',
+          properties: {
+            reason: 'server_error',
+            errorDetails: errorMessage,
+            clientEmail: body?.clientEmail || null,
+            serviceType: body?.serviceType || null,
+          },
+        });
+        await posthog.flush();
+      } catch (phError) {
+        // Don't fail the response if PostHog fails
+      }
       return NextResponse.json(
-        { 
+        {
           error: 'Failed to create booking',
-          details: error instanceof Error ? error.message : String(error)
+          details: errorMessage,
         },
         { status: 500 }
-      )
+      );
     }
 }
 

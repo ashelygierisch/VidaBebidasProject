@@ -151,8 +151,19 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         sessionStorage.removeItem('clientbookinginfo');
         router.push(`/thankyou?name=${bookingInfo.clientName}`);
       } else {
-        const errorData = await response.json();
-        toast.error(errorData.error || 'Failed to complete booking please contact us at +1 (214-893-2926) ');
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage =
+          errorData?.field === 'source'
+            ? 'Please go back and select how you heard about us.'
+            : errorData?.error || 'Failed to complete booking. Please contact us at +1 (214-893-2926).';
+        posthog?.capture('Booking Submit Failed', {
+          reason: errorData?.error || 'unknown',
+          field: errorData?.field || null,
+          status: response.status,
+          serviceType: bookingInfo.serviceType,
+          clientEmail: bookingInfo.clientEmail,
+        });
+        toast.error(errorMessage);
         setIsSubmitting(false);
       }
     };

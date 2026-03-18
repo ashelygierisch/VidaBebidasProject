@@ -10,8 +10,8 @@ const SourceList = ( {source, onSourceChange}: any) => {
 
 
   return (
-    <div>
-      <label className="flex flex-col gap-2 text-sm text-gray-700">
+    <div role="group" aria-required="true" aria-labelledby="source-label">
+      <label id="source-label" className="flex flex-col gap-2 text-sm text-gray-700">
           How Did you hear about us
           <ul className="flex flex-col gap-2">
             {options.map((option,index)  => (

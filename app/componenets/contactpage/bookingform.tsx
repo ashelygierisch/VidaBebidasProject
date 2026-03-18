@@ -49,6 +49,17 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
 
   const router = useRouter();
 
+  const isFormValid =
+    clientName.trim() !== '' &&
+    clientEmail.trim() !== '' &&
+    clientPhone.trim() !== '' &&
+    venueType !== '' &&
+    address.trim() !== '' &&
+    city.trim() !== '' &&
+    serviceType !== '' &&
+    source !== '' &&
+    eventdate != null;
+
   useEffect(() => {
     // Track form view for funnel analytics
     posthog?.capture('Booking Form Viewed');
@@ -129,7 +140,7 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
     }
 
     if (!venueType) {
-      toast.error('Please enter a name for the event');
+      toast.error('Please select a type of event');
       return;
     }
 
@@ -139,12 +150,24 @@ const [isDateAlreadyBooked, setIsDateAlreadyBooked] = useState(false);
       return;
     }
 
-    if(!city){
-      toast.error('Please enter a city')
+    if (!city) {
+      toast.error('Please enter a city');
+      return;
     }
 
     if (!serviceType) {
       toast.error('Please choose a Service');
+      return;
+    }
+
+    if (!source) {
+      toast.error('Please select how you heard about us');
+      return;
+    }
+
+    if (!eventdate) {
+      toast.error('Please select an event date');
+      return;
     }
 
 
@@ -396,6 +419,7 @@ const ClientBooking={
           className="bg-orange-400 rounded-sm hover:bg-[#FFFFF0] hover:text-black hover:animate-pulse"
           variant="shadow"
           onClick={storeInfo}
+          aria-label="Continue to waiver"
         >
           Continue
         </Button>

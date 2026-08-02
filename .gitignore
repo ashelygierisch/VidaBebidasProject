@@ -49,3 +49,4 @@ public/_next-video
 # allowlist anything meant to be published (use `git add -f` for one-offs).
 *.md
 !README.md
+.env*.local

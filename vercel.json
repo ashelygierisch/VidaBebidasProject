@@ -1,5 +1,20 @@
 {
+  "crons": [
+    {
+      "path": "/api/keep-alive",
+      "schedule": "0 12 * * *"
+    }
+  ],
   "headers": [
+    {
+      "source": "/api/keep-alive",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        }
+      ]
+    },
     {
       "source": "/api/get-booked-dates",
       "headers": [

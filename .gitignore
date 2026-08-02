@@ -44,3 +44,8 @@ public/_next-video
 
 
 .react-email/
+
+# internal notes, plans, and generated docs - keep out of the public repo.
+# allowlist anything meant to be published (use `git add -f` for one-offs).
+*.md
+!README.md
